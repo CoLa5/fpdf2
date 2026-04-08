@@ -291,7 +291,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
     MARKDOWN_STRIKETHROUGH_MARKER = "~~"
     MARKDOWN_UNDERLINE_MARKER = "--"
     MARKDOWN_ESCAPE_CHARACTER = "\\"
-    MARKDOWN_LINK_REGEX = re.compile(r"^\[([^][]+)\]\(([^()]+)\)(.*)$", re.DOTALL)
+    MARKDOWN_LINK_REGEX = re.compile(r"^\[([^][]*)\]\(([^()]+)\)(.*)$", re.DOTALL)
     MARKDOWN_LINK_COLOR = None
     MARKDOWN_LINK_UNDERLINE = True
 

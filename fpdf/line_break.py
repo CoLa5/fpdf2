@@ -805,6 +805,20 @@ class MultiLineBreak:
                     max_width -= self.first_line_indent
 
             if self.character_index >= len(current_fragment.characters):
+                # Catch empty fragments with link
+                if (
+                    len(current_fragment.characters) == 0
+                    and current_fragment.link is not None
+                ):
+                    current_line.add_character(
+                        "",
+                        0.0,
+                        current_fragment,
+                        self.fragment_index,
+                        self.character_index,
+                        current_font_height * self.line_height,
+                        current_fragment.link,
+                    )
                 self.character_index = 0
                 self.fragment_index += 1
                 continue
