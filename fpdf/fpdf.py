@@ -291,9 +291,15 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
     MARKDOWN_STRIKETHROUGH_MARKER = "~~"
     MARKDOWN_UNDERLINE_MARKER = "--"
     MARKDOWN_ESCAPE_CHARACTER = "\\"
-    MARKDOWN_LINK_REGEX = re.compile(r"^\[([^][]*)\]\(([^()]+)\)(.*)$", re.DOTALL)
+    MARKDOWN_LINK_REGEX = re.compile(
+        rf"^(?<!{MARKDOWN_ESCAPE_CHARACTER*2:s})"
+        rf"\[((?:{MARKDOWN_ESCAPE_CHARACTER*2:s}[\[\]]|[^\[\]])*)\]"
+        r"\(([^()]+)\)(.*)$",
+        re.DOTALL,
+    )
     MARKDOWN_LINK_COLOR = None
     MARKDOWN_LINK_UNDERLINE = True
+    _MARKDOWN_LINK_TEXT_UNESCAPE = re.compile(r"\\([\[\]])")
 
     HTML2FPDF_CLASS = HTML2FPDF
 
@@ -4599,6 +4605,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
                 is_link = self.MARKDOWN_LINK_REGEX.match(text)
                 if is_link:
                     link_text, link_dest, text = is_link.groups()
+                    link_text = self._MARKDOWN_LINK_TEXT_UNESCAPE.sub(r"\1", link_text)
                     if txt_frag:
                         yield frag()
                     gstate = self._get_current_graphics_state()

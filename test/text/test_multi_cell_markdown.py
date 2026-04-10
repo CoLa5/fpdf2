@@ -271,3 +271,17 @@ def test_multi_cell_markdown_empty_link(tmp_path):
     )
     assert len(pdf.pages[pdf.page].annots) == 1
     assert_pdf_equal(pdf, HERE / "multi_cell_markdown_empty_link.pdf", tmp_path)
+
+
+def test_multi_cell_markdown_link_text_with_square_brackets(tmp_path):
+    pdf = fpdf.FPDF()
+    pdf.set_font("Helvetica")
+    pdf.add_page()
+    pdf.multi_cell(
+        pdf.epw,
+        text="**Start** [One Page \\[Dungeon\\] Context](https://www.dungeoncontest.com/) __End__",
+        markdown=True,
+    )
+    assert_pdf_equal(
+        pdf, HERE / "multi_cell_markdown_link_square_brackets.pdf", tmp_path
+    )
