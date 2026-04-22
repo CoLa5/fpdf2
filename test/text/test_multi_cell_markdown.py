@@ -144,7 +144,7 @@ def test_multi_cell_markdown_link(tmp_path):
     pdf.add_page()
     pdf.multi_cell(
         pdf.epw,
-        text="**Start** [One Page Dungeon Context](https://www.dungeoncontest.com/) __End__",
+        text="**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2) __End__",
         markdown=True,
     )
     assert_pdf_equal(pdf, HERE / "multi_cell_markdown_link.pdf", tmp_path)
@@ -158,7 +158,7 @@ def test_multi_cell_markdown_link_dry_run(tmp_path):
 
     pdf.multi_cell(
         pdf.epw,
-        text="**Start** [One Page Dungeon Context](https://www.dungeoncontest.com/) __End__",
+        text="**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2) __End__",
         dry_run=True,
         markdown=True,
         new_x="left",
@@ -168,7 +168,7 @@ def test_multi_cell_markdown_link_dry_run(tmp_path):
 
     pdf.multi_cell(
         pdf.epw,
-        text="**Start** [One Page Dungeon Context](https://www.dungeoncontest.com/) __End__",
+        text="**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2) __End__",
         markdown=True,
         new_x="left",
         new_y="next",
@@ -177,7 +177,7 @@ def test_multi_cell_markdown_link_dry_run(tmp_path):
 
     pdf.multi_cell(
         pdf.epw,
-        text="**Start** [One Page Dungeon Context](https://www.dungeoncontest.com/) __End__",
+        text="**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2) __End__",
         dry_run=True,
         markdown=True,
         new_x="left",
@@ -187,7 +187,7 @@ def test_multi_cell_markdown_link_dry_run(tmp_path):
 
     pdf.multi_cell(
         pdf.epw,
-        text="**Start** [One Page Dungeon Context](https://www.dungeoncontest.com/) __End__",
+        text="**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2) __End__",
         markdown=True,
         new_x="left",
         new_y="next",
@@ -235,8 +235,8 @@ def test_multi_cell_markdown_styled_link(tmp_path):
 
 
 def test_multi_cell_markdown_consecutive_links(tmp_path):
-    link1 = "[One Page Dungeon Context](https://www.dungeoncontest.com/)"
-    link2 = "[One Page Dungeon Context About](https://www.dungeoncontest.com/about)"
+    link1 = "[fpdf2 github](https://github.com/py-pdf/fpdf2)"
+    link2 = "[fpdf2 github Releases](https://github.com/py-pdf/fpdf2/releases)"
 
     pdf = fpdf.FPDF()
     pdf.set_font("Helvetica")
