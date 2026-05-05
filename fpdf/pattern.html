@@ -1,0 +1,3909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>fpdf.pattern API documentation</title>
+<meta name="description" content="Handles the creation of patterns and gradients …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fpdf.pattern</code></h1>
+</header>
+<section id="section-intro">
+<p>Handles the creation of patterns and gradients</p>
+<p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/Patterns.html">https://py-pdf.github.io/fpdf2/Patterns.html</a></p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="fpdf.pattern.extract_alpha_stops"><code class="name flex">
+<span>def <span class="ident">extract_alpha_stops</span></span>(<span>stops01: list[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK]]) ‑> list[tuple[float, float]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L249-L257" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def extract_alpha_stops(
+    stops01: list[tuple[float, Color]],
+) -&gt; list[tuple[float, float]]:
+    &#34;&#34;&#34;Return [(u, a)] with a∈[0,1]; missing alpha =&gt; 1.0.&#34;&#34;&#34;
+    out: list[tuple[float, float]] = []
+    for u, c in stops01:
+        a = getattr(c, &#34;a&#34;, None)
+        out.append((u, 1.0 if a is None else float(a)))
+    return out</code></pre>
+</details>
+<div class="desc"><p>Return [(u, a)] with a∈[0,1]; missing alpha =&gt; 1.0.</p></div>
+</dd>
+<dt id="fpdf.pattern.lerp"><code class="name flex">
+<span>def <span class="ident">lerp</span></span>(<span>a: float, b: float, t: float) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L30-L31" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def lerp(a: float, b: float, t: float) -&gt; float:
+    return a + (b - a) * t</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.lerp_tuple"><code class="name flex">
+<span>def <span class="ident">lerp_tuple</span></span>(<span>a: tuple[float, ...], b: tuple[float, ...], t: float) ‑> tuple[float, ...]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L34-L39" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def lerp_tuple(
+    a: tuple[float, ...], b: tuple[float, ...], t: float
+) -&gt; tuple[float, ...]:
+    if len(a) != len(b):
+        raise ValueError(&#34;Mismatched color component counts&#34;)
+    return tuple(lerp(a[i], b[i], t) for i in range(len(a)))</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.merge_near_duplicates"><code class="name flex">
+<span>def <span class="ident">merge_near_duplicates</span></span>(<span>pairs: Sequence[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK | str]]) ‑> Sequence[tuple[float, <a title="fpdf.drawing_primitives.DeviceRGB" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceRGB">DeviceRGB</a> | <a title="fpdf.drawing_primitives.DeviceGray" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceGray">DeviceGray</a> | <a title="fpdf.drawing_primitives.DeviceCMYK" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceCMYK">DeviceCMYK</a> | str]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L196-L223" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def merge_near_duplicates(
+    pairs: Sequence[tuple[float, Union[Color, str]]],
+) -&gt; Sequence[tuple[float, Union[Color, str]]]:
+    out: list[tuple[float, Union[Color, str]]] = []
+    for u, col in pairs:
+        if out and FloatTolerance.equal(out[-1][0], u):
+            prev_u, prev_col = out[-1]
+            if prev_col == col:
+                # identical color: keep the newest sample
+                out[-1] = (u, col)
+                continue
+
+            step = max(FloatTolerance.TOLERANCE * 10, 1e-6)
+            nudged_prev = prev_u - step
+            if FloatTolerance.greater_equal(nudged_prev, 0.0):
+                out[-1] = (nudged_prev, prev_col)
+                out.append((u, col))
+            else:
+                nudged = u + step
+                if nudged &gt; 1.0:
+                    nudged = 1.0
+                    out[-1] = (max(0.0, min(prev_u, nudged - step)), prev_col)
+                else:
+                    out[-1] = (prev_u, prev_col)
+                out.append((nudged, col))
+        else:
+            out.append((u, col))
+    return out</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.normalize_stops"><code class="name flex">
+<span>def <span class="ident">normalize_stops</span></span>(<span>stops: Sequence[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK | str]],<br>coerce_to_device: bool = True,<br>*,<br>return_raw: bool = False) ‑> tuple[str, list[tuple[float, <a title="fpdf.drawing_primitives.DeviceRGB" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceRGB">DeviceRGB</a> | <a title="fpdf.drawing_primitives.DeviceGray" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceGray">DeviceGray</a> | <a title="fpdf.drawing_primitives.DeviceCMYK" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceCMYK">DeviceCMYK</a>]], list[tuple[float, <a title="fpdf.drawing_primitives.DeviceRGB" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceRGB">DeviceRGB</a> | <a title="fpdf.drawing_primitives.DeviceGray" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceGray">DeviceGray</a> | <a title="fpdf.drawing_primitives.DeviceCMYK" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceCMYK">DeviceCMYK</a>]] | None]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L59-L193" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def normalize_stops(
+    stops: Sequence[tuple[float, Union[Color, str]]],
+    coerce_to_device: bool = True,
+    *,
+    return_raw: bool = False,
+) -&gt; tuple[str, list[tuple[float, Color]], Optional[list[tuple[float, Color]]]]:
+    &#34;&#34;&#34;
+    Clamp/sort/merge, ensure endpoints at 0 and 1, coerce to single Device* colorspace.
+
+    When ``return_raw`` is true, also returns a list of the original stop positions
+    (prior to clamping to [0,1]) converted to the same device colorspace. The raw
+    offsets are sorted and merged (last stop wins for near-duplicates) but no
+    implicit 0/1 endpoints are synthesized.
+    &#34;&#34;&#34;
+
+    if not stops:
+        raise ValueError(&#34;At least one stop is required&#34;)
+
+    raw_entries: list[tuple[float, Color]] = []
+    for off, col in stops:
+        raw_u = float(off)
+        c = (
+            convert_to_device_color(col)
+            if (coerce_to_device and not hasattr(col, &#34;colors&#34;))
+            else col
+        )
+        raw_entries.append((raw_u, c))  # type: ignore[arg-type]
+    raw_entries.sort(key=lambda t: t[0])
+
+    merged_raw: list[tuple[float, Color]] = []
+    for raw_u, color in raw_entries:
+        if merged_raw and FloatTolerance.equal(merged_raw[-1][0], raw_u):
+            merged_raw[-1] = (raw_u, color)
+        else:
+            merged_raw.append((raw_u, color))
+
+    def _lerp_color(c0: Color, c1: Color, t: float) -&gt; Color:
+        comps0 = c0.colors
+        comps1 = c1.colors
+        blended = lerp_tuple(comps0, comps1, t)
+        a0 = getattr(c0, &#34;a&#34;, None)
+        a1 = getattr(c1, &#34;a&#34;, None)
+        alpha = None
+        if a0 is not None or a1 is not None:
+            alpha = lerp(
+                1.0 if a0 is None else float(a0), 1.0 if a1 is None else float(a1), t
+            )
+
+        if isinstance(c0, DeviceGray):
+            return DeviceGray(blended[0], alpha)
+        if isinstance(c0, DeviceRGB):
+            return DeviceRGB(blended[0], blended[1], blended[2], alpha)
+        if isinstance(c0, DeviceCMYK):
+            return DeviceCMYK(blended[0], blended[1], blended[2], blended[3], alpha)
+        return c0
+
+    def _ensure_stop(target: float) -&gt; None:
+        if not merged_raw:
+            return
+        if FloatTolerance.less_than(
+            target, merged_raw[0][0]
+        ) or FloatTolerance.greater_than(target, merged_raw[-1][0]):
+            return
+        for u, _ in merged_raw:
+            if FloatTolerance.equal(u, target):
+                return
+        for idx in range(1, len(merged_raw)):
+            u0, c0 = merged_raw[idx - 1]
+            u1, c1 = merged_raw[idx]
+            if FloatTolerance.greater_equal(target, u0) and FloatTolerance.less_equal(
+                target, u1
+            ):
+                span = max(u1 - u0, FloatTolerance.TOLERANCE)
+                t = (target - u0) / span
+                merged_raw.insert(idx, (target, _lerp_color(c0, c1, t)))
+                return
+
+    _ensure_stop(0.0)
+    _ensure_stop(1.0)
+
+    clamped_entries: list[tuple[float, Color]] = []
+    for raw_u, color in merged_raw:
+        if raw_u &lt; 0.0:
+            u = 0.0
+        elif raw_u &gt; 1.0:
+            u = 1.0
+        else:
+            u = raw_u
+        clamped_entries.append((u, color))
+
+    clamped_entries.sort(key=lambda t: t[0])
+
+    merged_clamped: list[tuple[float, Color]] = []
+    for u, color in clamped_entries:
+        if merged_clamped and FloatTolerance.equal(merged_clamped[-1][0], u):
+            merged_clamped[-1] = (u, color)
+        else:
+            merged_clamped.append((u, color))
+
+    if len(merged_clamped) == 1:
+        u, color = merged_clamped[0]
+        merged_clamped = [(0.0, color), (1.0, color)]
+    else:
+        if not FloatTolerance.is_zero(merged_clamped[0][0]):
+            merged_clamped.insert(0, (0.0, merged_clamped[0][1]))
+        else:
+            merged_clamped[0] = (0.0, merged_clamped[0][1])
+        if not FloatTolerance.equal(merged_clamped[-1][0], 1.0):
+            merged_clamped.append((1.0, merged_clamped[-1][1]))
+        else:
+            merged_clamped[-1] = (1.0, merged_clamped[-1][1])
+
+    space_name, palette = pick_colorspace_and_promote([c for _, c in merged_clamped])
+    normalized = [(u, p) for (u, _), p in zip(merged_clamped, palette)]
+
+    if not return_raw:
+        return space_name, normalized, None
+
+    def promote_raw(color: Color) -&gt; Color:
+        if space_name == &#34;DeviceGray&#34;:
+            if isinstance(color, DeviceGray):
+                return color
+            if isinstance(color, DeviceRGB):
+                return color.to_gray()
+            if isinstance(color, DeviceCMYK):
+                raise ValueError(&#34;Can&#39;t mix CMYK with non-CMYK gradients&#34;)
+        if space_name == &#34;DeviceRGB&#34;:
+            if isinstance(color, DeviceRGB):
+                return color
+            if isinstance(color, DeviceGray):
+                return DeviceRGB(color.g, color.g, color.g)
+        return color
+
+    raw_promoted = [(u, promote_raw(color)) for (u, color) in merged_raw]
+    return space_name, normalized, raw_promoted</code></pre>
+</details>
+<div class="desc"><p>Clamp/sort/merge, ensure endpoints at 0 and 1, coerce to single Device* colorspace.</p>
+<p>When <code>return_raw</code> is true, also returns a list of the original stop positions
+(prior to clamping to [0,1]) converted to the same device colorspace. The raw
+offsets are sorted and merged (last stop wins for near-duplicates) but no
+implicit 0/1 endpoints are synthesized.</p></div>
+</dd>
+<dt id="fpdf.pattern.pick_colorspace_and_promote"><code class="name flex">
+<span>def <span class="ident">pick_colorspace_and_promote</span></span>(<span>colors: list[DeviceRGB | DeviceGray | DeviceCMYK]) ‑> tuple[str, list[<a title="fpdf.drawing_primitives.DeviceRGB" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceRGB">DeviceRGB</a> | <a title="fpdf.drawing_primitives.DeviceGray" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceGray">DeviceGray</a> | <a title="fpdf.drawing_primitives.DeviceCMYK" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceCMYK">DeviceCMYK</a>]]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L42-L56" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def pick_colorspace_and_promote(colors: list[Color]) -&gt; tuple[str, list[Color]]:
+    kinds = {type(c).__name__ for c in colors}
+    if &#34;DeviceCMYK&#34; in kinds and len(kinds) &gt; 1:
+        raise ValueError(&#34;Can&#39;t mix CMYK with other color spaces.&#34;)
+    if kinds == {&#34;DeviceGray&#34;, &#34;DeviceRGB&#34;}:
+        # promote Gray -&gt; RGB
+        promoted: list[Color] = [
+            DeviceRGB(c.g, c.g, c.g) if isinstance(c, DeviceGray) else c for c in colors
+        ]
+        return &#34;DeviceRGB&#34;, promoted
+    if kinds == {&#34;DeviceGray&#34;}:
+        return &#34;DeviceGray&#34;, colors
+    if kinds == {&#34;DeviceRGB&#34;}:
+        return &#34;DeviceRGB&#34;, colors
+    return &#34;DeviceRGB&#34;, colors</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.sample_stops"><code class="name flex">
+<span>def <span class="ident">sample_stops</span></span>(<span>stops01: list[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK]], u: float) ‑> tuple[float, ...]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L237-L246" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def sample_stops(stops01: list[tuple[float, Color]], u: float) -&gt; tuple[float, ...]:
+    &#34;&#34;&#34;Piecewise-linear sampling in [0,1]. Assumes normalized/sorted stops incl. endpoints.&#34;&#34;&#34;
+    for i in range(1, len(stops01)):
+        u1, c1 = stops01[i]
+        if FloatTolerance.less_equal(u, u1):
+            u0, c0 = stops01[i - 1]
+            span = max(u1 - u0, FloatTolerance.TOLERANCE)
+            t = (u - u0) / span
+            return lerp_tuple(c0.colors, c1.colors, t)
+    return stops01[-1][1].colors</code></pre>
+</details>
+<div class="desc"><p>Piecewise-linear sampling in [0,1]. Assumes normalized/sorted stops incl. endpoints.</p></div>
+</dd>
+<dt id="fpdf.pattern.shape_linear_gradient"><code class="name flex">
+<span>def <span class="ident">shape_linear_gradient</span></span>(<span>x1: float,<br>y1: float,<br>x2: float,<br>y2: float,<br>stops: Sequence[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK | str]],<br>spread_method: <a title="fpdf.enums.GradientSpreadMethod" href="enums.html#fpdf.enums.GradientSpreadMethod">GradientSpreadMethod</a> | str = GradientSpreadMethod.PAD,<br>bbox: BoundingBox | None = None) ‑> <a title="fpdf.pattern.LinearGradient" href="#fpdf.pattern.LinearGradient">LinearGradient</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L1251-L1379" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def shape_linear_gradient(
+    x1: float,
+    y1: float,
+    x2: float,
+    y2: float,
+    stops: Sequence[tuple[float, Union[Color, str]]],
+    spread_method: Union[GradientSpreadMethod, str] = GradientSpreadMethod.PAD,
+    bbox: Optional[&#34;BoundingBox&#34;] = None,
+) -&gt; LinearGradient:
+    &#34;&#34;&#34;
+    Create a linear gradient for a shape with SVG-like stops (offset in [0,1]).
+    REPEAT/REFLECT are implemented by expanding stops to cover the bbox projection.
+    &#34;&#34;&#34;
+    if not stops:
+        raise ValueError(&#34;At least one stop is required&#34;)
+
+    spread_method = GradientSpreadMethod.coerce(spread_method)
+
+    _, normalized_stops, raw_stops = normalize_stops(stops, return_raw=True)
+
+    if spread_method == GradientSpreadMethod.PAD or bbox is None:
+        # if the spread_method is PAD this is the final gradient
+        # if the spread_method is REPEAT/REFLECT but no bbox is given, we can&#39;t expand yet
+        # gradient paint will call this method again with the bbox to replace the gradient
+        # at render time
+        colors = [color for _, color in normalized_stops]
+        bounds = [offset for offset, _ in normalized_stops[1:-1]]
+
+        gradient = LinearGradient(
+            from_x=x1,
+            from_y=y1,
+            to_x=x2,
+            to_y=y2,
+            colors=colors,
+            bounds=bounds,
+            extend_before=True,
+            extend_after=True,
+        )
+        gradient.raw_stops = raw_stops
+        return gradient
+
+    # 5) Expand for REPEAT / REFLECT
+    use_raw_period = raw_stops is not None and len(raw_stops) &gt;= 2
+    tile_stops = raw_stops if use_raw_period else normalized_stops
+    assert tile_stops is not None  # pleasing mypy
+    base_start = tile_stops[0][0]
+    base_end = tile_stops[-1][0]
+    base_span = max(base_end - base_start, FloatTolerance.TOLERANCE)
+    if FloatTolerance.less_equal(base_span, 0.0):
+        base_start = 0.0
+        base_span = 1.0
+        tile_stops = normalized_stops
+
+    tmin, tmax, L = bbox.project_interval_on_axis(x1, y1, x2, y2)
+    if FloatTolerance.less_equal(L, 0.0):
+        # Degenerate axis: synthesize flat
+        c0, c1 = normalized_stops[0][1], normalized_stops[-1][1]
+        return LinearGradient(
+            from_x=x1,
+            from_y=y1,
+            to_x=x2,
+            to_y=y2,
+            colors=[c0, c1],
+            bounds=[],
+            extend_before=False,
+            extend_after=False,
+        )
+
+    tmin_norm = tmin / L
+    tmax_norm = tmax / L
+
+    start_tile = math.floor((tmin_norm - base_start) / base_span) - 1
+    end_tile = math.ceil((tmax_norm - base_start) / base_span) + 1
+
+    expanded: list[tuple[float, Union[Color, str]]] = []
+    for k in range(start_tile, end_tile + 1):
+        shift = k * base_span
+        if spread_method == GradientSpreadMethod.REPEAT or (k &amp; 1) == 0:
+            # even tiles for REFLECT behave like REPEAT
+            for u, col in tile_stops:
+                expanded.append((shift + u, col))
+        else:
+            # REFLECT on odd tiles: reverse order + mirrored u
+            for u, col in reversed(tile_stops):
+                mirrored = shift + base_start + base_span - (u - base_start)
+                expanded.append((mirrored, col))
+
+    # Clip a bit beyond bbox for compactness
+    margin = max(base_span, 1.0)
+    a = tmin_norm - margin
+    b = tmax_norm + margin
+    clipped = [
+        (s, c)
+        for (s, c) in expanded
+        if FloatTolerance.greater_equal(s, a) and FloatTolerance.less_equal(s, b)
+    ] or expanded
+
+    # Renormalize to [0..1] over synthetic span
+    s0 = clipped[0][0]
+    sN = clipped[-1][0]
+    span = max(sN - s0, FloatTolerance.TOLERANCE)
+    renorm = [((s - s0) / span, c) for (s, c) in clipped]
+
+    # Shift/scale the coords so u=0..1 aligns to absolute positions s0..sN
+    lam0 = s0  # in units of periods
+    lam1 = s0 + span
+    nx1 = x1 + lam0 * (x2 - x1)
+    ny1 = y1 + lam0 * (y2 - y1)
+    nx2 = x1 + lam1 * (x2 - x1)
+    ny2 = y1 + lam1 * (y2 - y1)
+
+    # Merge identical offsets after math
+    merged = merge_near_duplicates(renorm)
+
+    linear_gradient_colors = [c for _, c in merged]
+    linear_gradient_bounds = [o for o, _ in merged[1:-1]]
+
+    gradient = LinearGradient(
+        from_x=nx1,
+        from_y=ny1,
+        to_x=nx2,
+        to_y=ny2,
+        colors=linear_gradient_colors,
+        bounds=linear_gradient_bounds,
+        extend_before=False,
+        extend_after=False,
+    )
+    gradient.raw_stops = raw_stops
+    return gradient</code></pre>
+</details>
+<div class="desc"><p>Create a linear gradient for a shape with SVG-like stops (offset in [0,1]).
+REPEAT/REFLECT are implemented by expanding stops to cover the bbox projection.</p></div>
+</dd>
+<dt id="fpdf.pattern.shape_radial_gradient"><code class="name flex">
+<span>def <span class="ident">shape_radial_gradient</span></span>(<span>cx: float,<br>cy: float,<br>r: float,<br>stops: Sequence[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK | str]],<br>fx: float | None = None,<br>fy: float | None = None,<br>fr: float = 0.0,<br>spread_method: <a title="fpdf.enums.GradientSpreadMethod" href="enums.html#fpdf.enums.GradientSpreadMethod">GradientSpreadMethod</a> | str = GradientSpreadMethod.PAD,<br>bbox: BoundingBox | None = None) ‑> <a title="fpdf.pattern.RadialGradient" href="#fpdf.pattern.RadialGradient">RadialGradient</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L1382-L1547" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def shape_radial_gradient(
+    cx: float,
+    cy: float,
+    r: float,
+    stops: Sequence[tuple[float, Union[Color, str]]],
+    fx: Optional[float] = None,
+    fy: Optional[float] = None,
+    fr: float = 0.0,
+    spread_method: Union[GradientSpreadMethod, str] = GradientSpreadMethod.PAD,
+    bbox: Optional[&#34;BoundingBox&#34;] = None,
+) -&gt; RadialGradient:
+    &#34;&#34;&#34;
+    Create a radial gradient for a shape with SVG-like stops (offset in [0,1]).
+    - (cx, cy, r): outer circle
+    - (fx, fy, fr): focal/inner circle (defaults to center with radius 0)
+    REPEAT/REFLECT are implemented by expanding stops to cover the bbox projection.
+    &#34;&#34;&#34;
+    if not stops:
+        raise ValueError(&#34;At least one stop is required&#34;)
+
+    spread_method = GradientSpreadMethod.coerce(spread_method)
+
+    _, normalized_stops, raw_stops = normalize_stops(stops, return_raw=True)
+
+    if r &lt; 0:
+        raise ValueError(&#34;Outer radius r must be &gt;= 0&#34;)
+    if fr &lt; 0:
+        fr = 0.0
+    if fx is None:
+        fx = cx
+    if fy is None:
+        fy = cy
+    # If inner radius exceeds outer, clamp
+    if fr &gt; r:
+        fr = r
+
+    if spread_method == GradientSpreadMethod.PAD or bbox is None:
+        # if the spread_method is PAD this is the final gradient
+        # if the spread_method is REPEAT/REFLECT but no bbox is given, we can&#39;t expand yet
+        # gradient paint will call this method again with the bbox to replace the gradient
+        # at render time
+        colors = [color for _, color in normalized_stops]
+        bounds = [offset for offset, _ in normalized_stops[1:-1]]
+
+        gradient = RadialGradient(
+            start_circle_x=fx,
+            start_circle_y=fy,
+            start_circle_radius=fr,
+            end_circle_x=cx,
+            end_circle_y=cy,
+            end_circle_radius=r,
+            colors=colors,
+            bounds=bounds,
+            extend_before=True,
+            extend_after=True,
+        )
+        gradient.raw_stops = raw_stops
+        return gradient
+
+    # 5) Expand for REPEAT / REFLECT across rings
+    use_raw_period = raw_stops is not None and len(raw_stops) &gt;= 2
+    tile_stops = raw_stops if use_raw_period else normalized_stops
+    assert tile_stops is not None  # pleasing mypy
+    base_start = tile_stops[0][0]
+    base_end = tile_stops[-1][0]
+    base_span = max(base_end - base_start, FloatTolerance.TOLERANCE)
+    if FloatTolerance.less_equal(base_span, 0.0):
+        base_start = 0.0
+        base_span = 1.0
+        tile_stops = normalized_stops
+
+    # Degenerate gradients with no radial growth can&#39;t be meaningfully repeated
+    if FloatTolerance.equal(r, fr):
+        colors = [color for _, color in normalized_stops]
+        bounds = [offset for offset, _ in normalized_stops[1:-1]]
+        gradient = RadialGradient(
+            start_circle_x=fx,
+            start_circle_y=fy,
+            start_circle_radius=fr,
+            end_circle_x=cx,
+            end_circle_y=cy,
+            end_circle_radius=r,
+            colors=colors,
+            bounds=bounds,
+            extend_before=True,
+            extend_after=True,
+        )
+        gradient.raw_stops = raw_stops
+        return gradient
+
+    def sigma_to_lambda(sigma: float) -&gt; float:
+        return (sigma - base_start) / base_span
+
+    def circle_at(lam: float) -&gt; tuple[float, float, float]:
+        return (
+            lerp(fx, cx, lam),
+            lerp(fy, cy, lam),
+            lerp(fr, r, lam),
+        )
+
+    target_sigma = base_end
+    if bbox is not None:
+        max_tiles = 256
+        for _ in range(max_tiles):
+            lam = sigma_to_lambda(target_sigma)
+            cx_lam, cy_lam, r_lam = circle_at(lam)
+            if FloatTolerance.less_equal(
+                bbox.max_distance_to_point(cx_lam, cy_lam), r_lam
+            ):
+                break
+            target_sigma += base_span
+        else:
+            target_sigma = base_end + max_tiles * base_span
+
+    tiles_needed = 0
+    if target_sigma &gt; base_end:
+        tiles_needed = math.ceil((target_sigma - base_end) / base_span)
+
+    expanded: list[tuple[float, Color]] = []
+    for k in range(tiles_needed + 1):
+        shift = k * base_span
+        if spread_method == GradientSpreadMethod.REPEAT or (k &amp; 1) == 0:
+            for u, col in tile_stops:
+                expanded.append((shift + u, col))
+        else:
+            for u, col in reversed(tile_stops):
+                mirrored = shift + base_start + base_span - (u - base_start)
+                expanded.append((mirrored, col))
+
+    if not expanded:
+        expanded = tile_stops[:]
+
+    # Clip a little beyond the target span to keep the list tight while preserving continuity
+    clip_limit = target_sigma + base_span + 1e-6
+    expanded = [pair for pair in expanded if pair[0] &lt;= clip_limit]
+
+    s0 = expanded[0][0]
+    sN = expanded[-1][0]
+    span = max(sN - s0, FloatTolerance.TOLERANCE)
+    renorm = [((s - s0) / span, c) for (s, c) in expanded]
+
+    lam0 = sigma_to_lambda(s0)
+    lam1 = sigma_to_lambda(sN)
+    sx, sy, sr = circle_at(lam0)
+    ex, ey, er = circle_at(lam1)
+
+    # Merge identical offsets after math
+    merged = merge_near_duplicates(renorm)
+
+    radial_gradient_colors = [c for _, c in merged]
+    radial_gradient_bounds = [o for o, _ in merged[1:-1]]
+
+    gradient = RadialGradient(
+        start_circle_x=sx,
+        start_circle_y=sy,
+        start_circle_radius=sr,
+        end_circle_x=ex,
+        end_circle_y=ey,
+        end_circle_radius=er,
+        colors=radial_gradient_colors,
+        bounds=radial_gradient_bounds,
+        extend_before=False,
+        extend_after=False,
+    )
+    gradient.raw_stops = raw_stops
+    return gradient</code></pre>
+</details>
+<div class="desc"><p>Create a radial gradient for a shape with SVG-like stops (offset in [0,1]).
+- (cx, cy, r): outer circle
+- (fx, fy, fr): focal/inner circle (defaults to center with radius 0)
+REPEAT/REFLECT are implemented by expanding stops to cover the bbox projection.</p></div>
+</dd>
+<dt id="fpdf.pattern.shape_sweep_gradient_as_mesh"><code class="name flex">
+<span>def <span class="ident">shape_sweep_gradient_as_mesh</span></span>(<span>cx: float,<br>cy: float,<br>start_angle: float,<br>end_angle: float,<br>stops: Sequence[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK | str]],<br>spread_method: <a title="fpdf.enums.GradientSpreadMethod" href="enums.html#fpdf.enums.GradientSpreadMethod">GradientSpreadMethod</a>,<br>bbox: BoundingBox,<br>segments: int | None = None,<br>inner_radius_factor: float = 0.002) ‑> <a title="fpdf.pattern.MeshShading" href="#fpdf.pattern.MeshShading">MeshShading</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L960-L1248" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def shape_sweep_gradient_as_mesh(
+    cx: float,
+    cy: float,
+    start_angle: float,
+    end_angle: float,
+    stops: Sequence[tuple[float, Union[Color, str]]],
+    spread_method: GradientSpreadMethod,
+    bbox: &#34;BoundingBox&#34;,
+    segments: Optional[int] = None,
+    inner_radius_factor: float = 0.002,
+) -&gt; MeshShading:
+    &#34;&#34;&#34;
+    Approximate a sweep (conic) gradient as a Type 4 mesh (triangles).
+    We build a full 0..2π fan so PAD/REPEAT/REFLECT outside [0,1] are respected.
+    Angles are expected in radians.
+    &#34;&#34;&#34;
+    _, norm_stops, _ = normalize_stops(stops)
+    first_c = norm_stops[0][1]
+    if isinstance(first_c, DeviceGray):
+        color_space = &#34;DeviceGray&#34;
+        comp_count = 1
+    elif isinstance(first_c, DeviceRGB):
+        color_space = &#34;DeviceRGB&#34;
+        comp_count = 3
+    else:
+        color_space = &#34;DeviceCMYK&#34;
+        comp_count = 4
+
+    tau = 2.0 * math.pi
+    delta = end_angle - start_angle
+    if FloatTolerance.is_zero(delta):
+        delta = tau
+
+    if delta &lt; 0.0:
+        start_angle, end_angle = end_angle, start_angle
+        norm_stops = [(1.0 - u, c) for (u, c) in norm_stops]
+        norm_stops.sort(key=lambda t: t[0])
+        delta = -delta
+
+    span = delta if FloatTolerance.greater_than(delta, 0.0) else tau
+    cover_span = max(span, tau)
+
+    if segments is None:
+        base_segments = max(1024, len(norm_stops) * 96)
+    else:
+        base_segments = max(16, segments)
+    max_angle = cover_span / float(base_segments)
+    max_angle = max(min(max_angle, math.pi / 2.0), math.pi / 360.0)
+
+    r_outer = bbox.max_distance_to_point(cx, cy)
+    r_inner = max(
+        min(bbox.width, bbox.height) * float(inner_radius_factor),
+        FloatTolerance.TOLERANCE,
+    )
+
+    start_mod = math.fmod(start_angle, tau)
+    if start_mod &lt; 0.0:
+        start_mod += tau
+    end_mod = math.fmod(start_mod + span, tau)
+    if end_mod &lt; 0.0:
+        end_mod += tau
+    wraps = FloatTolerance.less_than(span, tau) and end_mod &lt; start_mod
+    span_covers_full_circle = FloatTolerance.greater_equal(span, tau)
+    seam_progress = (tau - start_mod) % tau
+    if FloatTolerance.less_equal(seam_progress, 0.0):
+        seam_progress = cover_span
+
+    progress_candidates: list[float] = [0.0]
+    tile_count = int(math.floor(cover_span / span))
+    remainder = cover_span - tile_count * span
+    if FloatTolerance.less_equal(remainder, 0.0):
+        remainder = 0.0
+
+    for tile in range(tile_count):
+        base_progress = tile * span
+        for u, _ in norm_stops:
+            progress_candidates.append(base_progress + u * span)
+
+    if remainder &gt; 0.0:
+        portion = remainder / span
+        base_progress = tile_count * span
+        for u, _ in norm_stops:
+            if FloatTolerance.greater_than(u, portion):
+                break
+            progress_candidates.append(base_progress + u * span)
+        progress_candidates.append(cover_span)
+    else:
+        progress_candidates.append(cover_span)
+
+    if spread_method == GradientSpreadMethod.PAD and not span_covers_full_circle:
+        tail_length = max(cover_span - span, 0.0)
+        if FloatTolerance.greater_than(
+            seam_progress, 0.0
+        ) and FloatTolerance.less_equal(seam_progress, cover_span):
+            progress_candidates.append(seam_progress)
+        if (
+            FloatTolerance.greater_than(tail_length, 0.0)
+            and FloatTolerance.less_than(seam_progress, cover_span)
+            and FloatTolerance.greater_than(seam_progress, span)
+        ):
+            seam_eps = min(
+                max(span * 0.01, FloatTolerance.TOLERANCE),
+                seam_progress - span - FloatTolerance.TOLERANCE,
+                cover_span - seam_progress - FloatTolerance.TOLERANCE,
+            )
+            if FloatTolerance.greater_than(seam_eps, 0.0):
+                progress_candidates.append(seam_progress - seam_eps)
+
+    progress_candidates.sort()
+    progress_nodes: list[float] = []
+    for progress in progress_candidates:
+        if progress_nodes and FloatTolerance.equal(progress, progress_nodes[-1]):
+            progress_nodes[-1] = progress
+        else:
+            progress_nodes.append(progress)
+
+    if not progress_nodes:
+        progress_nodes = [0.0, cover_span]
+    elif len(progress_nodes) == 1:
+        progress_nodes.append(progress_nodes[0] + cover_span)
+
+    span_plus = start_mod + span
+    crosses_360 = FloatTolerance.greater_than(span_plus, tau)
+    limit_theta = start_angle + seam_progress
+
+    # pylint: disable=too-many-return-statements
+    def raw_from_progress(progress: float) -&gt; float:
+        if FloatTolerance.less_equal(span, 0.0):
+            return 0.0
+
+        theta = start_angle + progress
+
+        if FloatTolerance.greater_equal(progress, cover_span):
+            if (
+                spread_method == GradientSpreadMethod.PAD
+                and not span_covers_full_circle
+                and FloatTolerance.greater_than(cover_span, span)
+            ):
+                return 0.0
+            return 1.0
+
+        if spread_method == GradientSpreadMethod.PAD:
+            if span_covers_full_circle:
+                return (
+                    progress / span if FloatTolerance.greater_than(span, 0.0) else 0.0
+                )
+
+            if not crosses_360:
+                angle_mod = math.fmod(theta, tau)
+                if angle_mod &lt; 0.0:
+                    angle_mod += tau
+                end_limit = start_mod + span
+                if FloatTolerance.less_than(angle_mod, start_mod):
+                    return 0.0
+                if FloatTolerance.less_equal(angle_mod, end_limit):
+                    return (angle_mod - start_mod) / span
+                return 0.0
+
+            # crosses 360°: only sample up to the seam (start -&gt; 360°)
+            visible = max(seam_progress, FloatTolerance.TOLERANCE)
+            if FloatTolerance.less_equal(progress, visible):
+                return progress / visible
+            return 0.0
+
+        return progress / span
+
+    fan_line_raw: list[tuple[float, float, tuple[float, ...]]] = []
+    for progress in progress_nodes:
+        if (
+            FloatTolerance.greater_equal(progress, cover_span)
+            and not span_covers_full_circle
+            and FloatTolerance.greater_than(cover_span, span)
+            and spread_method != GradientSpreadMethod.PAD
+        ):
+            continue
+        theta = start_angle + progress
+        raw = raw_from_progress(progress)
+        if spread_method == GradientSpreadMethod.PAD:
+            mapped = 0.0 if raw &lt;= 0.0 else 1.0 if raw &gt;= 1.0 else raw
+        else:
+            mapped = spread_map(raw, spread_method)
+        color = sample_stops(norm_stops, mapped)
+        fan_line_raw.append((theta, raw, color))
+
+    if not fan_line_raw:
+        fan_line: list[tuple[float, tuple[float, ...]]] = []
+    elif (
+        spread_method == GradientSpreadMethod.PAD
+        and not span_covers_full_circle
+        and wraps
+    ):
+        limit_theta = start_angle + seam_progress
+        pad_color = fan_line_raw[0][2]
+        fan_line = []
+        inserted = False
+        for theta, raw, color in fan_line_raw:
+            fan_line.append((theta, color))
+            if not inserted and FloatTolerance.equal(theta, limit_theta):
+                fan_line.append((theta + FloatTolerance.TOLERANCE, pad_color))
+                inserted = True
+        if not inserted:
+            fan_line.append((limit_theta + FloatTolerance.TOLERANCE, pad_color))
+    else:
+        fan_line = [(theta, color) for (theta, _, color) in fan_line_raw]
+
+    samples: list[tuple[float, tuple[float, ...]]] = []
+    start_color_components = norm_stops[0][1].colors
+    if fan_line:
+        samples.append(fan_line[0])
+        for idx in range(len(fan_line) - 1):
+            theta0, color0 = fan_line[idx]
+            theta1, color1 = fan_line[idx + 1]
+            delta_theta = theta1 - theta0
+            if FloatTolerance.less_equal(delta_theta, 0.0):
+                if samples:
+                    samples[-1] = (theta1, color1)
+                else:
+                    samples.append((theta1, color1))
+                continue
+            if wraps and FloatTolerance.greater_than(theta0, limit_theta):
+                color0 = start_color_components
+                color1 = start_color_components
+            splits = max(1, int(math.ceil(delta_theta / max_angle)))
+            for s in range(1, splits + 1):
+                t = s / splits
+                theta = theta0 + t * delta_theta
+                color = tuple(
+                    color0[j] + (color1[j] - color0[j]) * t for j in range(comp_count)
+                )
+                samples.append((theta, color))
+
+    if len(samples) &lt;= 1:
+        theta = fan_line[0][0] if fan_line else start_angle
+        base_color = fan_line[0][1] if fan_line else norm_stops[0][1].colors
+        samples = [
+            (theta, base_color),
+            (theta + cover_span, base_color),
+        ]
+
+    triangles: list[
+        tuple[tuple[float, float], tuple[float, float], tuple[float, float]]
+    ] = []
+    tri_colors: list[tuple[tuple[float, ...], tuple[float, ...], tuple[float, ...]]] = (
+        []
+    )
+
+    theta_prev, color_prev = samples[0]
+    x_prev_inner = cx + r_inner * math.cos(theta_prev)
+    y_prev_inner = cy + r_inner * math.sin(theta_prev)
+    x_prev_outer = cx + r_outer * math.cos(theta_prev)
+    y_prev_outer = cy + r_outer * math.sin(theta_prev)
+
+    for theta_next, color_next in samples[1:]:
+        x_next_inner = cx + r_inner * math.cos(theta_next)
+        y_next_inner = cy + r_inner * math.sin(theta_next)
+        x_next_outer = cx + r_outer * math.cos(theta_next)
+        y_next_outer = cy + r_outer * math.sin(theta_next)
+
+        triangles.append(
+            (
+                (x_prev_inner, y_prev_inner),
+                (x_prev_outer, y_prev_outer),
+                (x_next_outer, y_next_outer),
+            )
+        )
+        tri_colors.append((color_prev, color_prev, color_next))
+
+        triangles.append(
+            (
+                (x_prev_inner, y_prev_inner),
+                (x_next_outer, y_next_outer),
+                (x_next_inner, y_next_inner),
+            )
+        )
+        tri_colors.append((color_prev, color_next, color_next))
+
+        theta_prev, color_prev = theta_next, color_next
+        x_prev_inner, y_prev_inner = x_next_inner, y_next_inner
+        x_prev_outer, y_prev_outer = x_next_outer, y_next_outer
+
+    return MeshShading(
+        color_space=color_space,
+        bbox=bbox,
+        comp_count=comp_count,
+        triangles=triangles,
+        colors=tri_colors,
+        background=None,
+        anti_alias=True,
+    )</code></pre>
+</details>
+<div class="desc"><p>Approximate a sweep (conic) gradient as a Type 4 mesh (triangles).
+We build a full 0..2π fan so PAD/REPEAT/REFLECT outside [0,1] are respected.
+Angles are expected in radians.</p></div>
+</dd>
+<dt id="fpdf.pattern.spread_map"><code class="name flex">
+<span>def <span class="ident">spread_map</span></span>(<span>u: float,<br>method: <a title="fpdf.enums.GradientSpreadMethod" href="enums.html#fpdf.enums.GradientSpreadMethod">GradientSpreadMethod</a>) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L226-L234" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def spread_map(u: float, method: GradientSpreadMethod) -&gt; float:
+    &#34;&#34;&#34;Map u∈R -&gt; [0,1] via PAD/REPEAT/REFLECT.&#34;&#34;&#34;
+    if method == GradientSpreadMethod.PAD:
+        return 0.0 if u &lt; 0.0 else 1.0 if u &gt; 1.0 else u
+    if method == GradientSpreadMethod.REPEAT:
+        return u - math.floor(u)
+    # REFLECT: triangle wave
+    v = u % 2.0
+    return v if v &lt;= 1.0 else 2.0 - v</code></pre>
+</details>
+<div class="desc"><p>Map u∈R -&gt; [0,1] via PAD/REPEAT/REFLECT.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fpdf.pattern.Gradient"><code class="flex name class">
+<span>class <span class="ident">Gradient</span></span>
+<span>(</span><span>colors: Sequence[int | float | decimal.Decimal | DeviceRGB | DeviceGray | DeviceCMYK | str | Sequence[int | float | decimal.Decimal]],<br>background: int | float | decimal.Decimal | DeviceRGB | DeviceGray | DeviceCMYK | str | Sequence[int | float | decimal.Decimal] | None,<br>extend_before: bool,<br>extend_after: bool,<br>bounds: Sequence[float] | None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L403-L599" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Gradient(ABC):
+    def __init__(
+        self,
+        colors: Sequence[ColorInput],
+        background: Optional[ColorInput],
+        extend_before: bool,
+        extend_after: bool,
+        bounds: Optional[Sequence[float]],
+    ):
+        self.color_space, self.colors, self._alphas = self._convert_colors(colors)
+        self.background = None
+        if background:
+            bg = (
+                convert_to_device_color(background)
+                if isinstance(background, (str, *ColorClass, *NumberClass))
+                else convert_to_device_color(*background)
+            )
+            # Re-map background to the chosen palette colorspace
+            if self.color_space == &#34;DeviceGray&#34;:
+                if isinstance(bg, DeviceRGB):
+                    bg = bg.to_gray()
+                elif isinstance(bg, DeviceCMYK):
+                    raise ValueError(&#34;Can&#39;t mix CMYK background with non-CMYK gradient&#34;)
+            elif self.color_space == &#34;DeviceRGB&#34;:
+                if isinstance(bg, DeviceGray):
+                    bg = DeviceRGB(bg.g, bg.g, bg.g)
+                elif isinstance(bg, DeviceCMYK):
+                    raise ValueError(&#34;Can&#39;t mix CMYK background with non-CMYK gradient&#34;)
+            self.background = bg
+        self.extend_before = extend_before
+        self.extend_after = extend_after
+        self.bounds = (
+            bounds
+            if bounds
+            else [(i + 1) / (len(self.colors) - 1) for i in range(len(self.colors) - 2)]
+        )
+        if len(self.bounds) != len(self.colors) - 2:
+            raise ValueError(
+                &#34;Bounds array length must be two less than the number of colors&#34;
+            )
+        self.functions = self._generate_functions()
+        self.pattern = Pattern(self)
+        self._shading_object: Optional[Shading] = None
+        self._alpha_shading_object: Optional[Shading] = None
+        self.coords: Optional[Sequence[float]] = None
+        self.shading_type = 0
+        self.raw_stops: Optional[list[tuple[float, Color]]] = None
+
+    @classmethod
+    def _convert_colors(
+        cls, colors: Sequence[ColorInput]
+    ) -&gt; tuple[str, list[Color], list[float]]:
+        &#34;&#34;&#34;Normalize colors to a single device colorspace and capture per-stop alpha (default 1.0).&#34;&#34;&#34;
+        if len(colors) &lt; 2:
+            raise ValueError(&#34;A gradient must have at least two colors&#34;)
+
+        # 1) Convert everything to Device* instances
+        palette: list[Color] = []
+        spaces: set[str] = set()
+        alphas: list[float] = []
+        for color in colors:
+            dc = (
+                convert_to_device_color(color)
+                if isinstance(color, (str, *ColorClass, *NumberClass))
+                else convert_to_device_color(*color)
+            )
+            palette.append(dc)
+            spaces.add(type(dc).__name__)
+            a = getattr(dc, &#34;a&#34;, None)
+            alphas.append(float(a) if a is not None else 1.0)
+
+        # 2) Disallow any CMYK mixture with others
+        if &#34;DeviceCMYK&#34; in spaces and len(spaces) &gt; 1:
+            raise ValueError(&#34;Can&#39;t mix CMYK with other color spaces.&#34;)
+
+        # 3) If we ended up with plain CMYK, we&#39;re done
+        if spaces == {&#34;DeviceCMYK&#34;}:
+            return &#34;DeviceCMYK&#34;, palette, alphas
+
+        # 4) Promote mix of Gray+RGB to RGB
+        if spaces == {&#34;DeviceGray&#34;, &#34;DeviceRGB&#34;}:
+            promoted: list[Color] = []
+            for c in palette:
+                if isinstance(c, DeviceGray):
+                    promoted.append(DeviceRGB(c.g, c.g, c.g))
+                else:
+                    assert isinstance(c, DeviceRGB)
+                    promoted.append(c)
+            return &#34;DeviceRGB&#34;, promoted, alphas
+
+        # 5) All Gray: stay Gray
+        if spaces == {&#34;DeviceGray&#34;}:
+            return &#34;DeviceGray&#34;, palette, alphas
+
+        # 6) All RGB: optionally downcast to Gray if all are achromatic
+        if spaces == {&#34;DeviceRGB&#34;}:
+            # changing palette to typed list to please mypy
+            rgb_palette: list[DeviceRGB] = [
+                c for c in palette if isinstance(c, DeviceRGB)
+            ]
+            if all(c.is_achromatic() for c in rgb_palette):
+                return &#34;DeviceGray&#34;, [c.to_gray() for c in rgb_palette], alphas
+            return &#34;DeviceRGB&#34;, palette, alphas
+
+        # Fallback: default to RGB
+        return &#34;DeviceRGB&#34;, palette, alphas
+
+    def _generate_functions(
+        self,
+    ) -&gt; list[Type2Function | Type2FunctionGray | Type3Function]:
+        if len(self.colors) &lt; 2:
+            raise ValueError(&#34;A gradient must have at least two colors&#34;)
+        if len(self.colors) == 2:
+            return [Type2Function(self.colors[0], self.colors[1])]
+        number_of_colors = len(self.colors)
+        functions: list[Type2Function | Type2FunctionGray | Type3Function] = []
+        for i in range(number_of_colors - 1):
+            functions.append(Type2Function(self.colors[i], self.colors[i + 1]))
+        functions.append(Type3Function(functions[:], self.bounds))
+        return functions
+
+    def get_functions(self) -&gt; list[Type2Function | Type2FunctionGray | Type3Function]:
+        return self.functions
+
+    def get_shading_object(self) -&gt; &#34;Shading&#34;:
+        if not self._shading_object:
+            coords = (
+                &#34;&#34;
+                if self.coords is None
+                else PDFArray(
+                    [
+                        (
+                            format_number(value)
+                            if isinstance(value, (int, float))
+                            else value
+                        )
+                        for value in self.coords
+                    ]
+                ).serialize()
+            )
+            self._shading_object = Shading(
+                shading_type=self.shading_type,
+                background=self.background,
+                color_space=self.color_space,
+                coords=coords,
+                functions=self.functions,
+                extend_before=self.extend_before,
+                extend_after=self.extend_after,
+            )
+        return self._shading_object
+
+    def get_pattern(self) -&gt; Pattern:
+        return self.pattern
+
+    def has_alpha(self) -&gt; bool:
+        &#34;&#34;&#34;True if any stop carries alpha != 1.0.&#34;&#34;&#34;
+        return any(not FloatTolerance.equal(a, 1.0) for a in self._alphas)
+
+    def _generate_alpha_functions(
+        self,
+    ) -&gt; Sequence[Type2Function | Type2FunctionGray | Type3Function]:
+        &#34;&#34;&#34;Stitched Type2 gray functions mirroring the color ramp bounds.&#34;&#34;&#34;
+        if len(self._alphas) &lt; 2:
+            raise ValueError(&#34;Alpha ramp requires at least two stops&#34;)
+        if len(self._alphas) == 2:
+            return [Type2FunctionGray(self._alphas[0], self._alphas[1])]
+        functions: list[Type2FunctionGray | Type3Function] = []
+        for i in range(len(self._alphas) - 1):
+            functions.append(Type2FunctionGray(self._alphas[i], self._alphas[i + 1]))
+        functions.append(Type3Function(functions[:], self.bounds))
+        return functions
+
+    def get_alpha_shading_object(
+        self, _: Optional[&#34;BoundingBox&#34;] = None
+    ) -&gt; Optional[&#34;Shading&#34;]:
+        &#34;&#34;&#34;Grayscale Shading object representing the alpha ramp (for a soft mask).&#34;&#34;&#34;
+        if not self.has_alpha():
+            return None
+        if not self._alpha_shading_object:
+            if (
+                self.coords is not None
+                and isinstance(self.coords, (list, tuple))
+                and len(self.coords) &gt; 1
+            ):
+                coords = PDFArray(self.coords).serialize()
+            else:
+                coords = &#34;&#34;
+            self._alpha_shading_object = Shading(
+                shading_type=self.shading_type,
+                background=None,  # mask content should be pure coverage, no bg
+                color_space=&#34;DeviceGray&#34;,
+                coords=coords,
+                functions=self._generate_alpha_functions(),
+                extend_before=self.extend_before,
+                extend_after=self.extend_after,
+            )
+        return self._alpha_shading_object</code></pre>
+</details>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="fpdf.pattern.LinearGradient" href="#fpdf.pattern.LinearGradient">LinearGradient</a></li>
+<li><a title="fpdf.pattern.RadialGradient" href="#fpdf.pattern.RadialGradient">RadialGradient</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.Gradient.get_alpha_shading_object"><code class="name flex">
+<span>def <span class="ident">get_alpha_shading_object</span></span>(<span>self) ‑> <a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L575-L599" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_alpha_shading_object(
+    self, _: Optional[&#34;BoundingBox&#34;] = None
+) -&gt; Optional[&#34;Shading&#34;]:
+    &#34;&#34;&#34;Grayscale Shading object representing the alpha ramp (for a soft mask).&#34;&#34;&#34;
+    if not self.has_alpha():
+        return None
+    if not self._alpha_shading_object:
+        if (
+            self.coords is not None
+            and isinstance(self.coords, (list, tuple))
+            and len(self.coords) &gt; 1
+        ):
+            coords = PDFArray(self.coords).serialize()
+        else:
+            coords = &#34;&#34;
+        self._alpha_shading_object = Shading(
+            shading_type=self.shading_type,
+            background=None,  # mask content should be pure coverage, no bg
+            color_space=&#34;DeviceGray&#34;,
+            coords=coords,
+            functions=self._generate_alpha_functions(),
+            extend_before=self.extend_before,
+            extend_after=self.extend_after,
+        )
+    return self._alpha_shading_object</code></pre>
+</details>
+<div class="desc"><p>Grayscale Shading object representing the alpha ramp (for a soft mask).</p></div>
+</dd>
+<dt id="fpdf.pattern.Gradient.get_functions"><code class="name flex">
+<span>def <span class="ident">get_functions</span></span>(<span>self) ‑> list[<a title="fpdf.pattern.Type2Function" href="#fpdf.pattern.Type2Function">Type2Function</a> | <a title="fpdf.pattern.Type2FunctionGray" href="#fpdf.pattern.Type2FunctionGray">Type2FunctionGray</a> | <a title="fpdf.pattern.Type3Function" href="#fpdf.pattern.Type3Function">Type3Function</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L524-L525" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_functions(self) -&gt; list[Type2Function | Type2FunctionGray | Type3Function]:
+    return self.functions</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Gradient.get_pattern"><code class="name flex">
+<span>def <span class="ident">get_pattern</span></span>(<span>self) ‑> <a title="fpdf.pattern.Pattern" href="#fpdf.pattern.Pattern">Pattern</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L554-L555" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_pattern(self) -&gt; Pattern:
+    return self.pattern</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Gradient.get_shading_object"><code class="name flex">
+<span>def <span class="ident">get_shading_object</span></span>(<span>self) ‑> <a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L527-L552" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_shading_object(self) -&gt; &#34;Shading&#34;:
+    if not self._shading_object:
+        coords = (
+            &#34;&#34;
+            if self.coords is None
+            else PDFArray(
+                [
+                    (
+                        format_number(value)
+                        if isinstance(value, (int, float))
+                        else value
+                    )
+                    for value in self.coords
+                ]
+            ).serialize()
+        )
+        self._shading_object = Shading(
+            shading_type=self.shading_type,
+            background=self.background,
+            color_space=self.color_space,
+            coords=coords,
+            functions=self.functions,
+            extend_before=self.extend_before,
+            extend_after=self.extend_after,
+        )
+    return self._shading_object</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Gradient.has_alpha"><code class="name flex">
+<span>def <span class="ident">has_alpha</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L557-L559" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def has_alpha(self) -&gt; bool:
+    &#34;&#34;&#34;True if any stop carries alpha != 1.0.&#34;&#34;&#34;
+    return any(not FloatTolerance.equal(a, 1.0) for a in self._alphas)</code></pre>
+</details>
+<div class="desc"><p>True if any stop carries alpha != 1.0.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.LinearGradient"><code class="flex name class">
+<span>class <span class="ident">LinearGradient</span></span>
+<span>(</span><span>from_x: float,<br>from_y: float,<br>to_x: float,<br>to_y: float,<br>colors: Sequence[int | float | decimal.Decimal | DeviceRGB | DeviceGray | DeviceCMYK | str | Sequence[int | float | decimal.Decimal]],<br>background: int | float | decimal.Decimal | DeviceRGB | DeviceGray | DeviceCMYK | str | Sequence[int | float | decimal.Decimal] | None = None,<br>extend_before: bool = False,<br>extend_after: bool = False,<br>bounds: list[float] | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L602-L656" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class LinearGradient(Gradient):
+    def __init__(
+        self,
+        from_x: float,
+        from_y: float,
+        to_x: float,
+        to_y: float,
+        colors: Sequence[ColorInput],
+        background: Optional[ColorInput] = None,
+        extend_before: bool = False,
+        extend_after: bool = False,
+        bounds: Optional[list[float]] = None,
+    ):
+        &#34;&#34;&#34;
+        A shading pattern that creates a linear (axial) gradient in a PDF.
+
+        The gradient is defined by two points: (from_x, from_y) and (to_x, to_y),
+        along which the specified colors are interpolated. Optionally, you can set
+        a background color, extend the gradient beyond its start or end, and
+        specify custom color stop positions via `bounds`.
+
+        Args:
+            from_x (int or float): The x-coordinate of the starting point of the gradient,
+                in user space units.
+            from_y (int or float): The y-coordinate of the starting point of the gradient,
+                in user space units.
+            to_x (int or float): The x-coordinate of the ending point of the gradient,
+                in user space units.
+            to_y (int or float): The y-coordinate of the ending point of the gradient,
+                in user space units.
+            colors (list[str or tuple[int, int, int]]): A list of colors along which the gradient
+                will be interpolated. Colors may be given as hex strings (e.g., &#34;#FF0000&#34;) or
+                (R, G, B) tuples.
+            background (str or tuple[int, int, int], optional): A background color to use
+                if the gradient does not fully cover the region it is applied to.
+                Defaults to None (no background).
+            extend_before (bool, optional): Whether to extend the first color beyond the
+                starting point (from_x, from_y). Defaults to False.
+            extend_after (bool, optional): Whether to extend the last color beyond the
+                ending point (to_x, to_y). Defaults to False.
+            bounds (list[float], optional): An optional list of floats in the range (0, 1)
+                that represent gradient stops for color transitions. The number of bounds
+                should be two less than the number of colors (for multi-color gradients).
+                Defaults to None, which evenly distributes color stops.
+        &#34;&#34;&#34;
+        super().__init__(colors, background, extend_before, extend_after, bounds)
+        self.coords: tuple[  # pyright: ignore[reportIncompatibleVariableOverride]
+            float, float, float, float
+        ] = (
+            from_x,
+            from_y,
+            to_x,
+            to_y,
+        )
+        self.shading_type = 2</code></pre>
+</details>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<p>A shading pattern that creates a linear (axial) gradient in a PDF.</p>
+<p>The gradient is defined by two points: (from_x, from_y) and (to_x, to_y),
+along which the specified colors are interpolated. Optionally, you can set
+a background color, extend the gradient beyond its start or end, and
+specify custom color stop positions via <code>bounds</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>from_x</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The x-coordinate of the starting point of the gradient,
+in user space units.</dd>
+<dt><strong><code>from_y</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The y-coordinate of the starting point of the gradient,
+in user space units.</dd>
+<dt><strong><code>to_x</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The x-coordinate of the ending point of the gradient,
+in user space units.</dd>
+<dt><strong><code>to_y</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The y-coordinate of the ending point of the gradient,
+in user space units.</dd>
+<dt><strong><code>colors</code></strong> :&ensp;<code>list[str</code> or <code>tuple[int, int, int]]</code></dt>
+<dd>A list of colors along which the gradient
+will be interpolated. Colors may be given as hex strings (e.g., "#FF0000") or
+(R, G, B) tuples.</dd>
+<dt><strong><code>background</code></strong> :&ensp;<code>str</code> or <code>tuple[int, int, int]</code>, optional</dt>
+<dd>A background color to use
+if the gradient does not fully cover the region it is applied to.
+Defaults to None (no background).</dd>
+<dt><strong><code>extend_before</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Whether to extend the first color beyond the
+starting point (from_x, from_y). Defaults to False.</dd>
+<dt><strong><code>extend_after</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Whether to extend the last color beyond the
+ending point (to_x, to_y). Defaults to False.</dd>
+<dt><strong><code>bounds</code></strong> :&ensp;<code>list[float]</code>, optional</dt>
+<dd>An optional list of floats in the range (0, 1)
+that represent gradient stops for color transitions. The number of bounds
+should be two less than the number of colors (for multi-color gradients).
+Defaults to None, which evenly distributes color stops.</dd>
+</dl></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.LinearGradient.get_alpha_shading_object"><code class="name flex">
+<span>def <span class="ident">get_alpha_shading_object</span></span>(<span>self) ‑> <a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a> | None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></code>.<code><a title="fpdf.pattern.Gradient.get_alpha_shading_object" href="#fpdf.pattern.Gradient.get_alpha_shading_object">get_alpha_shading_object</a></code>
+</p>
+<div class="desc inherited"><p>Grayscale Shading object representing the alpha ramp (for a soft mask).</p></div>
+</dd>
+<dt id="fpdf.pattern.LinearGradient.has_alpha"><code class="name flex">
+<span>def <span class="ident">has_alpha</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></code>.<code><a title="fpdf.pattern.Gradient.has_alpha" href="#fpdf.pattern.Gradient.has_alpha">has_alpha</a></code>
+</p>
+<div class="desc inherited"><p>True if any stop carries alpha != 1.0.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.MeshShading"><code class="flex name class">
+<span>class <span class="ident">MeshShading</span></span>
+<span>(</span><span>*,<br>color_space: str,<br>bbox: BoundingBox,<br>comp_count: int,<br>triangles: list[tuple[tuple[float, float], tuple[float, float], tuple[float, float]]],<br>colors: list[tuple[tuple[float, ...], tuple[float, ...], tuple[float, ...]]],<br>background: Color | None = None,<br>anti_alias: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L722-L814" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class MeshShading(PDFContentStream):
+    &#34;&#34;&#34;
+    PDF Shading type 4 (free-form Gouraud triangle mesh) with per-vertex colors.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self,
+        *,
+        color_space: str,
+        bbox: &#34;BoundingBox&#34;,
+        comp_count: int,
+        triangles: list[
+            tuple[tuple[float, float], tuple[float, float], tuple[float, float]]
+        ],
+        colors: list[tuple[tuple[float, ...], tuple[float, ...], tuple[float, ...]]],
+        background: Optional[&#34;Color&#34;] = None,
+        anti_alias: bool = True,
+    ):
+        self.type = Name(&#34;Shading&#34;)
+        self.shading_type = 4
+        self.color_space = Name(color_space)
+        self.background = (
+            f&#39;[{&#34; &#34;.join(format_number(c) for c in background.colors)}]&#39;
+            if background
+            else None
+        )
+        self._bbox = bbox
+        self._triangles = triangles
+        self._triangle_colors = colors
+        self.anti_alias = anti_alias
+        self._comp_count = comp_count
+
+        # Fixed bit depths (simple encoder): use 16-bit components to reduce banding
+        self.bits_per_coordinate = 16
+        self.bits_per_component = 16
+        self.bits_per_flag = 8
+
+        # Decode = [xmin xmax ymin ymax  0 1 (per component)]
+        decode_values = [
+            bbox.x0,
+            bbox.x1,
+            bbox.y0,
+            bbox.y1,
+            *([0.0, 1.0] * comp_count),
+        ]
+        self.decode = PDFArray([format_number(value) for value in decode_values])
+
+        super().__init__(contents=self._encode_stream_raw(), compress=True)
+
+    # Let Pattern() accept MeshShading like other shadings
+    def get_shading_object(self) -&gt; &#34;MeshShading&#34;:
+        return self
+
+    def _encode_stream_raw(self) -&gt; bytes:
+        xmin, xmax = self._bbox.x0, self._bbox.x1
+        ymin, ymax = self._bbox.y0, self._bbox.y1
+        maxc = (1 &lt;&lt; self.bits_per_coordinate) - 1
+        sx = maxc / max(xmax - xmin, FloatTolerance.TOLERANCE)
+        sy = maxc / max(ymax - ymin, FloatTolerance.TOLERANCE)
+        max_comp = (1 &lt;&lt; self.bits_per_component) - 1
+
+        def q16(u: float, umin: float, scale: float) -&gt; int:
+            ui = int(round((u - umin) * scale))
+            return 0 if ui &lt; 0 else maxc if ui &gt; maxc else ui
+
+        def q_component(v: float) -&gt; int:
+            iv = int(round(float(v) * max_comp))
+            return 0 if iv &lt; 0 else max_comp if iv &gt; max_comp else iv
+
+        comp_fmt = &#34;H&#34; if self.bits_per_component &gt; 8 else &#34;B&#34;
+        vertex_fmt = &#34;&gt;BHH&#34; + (comp_fmt * self._comp_count)
+        out = bytearray()
+        for (v0, v1, v2), (c0, c1, c2) in zip(self._triangles, self._triangle_colors):
+            for (x, y), comps in ((v0, c0), (v1, c1), (v2, c2)):
+                component_bytes = [
+                    q_component(comps[i]) if i &lt; len(comps) else 0
+                    for i in range(self._comp_count)
+                ]
+                out += struct.pack(
+                    vertex_fmt,
+                    0,  # flag = 0 (no reuse)
+                    q16(x, xmin, sx),  # x
+                    q16(y, ymin, sy),  # y
+                    *component_bytes,
+                )
+        return bytes(out)
+
+    @classmethod
+    def get_functions(
+        cls,
+    ) -&gt; Sequence[Type2Function | Type2FunctionGray | Type3Function]:
+        &#34;&#34;&#34;Type-4 mesh shadings don&#39;t use Function objects; return empty list for output.&#34;&#34;&#34;
+        return []</code></pre>
+</details>
+<div class="desc"><p>PDF Shading type 4 (free-form Gouraud triangle mesh) with per-vertex colors.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFContentStream" href="syntax.html#fpdf.syntax.PDFContentStream">PDFContentStream</a></li>
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="fpdf.pattern.MeshShading.get_functions"><code class="name flex">
+<span>def <span class="ident">get_functions</span></span>(<span>) ‑> Sequence[<a title="fpdf.pattern.Type2Function" href="#fpdf.pattern.Type2Function">Type2Function</a> | <a title="fpdf.pattern.Type2FunctionGray" href="#fpdf.pattern.Type2FunctionGray">Type2FunctionGray</a> | <a title="fpdf.pattern.Type3Function" href="#fpdf.pattern.Type3Function">Type3Function</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Type-4 mesh shadings don't use Function objects; return empty list for output.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.MeshShading.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFContentStream" href="syntax.html#fpdf.syntax.PDFContentStream">PDFContentStream</a></code>.<code><a title="fpdf.syntax.PDFContentStream.content_stream" href="syntax.html#fpdf.syntax.PDFContentStream.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.MeshShading.get_shading_object"><code class="name flex">
+<span>def <span class="ident">get_shading_object</span></span>(<span>self) ‑> <a title="fpdf.pattern.MeshShading" href="#fpdf.pattern.MeshShading">MeshShading</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L772-L773" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_shading_object(self) -&gt; &#34;MeshShading&#34;:
+    return self</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.MeshShading.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFContentStream" href="syntax.html#fpdf.syntax.PDFContentStream">PDFContentStream</a></code>.<code><a title="fpdf.syntax.PDFContentStream.serialize" href="syntax.html#fpdf.syntax.PDFContentStream.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.Pattern"><code class="flex name class">
+<span>class <span class="ident">Pattern</span></span>
+<span>(</span><span>shading: <a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a> | <a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a> | <a title="fpdf.pattern.MeshShading" href="#fpdf.pattern.MeshShading">MeshShading</a>)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L260-L303" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Pattern(PDFObject):
+    &#34;&#34;&#34;
+    Represents a PDF Pattern object.
+
+    Currently, this class supports only &#34;shading patterns&#34; (pattern_type 2),
+    using either a linear or radial gradient. Tiling patterns (pattern_type 1)
+    are not yet implemented.
+    &#34;&#34;&#34;
+
+    def __init__(self, shading: Union[&#34;Gradient&#34;, &#34;Shading&#34;, &#34;MeshShading&#34;]):
+        super().__init__()
+        self.type = Name(&#34;Pattern&#34;)
+        # 1 for a tiling pattern or type 2 for a shading pattern:
+        self.pattern_type = 2
+        self._shading = shading
+        self._matrix = Transform.identity()
+        # If True (default), OutputProducer will bake the page CTM into this pattern.
+        # For patterns used inside Form XObjects (e.g., soft masks), set to False.
+        self._apply_page_ctm = True
+
+    @property
+    def shading(self) -&gt; str:
+        return f&#34;{self._shading.get_shading_object().id} 0 R&#34;
+
+    @property
+    def matrix(self) -&gt; str:
+        return (
+            f&#34;[{format_number(self._matrix.a)} {format_number(self._matrix.b)} &#34;
+            f&#34;{format_number(self._matrix.c)} {format_number(self._matrix.d)} &#34;
+            f&#34;{format_number(self._matrix.e)} {format_number(self._matrix.f)}]&#34;
+        )
+
+    def set_matrix(self, matrix: Transform) -&gt; &#34;Pattern&#34;:
+        self._matrix = matrix
+        return self
+
+    def get_matrix(self) -&gt; Transform:
+        return self._matrix
+
+    def set_apply_page_ctm(self, apply: bool) -&gt; None:
+        self._apply_page_ctm = apply
+
+    def get_apply_page_ctm(self) -&gt; bool:
+        return self._apply_page_ctm</code></pre>
+</details>
+<div class="desc"><p>Represents a PDF Pattern object.</p>
+<p>Currently, this class supports only "shading patterns" (pattern_type 2),
+using either a linear or radial gradient. Tiling patterns (pattern_type 1)
+are not yet implemented.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.pattern.Pattern.matrix"><code class="name">prop <span class="ident">matrix</span> : str</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L284-L290" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def matrix(self) -&gt; str:
+    return (
+        f&#34;[{format_number(self._matrix.a)} {format_number(self._matrix.b)} &#34;
+        f&#34;{format_number(self._matrix.c)} {format_number(self._matrix.d)} &#34;
+        f&#34;{format_number(self._matrix.e)} {format_number(self._matrix.f)}]&#34;
+    )</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Pattern.shading"><code class="name">prop <span class="ident">shading</span> : str</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L280-L282" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def shading(self) -&gt; str:
+    return f&#34;{self._shading.get_shading_object().id} 0 R&#34;</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.Pattern.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.content_stream" href="syntax.html#fpdf.syntax.PDFObject.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.Pattern.get_apply_page_ctm"><code class="name flex">
+<span>def <span class="ident">get_apply_page_ctm</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L302-L303" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_apply_page_ctm(self) -&gt; bool:
+    return self._apply_page_ctm</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Pattern.get_matrix"><code class="name flex">
+<span>def <span class="ident">get_matrix</span></span>(<span>self) ‑> <a title="fpdf.drawing_primitives.Transform" href="drawing_primitives.html#fpdf.drawing_primitives.Transform">Transform</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L296-L297" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_matrix(self) -&gt; Transform:
+    return self._matrix</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Pattern.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.serialize" href="syntax.html#fpdf.syntax.PDFObject.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+<dt id="fpdf.pattern.Pattern.set_apply_page_ctm"><code class="name flex">
+<span>def <span class="ident">set_apply_page_ctm</span></span>(<span>self, apply: bool) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L299-L300" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def set_apply_page_ctm(self, apply: bool) -&gt; None:
+    self._apply_page_ctm = apply</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.Pattern.set_matrix"><code class="name flex">
+<span>def <span class="ident">set_matrix</span></span>(<span>self,<br>matrix: <a title="fpdf.drawing_primitives.Transform" href="drawing_primitives.html#fpdf.drawing_primitives.Transform">Transform</a>) ‑> <a title="fpdf.pattern.Pattern" href="#fpdf.pattern.Pattern">Pattern</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L292-L294" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def set_matrix(self, matrix: Transform) -&gt; &#34;Pattern&#34;:
+    self._matrix = matrix
+    return self</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.RadialGradient"><code class="flex name class">
+<span>class <span class="ident">RadialGradient</span></span>
+<span>(</span><span>start_circle_x: float,<br>start_circle_y: float,<br>start_circle_radius: float,<br>end_circle_x: float,<br>end_circle_y: float,<br>end_circle_radius: float,<br>colors: Sequence[int | float | decimal.Decimal | DeviceRGB | DeviceGray | DeviceCMYK | str | Sequence[int | float | decimal.Decimal]],<br>background: int | float | decimal.Decimal | DeviceRGB | DeviceGray | DeviceCMYK | str | Sequence[int | float | decimal.Decimal] | None = None,<br>extend_before: bool = False,<br>extend_after: bool = False,<br>bounds: list[float] | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L659-L719" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class RadialGradient(Gradient):
+    def __init__(
+        self,
+        start_circle_x: float,
+        start_circle_y: float,
+        start_circle_radius: float,
+        end_circle_x: float,
+        end_circle_y: float,
+        end_circle_radius: float,
+        colors: Sequence[ColorInput],
+        background: Optional[ColorInput] = None,
+        extend_before: bool = False,
+        extend_after: bool = False,
+        bounds: Optional[list[float]] = None,
+    ):
+        &#34;&#34;&#34;
+        A shading pattern that creates a radial (or circular/elliptical) gradient in a PDF.
+
+        The gradient is defined by two circles (start and end). Colors are blended from the
+        start circle to the end circle, forming a radial gradient. You can optionally set a
+        background color, extend the gradient beyond its circles, and provide custom color
+        stop positions via `bounds`.
+
+        Args:
+            start_circle_x (int or float): The x-coordinate of the inner circle&#39;s center,
+                in user space units.
+            start_circle_y (int or float): The y-coordinate of the inner circle&#39;s center,
+                in user space units.
+            start_circle_radius (int or float): The radius of the inner circle, in user space units.
+            end_circle_x (int or float): The x-coordinate of the outer circle&#39;s center,
+                in user space units.
+            end_circle_y (int or float): The y-coordinate of the outer circle&#39;s center,
+                in user space units.
+            end_circle_radius (int or float): The radius of the outer circle, in user space units.
+            colors (list[str or tuple[int, int, int]]): A list of colors along which the gradient
+                will be interpolated. Colors may be given as hex strings (e.g., &#34;#FF0000&#34;) or
+                (R, G, B) tuples.
+            background (str or tuple[int, int, int], optional): A background color to display
+                if the gradient does not fully cover the region it&#39;s applied to. Defaults to None
+                (no background).
+            extend_before (bool, optional): Whether to extend the gradient beyond the start circle.
+                Defaults to False.
+            extend_after (bool, optional): Whether to extend the gradient beyond the end circle.
+                Defaults to False.
+            bounds (list[float], optional): An optional list of floats in the range (0, 1) that
+                represent gradient stops for color transitions. The number of bounds should be one
+                less than the number of colors (for multi-color gradients). Defaults to None,
+                which evenly distributes color stops.
+        &#34;&#34;&#34;
+        super().__init__(colors, background, extend_before, extend_after, bounds)
+        self.coords: tuple[  # pyright: ignore[reportIncompatibleVariableOverride]
+            float, float, float, float, float, float
+        ] = (
+            start_circle_x,
+            start_circle_y,
+            start_circle_radius,
+            end_circle_x,
+            end_circle_y,
+            end_circle_radius,
+        )
+        self.shading_type = 3</code></pre>
+</details>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<p>A shading pattern that creates a radial (or circular/elliptical) gradient in a PDF.</p>
+<p>The gradient is defined by two circles (start and end). Colors are blended from the
+start circle to the end circle, forming a radial gradient. You can optionally set a
+background color, extend the gradient beyond its circles, and provide custom color
+stop positions via <code>bounds</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>start_circle_x</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The x-coordinate of the inner circle's center,
+in user space units.</dd>
+<dt><strong><code>start_circle_y</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The y-coordinate of the inner circle's center,
+in user space units.</dd>
+<dt><strong><code>start_circle_radius</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The radius of the inner circle, in user space units.</dd>
+<dt><strong><code>end_circle_x</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The x-coordinate of the outer circle's center,
+in user space units.</dd>
+<dt><strong><code>end_circle_y</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The y-coordinate of the outer circle's center,
+in user space units.</dd>
+<dt><strong><code>end_circle_radius</code></strong> :&ensp;<code>int</code> or <code>float</code></dt>
+<dd>The radius of the outer circle, in user space units.</dd>
+<dt><strong><code>colors</code></strong> :&ensp;<code>list[str</code> or <code>tuple[int, int, int]]</code></dt>
+<dd>A list of colors along which the gradient
+will be interpolated. Colors may be given as hex strings (e.g., "#FF0000") or
+(R, G, B) tuples.</dd>
+<dt><strong><code>background</code></strong> :&ensp;<code>str</code> or <code>tuple[int, int, int]</code>, optional</dt>
+<dd>A background color to display
+if the gradient does not fully cover the region it's applied to. Defaults to None
+(no background).</dd>
+<dt><strong><code>extend_before</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Whether to extend the gradient beyond the start circle.
+Defaults to False.</dd>
+<dt><strong><code>extend_after</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Whether to extend the gradient beyond the end circle.
+Defaults to False.</dd>
+<dt><strong><code>bounds</code></strong> :&ensp;<code>list[float]</code>, optional</dt>
+<dd>An optional list of floats in the range (0, 1) that
+represent gradient stops for color transitions. The number of bounds should be one
+less than the number of colors (for multi-color gradients). Defaults to None,
+which evenly distributes color stops.</dd>
+</dl></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.RadialGradient.get_alpha_shading_object"><code class="name flex">
+<span>def <span class="ident">get_alpha_shading_object</span></span>(<span>self) ‑> <a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a> | None</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></code>.<code><a title="fpdf.pattern.Gradient.get_alpha_shading_object" href="#fpdf.pattern.Gradient.get_alpha_shading_object">get_alpha_shading_object</a></code>
+</p>
+<div class="desc inherited"><p>Grayscale Shading object representing the alpha ramp (for a soft mask).</p></div>
+</dd>
+<dt id="fpdf.pattern.RadialGradient.has_alpha"><code class="name flex">
+<span>def <span class="ident">has_alpha</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></code>.<code><a title="fpdf.pattern.Gradient.has_alpha" href="#fpdf.pattern.Gradient.has_alpha">has_alpha</a></code>
+</p>
+<div class="desc inherited"><p>True if any stop carries alpha != 1.0.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.Shading"><code class="flex name class">
+<span>class <span class="ident">Shading</span></span>
+<span>(</span><span>shading_type: int,<br>background: DeviceRGB | DeviceGray | DeviceCMYK | None,<br>color_space: str,<br>coords: Sequence[float] | str,<br>functions: Sequence[<a title="fpdf.pattern.Type2Function" href="#fpdf.pattern.Type2Function">Type2Function</a> | <a title="fpdf.pattern.Type2FunctionGray" href="#fpdf.pattern.Type2FunctionGray">Type2FunctionGray</a> | <a title="fpdf.pattern.Type3Function" href="#fpdf.pattern.Type3Function">Type3Function</a>],<br>extend_before: bool,<br>extend_after: bool)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L363-L400" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Shading(PDFObject):
+    def __init__(
+        self,
+        shading_type: int,  # 2 for axial shading, 3 for radial shading
+        background: Optional[Color],
+        color_space: str,
+        coords: Sequence[float] | str,
+        functions: Sequence[Type2Function | Type2FunctionGray | Type3Function],
+        extend_before: bool,
+        extend_after: bool,
+    ):
+        super().__init__()
+        self.shading_type = shading_type
+        self.background = (
+            f&#39;[{&#34; &#34;.join(format_number(c) for c in background.colors)}]&#39;
+            if background
+            else None
+        )
+        self.color_space = Name(color_space)
+        self.coords = coords
+        self._functions = functions
+        self.extend = f&#39;[{&#34;true&#34; if extend_before else &#34;false&#34;} {&#34;true&#34; if extend_after else &#34;false&#34;}]&#39;
+        self.anti_alias = True
+
+    @property
+    def function(self) -&gt; str:
+        &#34;&#34;&#34;Reference to the *top-level* function object for the shading dictionary.&#34;&#34;&#34;
+        return f&#34;{self._functions[-1].id} 0 R&#34;
+
+    def get_functions(
+        self,
+    ) -&gt; Sequence[Type2Function | Type2FunctionGray | Type3Function]:
+        &#34;&#34;&#34;All function objects used by this shading (Type2 segments + final Type3).&#34;&#34;&#34;
+        return self._functions
+
+    def get_shading_object(self) -&gt; &#34;Shading&#34;:
+        &#34;&#34;&#34;Return self, as this is already a shading object.&#34;&#34;&#34;
+        return self</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.pattern.Shading.function"><code class="name">prop <span class="ident">function</span> : str</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L387-L390" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def function(self) -&gt; str:
+    &#34;&#34;&#34;Reference to the *top-level* function object for the shading dictionary.&#34;&#34;&#34;
+    return f&#34;{self._functions[-1].id} 0 R&#34;</code></pre>
+</details>
+<div class="desc"><p>Reference to the <em>top-level</em> function object for the shading dictionary.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.Shading.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.content_stream" href="syntax.html#fpdf.syntax.PDFObject.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.Shading.get_functions"><code class="name flex">
+<span>def <span class="ident">get_functions</span></span>(<span>self) ‑> Sequence[<a title="fpdf.pattern.Type2Function" href="#fpdf.pattern.Type2Function">Type2Function</a> | <a title="fpdf.pattern.Type2FunctionGray" href="#fpdf.pattern.Type2FunctionGray">Type2FunctionGray</a> | <a title="fpdf.pattern.Type3Function" href="#fpdf.pattern.Type3Function">Type3Function</a>]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L392-L396" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_functions(
+    self,
+) -&gt; Sequence[Type2Function | Type2FunctionGray | Type3Function]:
+    &#34;&#34;&#34;All function objects used by this shading (Type2 segments + final Type3).&#34;&#34;&#34;
+    return self._functions</code></pre>
+</details>
+<div class="desc"><p>All function objects used by this shading (Type2 segments + final Type3).</p></div>
+</dd>
+<dt id="fpdf.pattern.Shading.get_shading_object"><code class="name flex">
+<span>def <span class="ident">get_shading_object</span></span>(<span>self) ‑> <a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L398-L400" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_shading_object(self) -&gt; &#34;Shading&#34;:
+    &#34;&#34;&#34;Return self, as this is already a shading object.&#34;&#34;&#34;
+    return self</code></pre>
+</details>
+<div class="desc"><p>Return self, as this is already a shading object.</p></div>
+</dd>
+<dt id="fpdf.pattern.Shading.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.serialize" href="syntax.html#fpdf.syntax.PDFObject.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.SweepGradient"><code class="flex name class">
+<span>class <span class="ident">SweepGradient</span></span>
+<span>(</span><span>cx: float,<br>cy: float,<br>start_angle: float,<br>end_angle: float,<br>stops: Sequence[tuple[float, DeviceRGB | DeviceGray | DeviceCMYK | str]],<br>spread_method: GradientSpreadMethod | str = GradientSpreadMethod.PAD,<br>segments: int | None = None,<br>inner_radius_factor: float = 0.002)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"><p>Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+Build is bbox-dependent, so we create the shading lazily at emit time.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.pattern.SweepGradient.cx"><code class="name">var <span class="ident">cx</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.cy"><code class="name">var <span class="ident">cy</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.end_angle"><code class="name">var <span class="ident">end_angle</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.inner_radius_factor"><code class="name">var <span class="ident">inner_radius_factor</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.segments"><code class="name">var <span class="ident">segments</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.spread_method"><code class="name">var <span class="ident">spread_method</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.start_angle"><code class="name">var <span class="ident">start_angle</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.stops"><code class="name">var <span class="ident">stops</span></code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L817-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SweepGradient(PDFObject):
+    &#34;&#34;&#34;
+    Conic/sweep gradient that materializes as a type-4 (mesh) Shading.
+    Build is bbox-dependent, so we create the shading lazily at emit time.
+    &#34;&#34;&#34;
+
+    __slots__ = (
+        &#34;cx&#34;,
+        &#34;cy&#34;,
+        &#34;start_angle&#34;,
+        &#34;end_angle&#34;,
+        &#34;stops&#34;,
+        &#34;spread_method&#34;,
+        &#34;segments&#34;,
+        &#34;inner_radius_factor&#34;,
+        &#34;_cached_key&#34;,
+        &#34;_shading&#34;,
+        &#34;_alpha_shading&#34;,
+    )
+
+    def __init__(
+        self,
+        cx: float,
+        cy: float,
+        start_angle: float,
+        end_angle: float,
+        stops: Sequence[tuple[float, Union[Color, str]]],
+        spread_method: Union[&#34;GradientSpreadMethod&#34;, str] = GradientSpreadMethod.PAD,
+        segments: Optional[int] = None,
+        inner_radius_factor: float = 0.002,
+    ):
+        super().__init__()
+        self.cx, self.cy = float(cx), float(cy)
+        self.start_angle, self.end_angle = float(start_angle), float(end_angle)
+        self.stops = stops
+        self.spread_method = (
+            GradientSpreadMethod.coerce(spread_method)
+            if hasattr(GradientSpreadMethod, &#34;coerce&#34;)
+            else GradientSpreadMethod(spread_method)
+        )
+        self.segments = segments
+        self.inner_radius_factor = inner_radius_factor
+        self._cached_key: Optional[
+            tuple[
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                float,
+                Optional[int],
+                float,
+                str,
+            ]
+        ] = None
+        self._shading: Optional[MeshShading] = None
+        self._alpha_shading: Optional[MeshShading] = None
+
+    def has_alpha(self) -&gt; bool:
+        # any stop carries alpha != 1
+        for _, c in self.stops:
+            dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+            a = getattr(dc, &#34;a&#34;, None)
+            if a is not None and not FloatTolerance.equal(float(a), 1.0):
+                return True
+        return False
+
+    def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+        key = (
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+        if self._shading is not None and self._cached_key == key:
+            return self._shading
+        self._cached_key = key
+        self._shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        return self._shading
+
+    def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+        if not self.has_alpha():
+            return None
+
+        # Normalize color stops once, then extract alpha
+        _, stops01, _ = normalize_stops(self.stops)
+        alpha01 = extract_alpha_stops(stops01)
+        gray_stops: list[tuple[float, Color | str]] = [
+            (u, DeviceGray(a)) for (u, a) in alpha01
+        ]
+
+        key = (
+            &#34;alpha&#34;,
+            bbox.x0,
+            bbox.y0,
+            bbox.x1,
+            bbox.y1,
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            self.segments,
+            self.inner_radius_factor,
+            self.spread_method.value,
+        )
+
+        if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+            return self._alpha_shading
+
+        self._alpha_shading = shape_sweep_gradient_as_mesh(
+            self.cx,
+            self.cy,
+            self.start_angle,
+            self.end_angle,
+            gray_stops,
+            spread_method=self.spread_method,
+            bbox=bbox,
+            segments=self.segments,
+            inner_radius_factor=self.inner_radius_factor,
+        )
+        self._alpha_cached_key = key
+        return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.SweepGradient.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.content_stream" href="syntax.html#fpdf.syntax.PDFObject.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.get_alpha_shading_object"><code class="name flex">
+<span>def <span class="ident">get_alpha_shading_object</span></span>(<span>self, bbox: BoundingBox) ‑> <a title="fpdf.pattern.MeshShading" href="#fpdf.pattern.MeshShading">MeshShading</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L916-L957" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_alpha_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; Optional[&#34;MeshShading&#34;]:
+    if not self.has_alpha():
+        return None
+
+    # Normalize color stops once, then extract alpha
+    _, stops01, _ = normalize_stops(self.stops)
+    alpha01 = extract_alpha_stops(stops01)
+    gray_stops: list[tuple[float, Color | str]] = [
+        (u, DeviceGray(a)) for (u, a) in alpha01
+    ]
+
+    key = (
+        &#34;alpha&#34;,
+        bbox.x0,
+        bbox.y0,
+        bbox.x1,
+        bbox.y1,
+        self.cx,
+        self.cy,
+        self.start_angle,
+        self.end_angle,
+        self.segments,
+        self.inner_radius_factor,
+        self.spread_method.value,
+    )
+
+    if getattr(self, &#34;_alpha_cached_key&#34;, None) == key:
+        return self._alpha_shading
+
+    self._alpha_shading = shape_sweep_gradient_as_mesh(
+        self.cx,
+        self.cy,
+        self.start_angle,
+        self.end_angle,
+        gray_stops,
+        spread_method=self.spread_method,
+        bbox=bbox,
+        segments=self.segments,
+        inner_radius_factor=self.inner_radius_factor,
+    )
+    self._alpha_cached_key = key
+    return self._alpha_shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.get_shading_object"><code class="name flex">
+<span>def <span class="ident">get_shading_object</span></span>(<span>self, bbox: BoundingBox) ‑> <a title="fpdf.pattern.MeshShading" href="#fpdf.pattern.MeshShading">MeshShading</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L886-L914" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_shading_object(self, bbox: &#34;BoundingBox&#34;) -&gt; &#34;MeshShading&#34;:
+    key = (
+        bbox.x0,
+        bbox.y0,
+        bbox.x1,
+        bbox.y1,
+        self.cx,
+        self.cy,
+        self.start_angle,
+        self.end_angle,
+        self.segments,
+        self.inner_radius_factor,
+        self.spread_method.value,
+    )
+    if self._shading is not None and self._cached_key == key:
+        return self._shading
+    self._cached_key = key
+    self._shading = shape_sweep_gradient_as_mesh(
+        self.cx,
+        self.cy,
+        self.start_angle,
+        self.end_angle,
+        self.stops,
+        spread_method=self.spread_method,
+        bbox=bbox,
+        segments=self.segments,
+        inner_radius_factor=self.inner_radius_factor,
+    )
+    return self._shading</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.has_alpha"><code class="name flex">
+<span>def <span class="ident">has_alpha</span></span>(<span>self) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L877-L884" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def has_alpha(self) -&gt; bool:
+    # any stop carries alpha != 1
+    for _, c in self.stops:
+        dc = convert_to_device_color(c) if not hasattr(c, &#34;colors&#34;) else c
+        a = getattr(dc, &#34;a&#34;, None)
+        if a is not None and not FloatTolerance.equal(float(a), 1.0):
+            return True
+    return False</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.pattern.SweepGradient.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.serialize" href="syntax.html#fpdf.syntax.PDFObject.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.Type2Function"><code class="flex name class">
+<span>class <span class="ident">Type2Function</span></span>
+<span>(</span><span>color_1: DeviceRGB | DeviceGray | DeviceCMYK,<br>color_2: DeviceRGB | DeviceGray | DeviceCMYK)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L306-L326" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type2Function(PDFObject):
+    &#34;&#34;&#34;Transition between 2 colors&#34;&#34;&#34;
+
+    def __init__(self, color_1: Color, color_2: Color):
+        super().__init__()
+        # 0: Sampled function; 2: Exponential interpolation function; 3: Stitching function; 4: PostScript calculator function
+        self.function_type = 2
+        self.domain = &#34;[0 1]&#34;
+        c1 = self._get_color_components(color_1)
+        c2 = self._get_color_components(color_2)
+        if len(c1) != len(c2):
+            raise ValueError(&#34;Type2Function endpoints must have same component count&#34;)
+        self.c0 = f&#39;[{&#34; &#34;.join(format_number(c) for c in c1)}]&#39;
+        self.c1 = f&#39;[{&#34; &#34;.join(format_number(c) for c in c2)}]&#39;
+        self.n = 1
+
+    @classmethod
+    def _get_color_components(cls, color: Color) -&gt; tuple[float, ...]:
+        if isinstance(color, DeviceGray):
+            return (color.g,)
+        return color.colors</code></pre>
+</details>
+<div class="desc"><p>Transition between 2 colors</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.Type2Function.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.content_stream" href="syntax.html#fpdf.syntax.PDFObject.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.Type2Function.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.serialize" href="syntax.html#fpdf.syntax.PDFObject.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.Type2FunctionGray"><code class="flex name class">
+<span>class <span class="ident">Type2FunctionGray</span></span>
+<span>(</span><span>g0: float, g1: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L329-L338" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type2FunctionGray(PDFObject):
+    &#34;&#34;&#34;1‑channel exponential interpolation for alpha/luminance ramps.&#34;&#34;&#34;
+
+    def __init__(self, g0: float, g1: float):
+        super().__init__()
+        self.function_type = 2
+        self.domain = &#34;[0 1]&#34;
+        self.c0 = f&#34;[{format_number(g0)}]&#34;
+        self.c1 = f&#34;[{format_number(g1)}]&#34;
+        self.n = 1</code></pre>
+</details>
+<div class="desc"><p>1‑channel exponential interpolation for alpha/luminance ramps.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.Type2FunctionGray.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.content_stream" href="syntax.html#fpdf.syntax.PDFObject.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.Type2FunctionGray.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.serialize" href="syntax.html#fpdf.syntax.PDFObject.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.pattern.Type3Function"><code class="flex name class">
+<span>class <span class="ident">Type3Function</span></span>
+<span>(</span><span>functions: Sequence[<a title="fpdf.pattern.Type2Function" href="#fpdf.pattern.Type2Function">Type2Function</a> | <a title="fpdf.pattern.Type2FunctionGray" href="#fpdf.pattern.Type2FunctionGray">Type2FunctionGray</a> | <a title="fpdf.pattern.Type3Function" href="#fpdf.pattern.Type3Function">Type3Function</a>],<br>bounds: Sequence[float])</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L341-L360" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3Function(PDFObject):
+    &#34;&#34;&#34;When multiple colors are used, a type 3 function is necessary to stitch type 2 functions together
+    and define the bounds between each color transition&#34;&#34;&#34;
+
+    def __init__(
+        self,
+        functions: Sequence[Union[Type2Function, Type2FunctionGray, &#34;Type3Function&#34;]],
+        bounds: Sequence[float],
+    ):
+        super().__init__()
+        # 0: Sampled function; 2: Exponential interpolation function; 3: Stitching function; 4: PostScript calculator function
+        self.function_type = 3
+        self.domain = &#34;[0 1]&#34;
+        self._functions = functions
+        self.bounds = f&#34;[{&#39; &#39;.join(format_number(bound) for bound in bounds)}]&#34;
+        self.encode = f&#34;[{&#39; &#39;.join(&#39;0 1&#39; for _ in functions)}]&#34;
+
+    @property
+    def functions(self) -&gt; str:
+        return f&#34;[{&#39; &#39;.join(f&#39;{f.id} 0 R&#39; for f in self._functions)}]&#34;</code></pre>
+</details>
+<div class="desc"><p>When multiple colors are used, a type 3 function is necessary to stitch type 2 functions together
+and define the bounds between each color transition</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.pattern.Type3Function.functions"><code class="name">prop <span class="ident">functions</span> : str</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/pattern.py#L358-L360" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def functions(self) -&gt; str:
+    return f&#34;[{&#39; &#39;.join(f&#39;{f.id} 0 R&#39; for f in self._functions)}]&#34;</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.pattern.Type3Function.content_stream"><code class="name flex">
+<span>def <span class="ident">content_stream</span></span>(<span>self) ‑> bytes</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.content_stream" href="syntax.html#fpdf.syntax.PDFObject.content_stream">content_stream</a></code>
+</p>
+<div class="desc inherited"><p>Subclasses can override this method to indicate the presence of a content stream</p></div>
+</dd>
+<dt id="fpdf.pattern.Type3Function.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self, obj_dict: Dict[str, object] | None = None) ‑> str</span>
+</code></dt>
+<dd>
+<p class="inheritance">
+<em>Inherited from:</em>
+<code><a title="fpdf.syntax.PDFObject" href="syntax.html#fpdf.syntax.PDFObject">PDFObject</a></code>.<code><a title="fpdf.syntax.PDFObject.serialize" href="syntax.html#fpdf.syntax.PDFObject.serialize">serialize</a></code>
+</p>
+<div class="desc inherited"><p>Serialize the PDF object as an obj&lt;&lt;/&gt;&gt;endobj text block</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fpdf" href="index.html">fpdf</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="fpdf.pattern.extract_alpha_stops" href="#fpdf.pattern.extract_alpha_stops">extract_alpha_stops</a></code></li>
+<li><code><a title="fpdf.pattern.lerp" href="#fpdf.pattern.lerp">lerp</a></code></li>
+<li><code><a title="fpdf.pattern.lerp_tuple" href="#fpdf.pattern.lerp_tuple">lerp_tuple</a></code></li>
+<li><code><a title="fpdf.pattern.merge_near_duplicates" href="#fpdf.pattern.merge_near_duplicates">merge_near_duplicates</a></code></li>
+<li><code><a title="fpdf.pattern.normalize_stops" href="#fpdf.pattern.normalize_stops">normalize_stops</a></code></li>
+<li><code><a title="fpdf.pattern.pick_colorspace_and_promote" href="#fpdf.pattern.pick_colorspace_and_promote">pick_colorspace_and_promote</a></code></li>
+<li><code><a title="fpdf.pattern.sample_stops" href="#fpdf.pattern.sample_stops">sample_stops</a></code></li>
+<li><code><a title="fpdf.pattern.shape_linear_gradient" href="#fpdf.pattern.shape_linear_gradient">shape_linear_gradient</a></code></li>
+<li><code><a title="fpdf.pattern.shape_radial_gradient" href="#fpdf.pattern.shape_radial_gradient">shape_radial_gradient</a></code></li>
+<li><code><a title="fpdf.pattern.shape_sweep_gradient_as_mesh" href="#fpdf.pattern.shape_sweep_gradient_as_mesh">shape_sweep_gradient_as_mesh</a></code></li>
+<li><code><a title="fpdf.pattern.spread_map" href="#fpdf.pattern.spread_map">spread_map</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fpdf.pattern.Gradient" href="#fpdf.pattern.Gradient">Gradient</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.Gradient.get_alpha_shading_object" href="#fpdf.pattern.Gradient.get_alpha_shading_object">get_alpha_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.Gradient.get_functions" href="#fpdf.pattern.Gradient.get_functions">get_functions</a></code></li>
+<li><code><a title="fpdf.pattern.Gradient.get_pattern" href="#fpdf.pattern.Gradient.get_pattern">get_pattern</a></code></li>
+<li><code><a title="fpdf.pattern.Gradient.get_shading_object" href="#fpdf.pattern.Gradient.get_shading_object">get_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.Gradient.has_alpha" href="#fpdf.pattern.Gradient.has_alpha">has_alpha</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.LinearGradient" href="#fpdf.pattern.LinearGradient">LinearGradient</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.LinearGradient.get_alpha_shading_object" href="#fpdf.pattern.LinearGradient.get_alpha_shading_object">get_alpha_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.LinearGradient.has_alpha" href="#fpdf.pattern.LinearGradient.has_alpha">has_alpha</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.MeshShading" href="#fpdf.pattern.MeshShading">MeshShading</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.MeshShading.content_stream" href="syntax.html#fpdf.pattern.MeshShading.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.MeshShading.get_functions" href="#fpdf.pattern.MeshShading.get_functions">get_functions</a></code></li>
+<li><code><a title="fpdf.pattern.MeshShading.get_shading_object" href="#fpdf.pattern.MeshShading.get_shading_object">get_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.MeshShading.serialize" href="syntax.html#fpdf.pattern.MeshShading.serialize">serialize</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.Pattern" href="#fpdf.pattern.Pattern">Pattern</a></code></h4>
+<ul class="two-column">
+<li><code><a title="fpdf.pattern.Pattern.content_stream" href="syntax.html#fpdf.pattern.Pattern.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.get_apply_page_ctm" href="#fpdf.pattern.Pattern.get_apply_page_ctm">get_apply_page_ctm</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.get_matrix" href="#fpdf.pattern.Pattern.get_matrix">get_matrix</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.matrix" href="#fpdf.pattern.Pattern.matrix">matrix</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.serialize" href="syntax.html#fpdf.pattern.Pattern.serialize">serialize</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.set_apply_page_ctm" href="#fpdf.pattern.Pattern.set_apply_page_ctm">set_apply_page_ctm</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.set_matrix" href="#fpdf.pattern.Pattern.set_matrix">set_matrix</a></code></li>
+<li><code><a title="fpdf.pattern.Pattern.shading" href="#fpdf.pattern.Pattern.shading">shading</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.RadialGradient" href="#fpdf.pattern.RadialGradient">RadialGradient</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.RadialGradient.get_alpha_shading_object" href="#fpdf.pattern.RadialGradient.get_alpha_shading_object">get_alpha_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.RadialGradient.has_alpha" href="#fpdf.pattern.RadialGradient.has_alpha">has_alpha</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.Shading" href="#fpdf.pattern.Shading">Shading</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.Shading.content_stream" href="syntax.html#fpdf.pattern.Shading.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.Shading.function" href="#fpdf.pattern.Shading.function">function</a></code></li>
+<li><code><a title="fpdf.pattern.Shading.get_functions" href="#fpdf.pattern.Shading.get_functions">get_functions</a></code></li>
+<li><code><a title="fpdf.pattern.Shading.get_shading_object" href="#fpdf.pattern.Shading.get_shading_object">get_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.Shading.serialize" href="syntax.html#fpdf.pattern.Shading.serialize">serialize</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.SweepGradient" href="#fpdf.pattern.SweepGradient">SweepGradient</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.SweepGradient.content_stream" href="syntax.html#fpdf.pattern.SweepGradient.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.cx" href="#fpdf.pattern.SweepGradient.cx">cx</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.cy" href="#fpdf.pattern.SweepGradient.cy">cy</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.end_angle" href="#fpdf.pattern.SweepGradient.end_angle">end_angle</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.get_alpha_shading_object" href="#fpdf.pattern.SweepGradient.get_alpha_shading_object">get_alpha_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.get_shading_object" href="#fpdf.pattern.SweepGradient.get_shading_object">get_shading_object</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.has_alpha" href="#fpdf.pattern.SweepGradient.has_alpha">has_alpha</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.inner_radius_factor" href="#fpdf.pattern.SweepGradient.inner_radius_factor">inner_radius_factor</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.segments" href="#fpdf.pattern.SweepGradient.segments">segments</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.serialize" href="syntax.html#fpdf.pattern.SweepGradient.serialize">serialize</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.spread_method" href="#fpdf.pattern.SweepGradient.spread_method">spread_method</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.start_angle" href="#fpdf.pattern.SweepGradient.start_angle">start_angle</a></code></li>
+<li><code><a title="fpdf.pattern.SweepGradient.stops" href="#fpdf.pattern.SweepGradient.stops">stops</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.Type2Function" href="#fpdf.pattern.Type2Function">Type2Function</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.Type2Function.content_stream" href="syntax.html#fpdf.pattern.Type2Function.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.Type2Function.serialize" href="syntax.html#fpdf.pattern.Type2Function.serialize">serialize</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.Type2FunctionGray" href="#fpdf.pattern.Type2FunctionGray">Type2FunctionGray</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.Type2FunctionGray.content_stream" href="syntax.html#fpdf.pattern.Type2FunctionGray.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.Type2FunctionGray.serialize" href="syntax.html#fpdf.pattern.Type2FunctionGray.serialize">serialize</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.pattern.Type3Function" href="#fpdf.pattern.Type3Function">Type3Function</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.pattern.Type3Function.content_stream" href="syntax.html#fpdf.pattern.Type3Function.content_stream">content_stream</a></code></li>
+<li><code><a title="fpdf.pattern.Type3Function.functions" href="#fpdf.pattern.Type3Function.functions">functions</a></code></li>
+<li><code><a title="fpdf.pattern.Type3Function.serialize" href="syntax.html#fpdf.pattern.Type3Function.serialize">serialize</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

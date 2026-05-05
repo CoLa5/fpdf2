@@ -1,0 +1,2893 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>fpdf.font_type_3 API documentation</title>
+<meta name="description" content="This module provides support for embedding and rendering various color font formats
+in PDF documents using Type 3 fonts. It defines classes and …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fpdf.font_type_3</code></h1>
+</header>
+<section id="section-intro">
+<p>This module provides support for embedding and rendering various color font formats
+in PDF documents using Type 3 fonts. It defines classes and utilities to handle
+different color font technologies, including:</p>
+<ul>
+<li>COLRv0 and COLRv1 (OpenType color vector fonts)</li>
+<li>CBDT/CBLC (bitmap color fonts)</li>
+<li>SBIX (bitmap color fonts)</li>
+<li>SVG (fonts with embedded SVG glyphs)</li>
+</ul>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="fpdf.font_type_3.get_color_font_object"><code class="name flex">
+<span>def <span class="ident">get_color_font_object</span></span>(<span>fpdf: FPDF, base_font: TTFFont, palette_index: int = 0) ‑> <a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a> | None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1306-L1348" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_color_font_object(
+    fpdf: &#34;FPDF&#34;, base_font: &#34;TTFFont&#34;, palette_index: int = 0
+) -&gt; Union[Type3Font, None]:
+    def has_outline_glyphs() -&gt; bool:
+        if base_font.is_cff:
+            return True
+        if &#34;glyf&#34; not in base_font.ttfont:
+            return False
+        glyph_names = set(base_font.cmap.values())
+        if not glyph_names:
+            return False
+        glyf_table = base_font.ttfont[&#34;glyf&#34;]
+        return any(
+            glyph_name != &#34;.notdef&#34; and glyph_name in glyf_table
+            for glyph_name in glyph_names
+        )
+
+    if &#34;CBDT&#34; in base_font.ttfont:
+        LOGGER.debug(&#34;Font %s is a CBLC+CBDT color font&#34;, base_font.name)
+        return CBDTColorFont(fpdf, base_font)
+    if &#34;EBDT&#34; in base_font.ttfont:
+        if has_outline_glyphs():
+            # Prefer outlines when a font ships both outlines and bitmap strikes.
+            LOGGER.debug(
+                &#34;Font %s has EBLC+EBDT tables and outline glyphs; preferring outlines&#34;,
+                base_font.name,
+            )
+            return None
+        LOGGER.debug(&#34;Font %s is a EBLC+EBDT color font&#34;, base_font.name)
+        return EBDTBitmapFont(fpdf, base_font)
+    if &#34;COLR&#34; in base_font.ttfont:
+        if base_font.ttfont[&#34;COLR&#34;].version == 0:
+            LOGGER.debug(&#34;Font %s is a COLRv0 color font&#34;, base_font.name)
+        else:
+            LOGGER.debug(&#34;Font %s is a COLRv1 color font&#34;, base_font.name)
+        return COLRFont(fpdf, base_font, palette_index)
+    if &#34;SVG &#34; in base_font.ttfont:
+        LOGGER.debug(&#34;Font %s is a SVG color font&#34;, base_font.name)
+        return SVGColorFont(fpdf, base_font)
+    if &#34;sbix&#34; in base_font.ttfont:
+        LOGGER.debug(&#34;Font %s is a SBIX color font&#34;, base_font.name)
+        return SBIXColorFont(fpdf, base_font)
+    return None</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fpdf.font_type_3.CBDTColorFont"><code class="flex name class">
+<span>class <span class="ident">CBDTColorFont</span></span>
+<span>(</span><span>fpdf: FPDF, base_font: TTFFont)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L978-L1017" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class CBDTColorFont(Type3Font):
+    &#34;&#34;&#34;Support for CBDT+CBLC bitmap color fonts.&#34;&#34;&#34;
+
+    # Only looking at the first strike - Need to look all strikes available on the CBLC table first?
+    def glyph_exists(self, glyph_name: str) -&gt; bool:
+        return glyph_name in self.base_font.ttfont[&#34;CBDT&#34;].strikeData[0]
+
+    def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+        ppem = self.base_font.ttfont[&#34;CBLC&#34;].strikes[0].bitmapSizeTable.ppemX
+        g = self.base_font.ttfont[&#34;CBDT&#34;].strikeData[0][glyph.glyph_name]
+        glyph_bitmap = g.data[9:]
+        metrics = g.metrics
+        if isinstance(metrics, SmallGlyphMetrics):
+            x_min = round(metrics.BearingX * self.upem / ppem)
+            y_min = round((metrics.BearingY - metrics.height) * self.upem / ppem)
+            x_max = round(metrics.width * self.upem / ppem)
+            y_max = round(metrics.BearingY * self.upem / ppem)
+        elif isinstance(metrics, BigGlyphMetrics):
+            x_min = round(metrics.horiBearingX * self.upem / ppem)
+            y_min = round((metrics.horiBearingY - metrics.height) * self.upem / ppem)
+            x_max = round(metrics.width * self.upem / ppem)
+            y_max = round(metrics.horiBearingY * self.upem / ppem)
+        else:  # fallback scenario: use font bounding box
+            x_min = self.base_font.ttfont[&#34;head&#34;].xMin
+            y_min = self.base_font.ttfont[&#34;head&#34;].yMin
+            x_max = self.base_font.ttfont[&#34;head&#34;].xMax
+            y_max = self.base_font.ttfont[&#34;head&#34;].yMax
+
+        bio = BytesIO(glyph_bitmap)
+        bio.seek(0)
+        _, _, info = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+        w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+        glyph.glyph = (
+            f&#34;{round(w * self.scale)} 0 d0\n&#34;
+            &#34;q\n&#34;
+            f&#34;{(x_max - x_min)* self.scale} 0 0 {(-y_min + y_max)*self.scale} {x_min*self.scale} {y_min*self.scale} cm\n&#34;
+            f&#34;/I{info[&#39;i&#39;]} Do\nQ&#34;
+        )
+        self.images_used.add(info[&#34;i&#34;])  # type: ignore[arg-type]
+        glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"><p>Support for CBDT+CBLC bitmap color fonts.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.CBDTColorFont.glyph_exists"><code class="name flex">
+<span>def <span class="ident">glyph_exists</span></span>(<span>self, glyph_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L982-L983" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def glyph_exists(self, glyph_name: str) -&gt; bool:
+    return glyph_name in self.base_font.ttfont[&#34;CBDT&#34;].strikeData[0]</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.CBDTColorFont.load_glyph_image"><code class="name flex">
+<span>def <span class="ident">load_glyph_image</span></span>(<span>self,<br>glyph: <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L985-L1017" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+    ppem = self.base_font.ttfont[&#34;CBLC&#34;].strikes[0].bitmapSizeTable.ppemX
+    g = self.base_font.ttfont[&#34;CBDT&#34;].strikeData[0][glyph.glyph_name]
+    glyph_bitmap = g.data[9:]
+    metrics = g.metrics
+    if isinstance(metrics, SmallGlyphMetrics):
+        x_min = round(metrics.BearingX * self.upem / ppem)
+        y_min = round((metrics.BearingY - metrics.height) * self.upem / ppem)
+        x_max = round(metrics.width * self.upem / ppem)
+        y_max = round(metrics.BearingY * self.upem / ppem)
+    elif isinstance(metrics, BigGlyphMetrics):
+        x_min = round(metrics.horiBearingX * self.upem / ppem)
+        y_min = round((metrics.horiBearingY - metrics.height) * self.upem / ppem)
+        x_max = round(metrics.width * self.upem / ppem)
+        y_max = round(metrics.horiBearingY * self.upem / ppem)
+    else:  # fallback scenario: use font bounding box
+        x_min = self.base_font.ttfont[&#34;head&#34;].xMin
+        y_min = self.base_font.ttfont[&#34;head&#34;].yMin
+        x_max = self.base_font.ttfont[&#34;head&#34;].xMax
+        y_max = self.base_font.ttfont[&#34;head&#34;].yMax
+
+    bio = BytesIO(glyph_bitmap)
+    bio.seek(0)
+    _, _, info = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+    w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+    glyph.glyph = (
+        f&#34;{round(w * self.scale)} 0 d0\n&#34;
+        &#34;q\n&#34;
+        f&#34;{(x_max - x_min)* self.scale} 0 0 {(-y_min + y_max)*self.scale} {x_min*self.scale} {y_min*self.scale} cm\n&#34;
+        f&#34;/I{info[&#39;i&#39;]} Do\nQ&#34;
+    )
+    self.images_used.add(info[&#34;i&#34;])  # type: ignore[arg-type]
+    glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont"><code class="flex name class">
+<span>class <span class="ident">COLRFont</span></span>
+<span>(</span><span>fpdf: FPDF, base_font: TTFFont, palette_index: int = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L265-L908" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class COLRFont(Type3Font):
+    &#34;&#34;&#34;
+    Support for COLRv0 and COLRv1 OpenType color vector fonts.
+    https://learn.microsoft.com/en-us/typography/opentype/spec/colr
+
+    COLRv0 is a sequence of glyphs layers with color specification
+    and they are built one on top of the other.
+
+    COLRv1 allows for more complex color glyphs by including gradients,
+    transformations, and composite operations.
+
+    This class handles both versions of the COLR table by using the
+    drawing API to render the glyphs as vector graphics.
+    &#34;&#34;&#34;
+
+    def __init__(
+        self, fpdf: &#34;FPDF&#34;, base_font: &#34;TTFFont&#34;, palette_index: int = 0
+    ) -&gt; None:
+        super().__init__(fpdf, base_font)
+        colr_table: table_C_O_L_R_ = self.base_font.ttfont[&#34;COLR&#34;]
+        self.colrv0_glyphs: dict[str, tuple[ColrV0Layer]] = {}
+        self.colrv1_glyphs: dict[str, ColrV1Paint] = {}
+        self.version = colr_table.version
+        self.colrv1_clip_boxes = {}
+        self.colr_var_instancer = None
+        self.colr_var_index_map = None
+        if colr_table.version == 0:
+            self.colrv0_glyphs = colr_table.ColorLayers
+        else:
+            try:
+                self.colrv0_glyphs = (
+                    colr_table._decompileColorLayersV0(colr_table.table) or {}
+                )
+            except (KeyError, AttributeError, TypeError, ValueError):
+                self.colrv0_glyphs = {}
+            colr_table_v1 = colr_table.table
+            var_store = getattr(colr_table_v1, &#34;VarStore&#34;, None)
+            if var_store is not None:
+                axis_tags = []
+                if &#34;fvar&#34; in self.base_font.ttfont:
+                    axis_tags = [
+                        axis.axisTag for axis in self.base_font.ttfont[&#34;fvar&#34;].axes
+                    ]
+                self.colr_var_instancer = VarStoreInstancer(var_store, axis_tags)
+                self.colr_var_instancer.setLocation({tag: 0.0 for tag in axis_tags})
+                var_index_map = getattr(colr_table_v1, &#34;VarIndexMap&#34;, None)
+                if var_index_map is not None:
+                    self.colr_var_index_map = var_index_map.mapping
+            self.colrv1_glyphs = {
+                glyph.BaseGlyph: glyph
+                for glyph in colr_table_v1.BaseGlyphList.BaseGlyphPaintRecord
+            }
+            clip_list = getattr(colr_table_v1, &#34;ClipList&#34;, None)
+            if clip_list is not None:
+                for glyph_name, clip in getattr(clip_list, &#34;clips&#34;, {}).items():
+                    resolved = self._resolve_clip_box(clip)
+                    if resolved is not None:
+                        self.colrv1_clip_boxes[glyph_name] = resolved
+        self.palette = None
+        if &#34;CPAL&#34; in self.base_font.ttfont:
+            num_palettes = len(self.base_font.ttfont[&#34;CPAL&#34;].palettes)
+            # Validate palette index
+            if palette_index &gt;= num_palettes:
+                LOGGER.warning(
+                    &#34;Palette index %s is out of range. This font has %s palettes. Using palette 0.&#34;,
+                    palette_index,
+                    num_palettes,
+                )
+                palette_index = 0
+            palette = self.base_font.ttfont[&#34;CPAL&#34;].palettes[palette_index]
+            self.palette = [
+                (
+                    color.red / 255,
+                    color.green / 255,
+                    color.blue / 255,
+                    color.alpha / 255,
+                )
+                for color in palette
+            ]
+
+    def metric_bbox(self) -&gt; BoundingBox:
+        return BoundingBox(
+            self.base_font.ttfont[&#34;head&#34;].xMin,
+            self.base_font.ttfont[&#34;head&#34;].yMin,
+            self.base_font.ttfont[&#34;head&#34;].xMax,
+            self.base_font.ttfont[&#34;head&#34;].yMax,
+        )
+
+    def glyph_exists(self, glyph_name: str) -&gt; bool:
+        return glyph_name in self.colrv0_glyphs or glyph_name in self.colrv1_glyphs
+
+    def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+        w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+        if glyph.glyph_name in self.colrv0_glyphs:
+            glyph_layers = self.colrv0_glyphs[glyph.glyph_name]
+            img = self.draw_glyph_colrv0(glyph_layers)
+        else:
+            if self.version &lt; 1 or glyph.glyph_name not in self.colrv1_glyphs:
+                raise NotImplementedError(
+                    f&#34;No COLRv0 layers and no COLRv1 paint found for &#39;{glyph.glyph_name}&#39;.&#34;
+                )
+            img = self.draw_glyph_colrv1(glyph.glyph_name)
+        img.transform = Transform.scaling(self.scale, -self.scale)
+        output_stream = self.fpdf.draw_vector_glyph(img, self)
+        glyph.glyph = f&#34;{round(w * self.scale)} 0 d0\n&#34; &#34;q\n&#34; f&#34;{output_stream}\n&#34; &#34;Q&#34;
+        glyph.glyph_width = w
+
+    def get_color(self, color_index: int, alpha: float = 1) -&gt; DeviceRGB:
+        if self.palette is None:  # should never happen
+            return DeviceRGB(0, 0, 0, 1)
+        if color_index == 0xFFFF:
+            # Palette entry 0xFFFF requests the application text foreground color.
+            text_color = getattr(self.fpdf, &#34;text_color&#34;, DeviceGray(0))
+            if isinstance(text_color, DeviceRGB):
+                r, g, b = text_color.r, text_color.g, text_color.b
+                a = 1.0 if text_color.a is None else text_color.a
+            elif isinstance(text_color, DeviceGray):
+                r = g = b = text_color.g
+                a = 1.0 if text_color.a is None else text_color.a
+            elif isinstance(text_color, DeviceCMYK):
+                c, m, y, k = text_color.c, text_color.m, text_color.y, text_color.k
+                r = 1.0 - min(1.0, c + k)
+                g = 1.0 - min(1.0, m + k)
+                b = 1.0 - min(1.0, y + k)
+                a = 1.0 if text_color.a is None else text_color.a
+            else:
+                r = g = b = 0.0
+                a = 1.0
+        else:
+            r, g, b, a = self.palette[color_index]
+        a *= alpha
+        return DeviceRGB(r, g, b, a)
+
+    def draw_glyph_colrv0(self, layers: Sequence[ColrV0Layer]) -&gt; GraphicsContext:
+        gc = GraphicsContext()
+        for layer in layers:
+            path = PaintedPath()
+            glyph_set = self.base_font.ttfont.getGlyphSet()
+            pen = GlyphPathPen(path, glyphSet=glyph_set)
+            glyph = glyph_set[layer.name]
+            glyph.draw(pen)
+            path.style.fill_color = self.get_color(layer.colorID)
+            path.style.stroke_color = self.get_color(layer.colorID)
+            gc.add_item(item=path, clone=False)
+        return gc
+
+    def draw_glyph_colrv1(self, glyph_name: str) -&gt; GraphicsContext:
+        gc = GraphicsContext()
+        clip_path = self._build_clip_path(glyph_name)
+        if clip_path is not None:
+            gc.clipping_path = clip_path
+        glyph = self.colrv1_glyphs[glyph_name]
+        self.draw_colrv1_paint(
+            paint=glyph.Paint,
+            parent=gc,
+            target_path=None,
+            ctm=Transform.identity(),
+            visited_glyphs=set(glyph_name),
+        )
+        return gc
+
+    # pylint: disable=too-many-return-statements
+    def draw_colrv1_paint(
+        self,
+        paint: Paint,
+        parent: GraphicsContext,
+        target_path: Optional[PaintedPath] = None,
+        ctm: Optional[Transform] = None,
+        visited_glyphs: Optional[set[str]] = None,
+    ) -&gt; tuple[GraphicsContext, Optional[PaintedPath]]:
+        &#34;&#34;&#34;
+        Draw a COLRv1 Paint object into the given GraphicsContext.
+        This is an implementation of the COLR version 1 rendering algorithm:
+        https://learn.microsoft.com/en-us/typography/opentype/spec/colr#colr-version-1-rendering-algorithm
+        &#34;&#34;&#34;
+        paint = self._unwrap_paint(paint)
+        ctm = ctm or Transform.identity()
+
+        if visited_glyphs is None:
+            visited_glyphs = set()
+
+        if paint.Format == PaintFormat.PaintColrLayers:
+            layer_list = self.base_font.ttfont[&#34;COLR&#34;].table.LayerList
+            group = GraphicsContext()
+            for layer in range(
+                paint.FirstLayerIndex, paint.FirstLayerIndex + paint.NumLayers
+            ):
+                self.draw_colrv1_paint(
+                    paint=layer_list.Paint[layer],
+                    parent=group,
+                    ctm=ctm,
+                    visited_glyphs=visited_glyphs,
+                )
+            parent.add_item(item=group, clone=False)
+            return parent, target_path
+
+        if paint.Format in (
+            PaintFormat.PaintSolid,
+            PaintFormat.PaintVarSolid,
+        ):
+            target_path = target_path or self.get_paint_surface()
+            target_path.style.fill_color = self.get_color(
+                color_index=paint.PaletteIndex, alpha=paint.Alpha
+            )
+            target_path.style.stroke_color = None
+            target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+            return parent, target_path
+
+        if paint.Format == PaintFormat.PaintLinearGradient:
+            stops: list[tuple[float, DeviceRGB]] = [
+                (stop.StopOffset, self.get_color(stop.PaletteIndex, stop.Alpha))
+                for stop in paint.ColorLine.ColorStop
+            ]
+            if paint.ColorLine.Extend == 2:  # REFLECT
+                spread_method = GradientSpreadMethod.REFLECT
+            elif paint.ColorLine.Extend == 1:  # REPEAT
+                spread_method = GradientSpreadMethod.REPEAT
+            else:  # PAD
+                spread_method = GradientSpreadMethod.PAD
+            linear_gradient = shape_linear_gradient(
+                paint.x0,
+                paint.y0,
+                paint.x1,
+                paint.y1,
+                stops,
+            )
+            target_path = target_path or self.get_paint_surface()
+            target_path.style.fill_color = GradientPaint(
+                gradient=linear_gradient,
+                units=GradientUnits.USER_SPACE_ON_USE,
+                gradient_transform=ctm,
+                apply_page_ctm=False,
+                spread_method=spread_method,
+            )
+            target_path.style.stroke_color = None
+            target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+            return parent, target_path
+
+        if paint.Format == PaintFormat.PaintRadialGradient:
+            raw = [
+                (cs.StopOffset, self.get_color(cs.PaletteIndex, cs.Alpha))
+                for cs in paint.ColorLine.ColorStop
+            ]
+            t_min, t_max, norm_stops = _normalize_color_line(raw)
+            c0: tuple[float, float] = (paint.x0, paint.y0)
+            r0: float = paint.r0
+            c1: tuple[float, float] = (paint.x1, paint.y1)
+            r1: float = paint.r1
+            fx, fy = _lerp_pt(c0, c1, t_min)
+            cx, cy = _lerp_pt(c0, c1, t_max)
+            fr = max(_lerp(r0, r1, t_min), 0.0)
+            r = max(_lerp(r0, r1, t_max), 1e-6)
+            if paint.ColorLine.Extend == 2:  # REFLECT
+                spread_method = GradientSpreadMethod.REFLECT
+            elif paint.ColorLine.Extend == 1:  # REPEAT
+                spread_method = GradientSpreadMethod.REPEAT
+            else:  # PAD
+                spread_method = GradientSpreadMethod.PAD
+            radial_gradient = shape_radial_gradient(
+                cx=cx,
+                cy=cy,
+                r=r,
+                fx=fx,
+                fy=fy,
+                fr=fr,
+                stops=norm_stops,
+            )
+            target_path = target_path or self.get_paint_surface()
+            target_path.style.fill_color = GradientPaint(
+                gradient=radial_gradient,
+                units=GradientUnits.USER_SPACE_ON_USE,
+                gradient_transform=ctm,
+                apply_page_ctm=False,
+                spread_method=spread_method,
+            )
+            target_path.style.stroke_color = None
+            target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+            return parent, target_path
+
+        if paint.Format == PaintFormat.PaintSweepGradient:  # 8
+            stops = [
+                (cs.StopOffset, self.get_color(cs.PaletteIndex, cs.Alpha))
+                for cs in paint.ColorLine.ColorStop
+            ]
+
+            if paint.ColorLine.Extend == 2:  # REFLECT
+                spread_method = GradientSpreadMethod.REFLECT
+            elif paint.ColorLine.Extend == 1:  # REPEAT
+                spread_method = GradientSpreadMethod.REPEAT
+            else:
+                spread_method = GradientSpreadMethod.PAD
+
+            cx = paint.centerX
+            cy = paint.centerY
+
+            # COLRv1 defines sweep angles clockwise from the positive X axis.
+            # We build gradients in glyph space, which later undergoes a Y-axis flip
+            # when emitted to PDF coordinates. To compensate, convert the COLR angles
+            # directly to mathematical radians (counter-clockwise); the subsequent flip
+            # restores the expected clockwise visual direction.
+            start_angle, end_angle = self._sweep_angles(
+                paint.startAngle, paint.endAngle
+            )
+
+            # Build a lazy sweep gradient object (bbox-resolved at emit time)
+            sweep_gradient = SweepGradient(
+                cx=cx,
+                cy=cy,
+                start_angle=start_angle,
+                end_angle=end_angle,
+                stops=stops,
+                spread_method=spread_method,
+                segments=None,
+                inner_radius_factor=0.002,
+            )
+
+            target_path = target_path or self.get_paint_surface()
+            target_path.style.fill_color = GradientPaint(
+                gradient=sweep_gradient,
+                units=GradientUnits.USER_SPACE_ON_USE,
+                gradient_transform=ctm,
+                apply_page_ctm=False,
+                spread_method=spread_method,
+            )
+            target_path.style.stroke_color = None
+            target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+            return parent, target_path
+
+        if paint.Format == PaintFormat.PaintGlyph:  # 10
+            glyph_set = self.base_font.ttfont.getGlyphSet()
+            clipping_path = ClippingPath()
+            glyph_set[paint.Glyph].draw(GlyphPathPen(clipping_path, glyphSet=glyph_set))
+            clipping_path.transform = (
+                clipping_path.transform or Transform.identity()
+            ) @ ctm
+
+            if getattr(paint, &#34;Paint&#34;, None) is None:
+                return parent, None
+
+            group = GraphicsContext()
+            group.clipping_path = clipping_path
+
+            group, surface_path = self.draw_colrv1_paint(
+                paint=paint.Paint,
+                parent=group,
+                ctm=Transform.identity(),
+                visited_glyphs=visited_glyphs,
+            )
+            if surface_path is not None:
+                group.add_item(item=surface_path, clone=False)
+            parent.add_item(item=group, clone=False)
+            return parent, None
+
+        if paint.Format == PaintFormat.PaintColrGlyph:
+            ref: str = getattr(paint, &#34;Glyph&#34;, None) or getattr(paint, &#34;GlyphID&#34;, None)  # type: ignore[assignment]
+            if isinstance(ref, int):
+                ref_name = self.base_font.ttfont.getGlyphName(ref)
+            else:
+                ref_name = ref
+            if ref_name in visited_glyphs:
+                LOGGER.warning(&#34;Skipping recursive COLR glyph reference &#39;%s&#39;&#34;, ref_name)
+                return parent, target_path  # nothing to draw
+            rec = self.colrv1_glyphs.get(ref_name)
+            if rec is None or getattr(rec, &#34;Paint&#34;, None) is None:
+                return parent, target_path  # nothing to draw
+
+            visited_glyphs.add(ref_name)
+            try:
+                group = GraphicsContext()
+                clip_path = self._build_clip_path(ref_name)
+                if clip_path is not None:
+                    group.clipping_path = clip_path
+                self.draw_colrv1_paint(
+                    paint=rec.Paint,
+                    parent=group,
+                    ctm=ctm,
+                    visited_glyphs=visited_glyphs,
+                )
+                parent.add_item(item=group, clone=False)
+            finally:
+                visited_glyphs.remove(ref_name)
+            return parent, target_path
+
+        if paint.Format in (
+            PaintFormat.PaintTransform,  # 12
+            PaintFormat.PaintVarTransform,  # 13
+            PaintFormat.PaintTranslate,  # 14
+            PaintFormat.PaintVarTranslate,  # 15
+            PaintFormat.PaintScale,  # 16
+            PaintFormat.PaintVarScale,  # 17
+            PaintFormat.PaintScaleAroundCenter,  # 18
+            PaintFormat.PaintVarScaleAroundCenter,  # 19
+            PaintFormat.PaintScaleUniform,  # 20
+            PaintFormat.PaintVarScaleUniform,  # 21
+            PaintFormat.PaintScaleUniformAroundCenter,  # 22
+            PaintFormat.PaintVarScaleUniformAroundCenter,  # 23
+            PaintFormat.PaintRotate,  # 24
+            PaintFormat.PaintVarRotate,  # 25
+            PaintFormat.PaintRotateAroundCenter,  # 26
+            PaintFormat.PaintVarRotateAroundCenter,  # 27
+            PaintFormat.PaintSkew,  # 28
+            PaintFormat.PaintVarSkew,  # 29
+            PaintFormat.PaintSkewAroundCenter,  # 30
+            PaintFormat.PaintVarSkewAroundCenter,  # 31
+        ):
+            transform = self._transform_from_paint(paint)
+            new_ctm = ctm @ transform
+            return self.draw_colrv1_paint(
+                paint=paint.Paint,
+                parent=parent,
+                target_path=target_path,
+                ctm=new_ctm,
+                visited_glyphs=visited_glyphs,
+            )
+
+        if paint.Format in (
+            PaintFormat.PaintVarLinearGradient,  # 5
+            PaintFormat.PaintVarRadialGradient,  # 7
+            PaintFormat.PaintVarSweepGradient,
+        ):  # 9
+            raise NotImplementedError(&#34;Variable fonts are not yet supported.&#34;)
+
+        if paint.Format == PaintFormat.PaintComposite:  # 32
+            backdrop_node = GraphicsContext()
+            _, backdrop_path = self.draw_colrv1_paint(
+                paint=paint.BackdropPaint,
+                parent=backdrop_node,
+                ctm=ctm,
+                visited_glyphs=visited_glyphs,
+            )
+            if backdrop_path is not None:
+                backdrop_node.add_item(item=backdrop_path, clone=False)
+
+            source_node = GraphicsContext()
+            _, source_path = self.draw_colrv1_paint(
+                paint=paint.SourcePaint,
+                parent=source_node,
+                ctm=ctm,
+                visited_glyphs=visited_glyphs,
+            )
+            if source_path is not None:
+                source_node.add_item(item=source_path, clone=False)
+
+            composite_type, composite_mode = self.get_composite_mode(
+                paint.CompositeMode
+            )
+            if composite_type == &#34;Blend&#34;:
+                if TYPE_CHECKING:
+                    assert isinstance(composite_mode, BlendMode)
+                parent.add_item(
+                    item=PaintBlendComposite(
+                        backdrop=backdrop_node,
+                        source=source_node,
+                        blend_mode=composite_mode,
+                    ),
+                    clone=False,
+                )
+            elif composite_type == &#34;Compositing&#34;:
+                if TYPE_CHECKING:
+                    assert isinstance(composite_mode, CompositeMode)
+                composite_node = PaintComposite(
+                    backdrop=backdrop_node,
+                    source=source_node,
+                    operation=composite_mode,  # pyright: ignore[reportArgumentType]
+                )
+                parent.add_item(item=composite_node, clone=False)
+            else:
+                raise ValueError(&#34;Composite operation not supported - {composite_type}&#34;)
+            return parent, None
+
+        raise NotImplementedError(f&#34;Unknown PaintFormat: {paint.Format}&#34;)
+
+    @classmethod
+    def _sweep_angles(cls, start_deg: float, end_deg: float) -&gt; tuple[float, float]:
+        start_norm = math.fmod(start_deg, 360.0)
+        if start_norm &lt; 0.0:
+            start_norm += 360.0
+        span_deg = math.fmod(end_deg - start_deg, 360.0)
+        if span_deg &lt;= 0.0:
+            span_deg += 360.0
+        start_rad = math.radians(start_norm)
+        end_rad = start_rad + math.radians(span_deg)
+        return start_rad, end_rad
+
+    @classmethod
+    def _transform_from_paint(cls, paint: Paint) -&gt; Transform:
+        paint_format = paint.Format
+        if paint_format in (PaintFormat.PaintTransform, PaintFormat.PaintVarTransform):
+            transform = paint.Transform
+            return Transform(
+                transform.xx,
+                transform.yx,
+                transform.xy,
+                transform.yy,
+                transform.dx,
+                transform.dy,
+            )
+        if paint_format in (PaintFormat.PaintTranslate, PaintFormat.PaintVarTranslate):
+            return Transform.translation(paint.dx, paint.dy)
+        if paint_format in (PaintFormat.PaintScale, PaintFormat.PaintVarScale):
+            return Transform.scaling(paint.scaleX, paint.scaleY)
+        if paint_format in (
+            PaintFormat.PaintScaleAroundCenter,
+            PaintFormat.PaintVarScaleAroundCenter,
+        ):
+            return Transform.scaling(paint.scaleX, paint.scaleY).about(
+                paint.centerX, paint.centerY
+            )
+        if paint_format in (
+            PaintFormat.PaintScaleUniform,
+            PaintFormat.PaintVarScaleUniform,
+        ):
+            return Transform.scaling(paint.scale, paint.scale)
+        if paint_format in (
+            PaintFormat.PaintScaleUniformAroundCenter,
+            PaintFormat.PaintVarScaleUniformAroundCenter,
+        ):
+            return Transform.scaling(paint.scale, paint.scale).about(
+                paint.centerX, paint.centerY
+            )
+        if paint_format in (PaintFormat.PaintRotate, PaintFormat.PaintVarRotate):
+            return Transform.rotation_d(paint.angle)
+        if paint_format in (
+            PaintFormat.PaintRotateAroundCenter,
+            PaintFormat.PaintVarRotateAroundCenter,
+        ):
+            return Transform.rotation_d(paint.angle).about(paint.centerX, paint.centerY)
+        if paint_format in (PaintFormat.PaintSkew, PaintFormat.PaintVarSkew):
+            return Transform.skewing_d(-paint.xSkewAngle, paint.ySkewAngle)
+        if paint_format in (
+            PaintFormat.PaintSkewAroundCenter,
+            PaintFormat.PaintVarSkewAroundCenter,
+        ):
+            return Transform.skewing_d(-paint.xSkewAngle, paint.ySkewAngle).about(
+                paint.centerX, paint.centerY
+            )
+        raise NotImplementedError(f&#34;Transform not implemented for {format}&#34;)
+
+    def get_paint_surface(self) -&gt; PaintedPath:
+        &#34;&#34;&#34;
+        Creates a surface representing the whole glyph area for actions that require
+        painting an infinite surface and clipping to a geometry path
+        &#34;&#34;&#34;
+        paint_surface = PaintedPath()
+        surface_bbox = self.metric_bbox()
+        paint_surface.rectangle(
+            x=surface_bbox.x0,
+            y=surface_bbox.y0,
+            w=surface_bbox.width,
+            h=surface_bbox.height,
+        )
+        return paint_surface
+
+    @classmethod
+    def get_composite_mode(
+        cls, composite_mode: CompositeMode
+    ) -&gt; (
+        tuple[Literal[&#34;Compositing&#34;], CompositingOperation]
+        | tuple[Literal[&#34;Blend&#34;], BlendMode]
+    ):
+        &#34;&#34;&#34;Get the FPDF BlendMode for a given CompositeMode.&#34;&#34;&#34;
+
+        map_compositing_operation = {
+            CompositeMode.SRC: CompositingOperation.SOURCE,
+            CompositeMode.DEST: CompositingOperation.DESTINATION,
+            CompositeMode.CLEAR: CompositingOperation.CLEAR,
+            CompositeMode.SRC_OVER: CompositingOperation.SOURCE_OVER,
+            CompositeMode.DEST_OVER: CompositingOperation.DESTINATION_OVER,
+            CompositeMode.SRC_IN: CompositingOperation.SOURCE_IN,
+            CompositeMode.DEST_IN: CompositingOperation.DESTINATION_IN,
+            CompositeMode.SRC_OUT: CompositingOperation.SOURCE_OUT,
+            CompositeMode.DEST_OUT: CompositingOperation.DESTINATION_OUT,
+            CompositeMode.SRC_ATOP: CompositingOperation.SOURCE_ATOP,
+            CompositeMode.DEST_ATOP: CompositingOperation.DESTINATION_ATOP,
+            CompositeMode.XOR: CompositingOperation.XOR,
+        }
+
+        compositing_operation = map_compositing_operation.get(composite_mode, None)
+        if compositing_operation is not None:
+            return (&#34;Compositing&#34;, compositing_operation)
+
+        map_blend_mode = {
+            CompositeMode.PLUS: BlendMode.SCREEN,  # approximation
+            CompositeMode.SCREEN: BlendMode.SCREEN,
+            CompositeMode.OVERLAY: BlendMode.OVERLAY,
+            CompositeMode.DARKEN: BlendMode.DARKEN,
+            CompositeMode.LIGHTEN: BlendMode.LIGHTEN,
+            CompositeMode.COLOR_DODGE: BlendMode.COLOR_DODGE,
+            CompositeMode.COLOR_BURN: BlendMode.COLOR_BURN,
+            CompositeMode.HARD_LIGHT: BlendMode.HARD_LIGHT,
+            CompositeMode.SOFT_LIGHT: BlendMode.SOFT_LIGHT,
+            CompositeMode.DIFFERENCE: BlendMode.DIFFERENCE,
+            CompositeMode.EXCLUSION: BlendMode.EXCLUSION,
+            CompositeMode.MULTIPLY: BlendMode.MULTIPLY,
+            CompositeMode.HSL_HUE: BlendMode.HUE,
+            CompositeMode.HSL_SATURATION: BlendMode.SATURATION,
+            CompositeMode.HSL_COLOR: BlendMode.COLOR,
+            CompositeMode.HSL_LUMINOSITY: BlendMode.LUMINOSITY,
+        }
+        blend_mode = map_blend_mode.get(composite_mode, None)
+        if blend_mode is not None:
+            return (&#34;Blend&#34;, blend_mode)
+
+        raise NotImplementedError(f&#34;Unknown composite mode: {composite_mode}&#34;)
+
+    def _unwrap_paint(self, paint: Paint) -&gt; Union[Paint, &#34;VarTableWrapper&#34;]:
+        mapped_format = PAINT_VAR_MAPPING.get(paint.Format)
+        if mapped_format is None or self.colr_var_instancer is None:
+            return paint
+        return VarTableWrapper(
+            paint,
+            self.colr_var_instancer,
+            self.colr_var_index_map,
+            format_override=mapped_format,
+        )
+
+    def _build_clip_path(self, glyph_name: str) -&gt; Optional[ClippingPath]:
+        clip_box = self.colrv1_clip_boxes.get(glyph_name)
+        if clip_box is None:
+            return None
+        x_min, y_min, x_max, y_max = clip_box
+        clip_path = ClippingPath()
+        clip_path.move_to(x_min, y_min)
+        clip_path.rectangle(x_min, y_min, x_max - x_min, y_max - y_min)
+        return clip_path
+
+    def _resolve_clip_box(
+        self, clip: Any
+    ) -&gt; Optional[tuple[float, float, float, float]]:
+        if clip is None:
+            return None
+        if (
+            getattr(clip, &#34;Format&#34;, None) == ClipBoxFormat.Variable
+            and self.colr_var_instancer is not None
+        ):
+            clip = VarTableWrapper(
+                clip,
+                self.colr_var_instancer,
+                self.colr_var_index_map,
+            )
+        if hasattr(clip, &#34;xMin&#34;) and hasattr(clip, &#34;xMax&#34;):
+            return (clip.xMin, clip.yMin, clip.xMax, clip.yMax)
+        LOGGER.debug(&#34;Unsupported COLRv1 clip format for clip box&#34;)
+        return None</code></pre>
+</details>
+<div class="desc"><p>Support for COLRv0 and COLRv1 OpenType color vector fonts.
+<a href="https://learn.microsoft.com/en-us/typography/opentype/spec/colr">https://learn.microsoft.com/en-us/typography/opentype/spec/colr</a></p>
+<p>COLRv0 is a sequence of glyphs layers with color specification
+and they are built one on top of the other.</p>
+<p>COLRv1 allows for more complex color glyphs by including gradients,
+transformations, and composite operations.</p>
+<p>This class handles both versions of the COLR table by using the
+drawing API to render the glyphs as vector graphics.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.COLRFont.get_composite_mode"><code class="name flex">
+<span>def <span class="ident">get_composite_mode</span></span>(<span>composite_mode: fontTools.ttLib.tables.otTables.CompositeMode) ‑> tuple[typing.Literal['Compositing'], <a title="fpdf.enums.CompositingOperation" href="enums.html#fpdf.enums.CompositingOperation">CompositingOperation</a>] | tuple[typing.Literal['Blend'], <a title="fpdf.enums.BlendMode" href="enums.html#fpdf.enums.BlendMode">BlendMode</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the FPDF BlendMode for a given CompositeMode.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.COLRFont.draw_colrv1_paint"><code class="name flex">
+<span>def <span class="ident">draw_colrv1_paint</span></span>(<span>self,<br>paint: fontTools.ttLib.tables.otTables.Paint,<br>parent: <a title="fpdf.drawing.GraphicsContext" href="drawing.html#fpdf.drawing.GraphicsContext">GraphicsContext</a>,<br>target_path: <a title="fpdf.drawing.PaintedPath" href="drawing.html#fpdf.drawing.PaintedPath">PaintedPath</a> | None = None,<br>ctm: <a title="fpdf.drawing_primitives.Transform" href="drawing_primitives.html#fpdf.drawing_primitives.Transform">Transform</a> | None = None,<br>visited_glyphs: set[str] | None = None) ‑> tuple[<a title="fpdf.drawing.GraphicsContext" href="drawing.html#fpdf.drawing.GraphicsContext">GraphicsContext</a>, <a title="fpdf.drawing.PaintedPath" href="drawing.html#fpdf.drawing.PaintedPath">PaintedPath</a> | None]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L427-L735" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def draw_colrv1_paint(
+    self,
+    paint: Paint,
+    parent: GraphicsContext,
+    target_path: Optional[PaintedPath] = None,
+    ctm: Optional[Transform] = None,
+    visited_glyphs: Optional[set[str]] = None,
+) -&gt; tuple[GraphicsContext, Optional[PaintedPath]]:
+    &#34;&#34;&#34;
+    Draw a COLRv1 Paint object into the given GraphicsContext.
+    This is an implementation of the COLR version 1 rendering algorithm:
+    https://learn.microsoft.com/en-us/typography/opentype/spec/colr#colr-version-1-rendering-algorithm
+    &#34;&#34;&#34;
+    paint = self._unwrap_paint(paint)
+    ctm = ctm or Transform.identity()
+
+    if visited_glyphs is None:
+        visited_glyphs = set()
+
+    if paint.Format == PaintFormat.PaintColrLayers:
+        layer_list = self.base_font.ttfont[&#34;COLR&#34;].table.LayerList
+        group = GraphicsContext()
+        for layer in range(
+            paint.FirstLayerIndex, paint.FirstLayerIndex + paint.NumLayers
+        ):
+            self.draw_colrv1_paint(
+                paint=layer_list.Paint[layer],
+                parent=group,
+                ctm=ctm,
+                visited_glyphs=visited_glyphs,
+            )
+        parent.add_item(item=group, clone=False)
+        return parent, target_path
+
+    if paint.Format in (
+        PaintFormat.PaintSolid,
+        PaintFormat.PaintVarSolid,
+    ):
+        target_path = target_path or self.get_paint_surface()
+        target_path.style.fill_color = self.get_color(
+            color_index=paint.PaletteIndex, alpha=paint.Alpha
+        )
+        target_path.style.stroke_color = None
+        target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+        return parent, target_path
+
+    if paint.Format == PaintFormat.PaintLinearGradient:
+        stops: list[tuple[float, DeviceRGB]] = [
+            (stop.StopOffset, self.get_color(stop.PaletteIndex, stop.Alpha))
+            for stop in paint.ColorLine.ColorStop
+        ]
+        if paint.ColorLine.Extend == 2:  # REFLECT
+            spread_method = GradientSpreadMethod.REFLECT
+        elif paint.ColorLine.Extend == 1:  # REPEAT
+            spread_method = GradientSpreadMethod.REPEAT
+        else:  # PAD
+            spread_method = GradientSpreadMethod.PAD
+        linear_gradient = shape_linear_gradient(
+            paint.x0,
+            paint.y0,
+            paint.x1,
+            paint.y1,
+            stops,
+        )
+        target_path = target_path or self.get_paint_surface()
+        target_path.style.fill_color = GradientPaint(
+            gradient=linear_gradient,
+            units=GradientUnits.USER_SPACE_ON_USE,
+            gradient_transform=ctm,
+            apply_page_ctm=False,
+            spread_method=spread_method,
+        )
+        target_path.style.stroke_color = None
+        target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+        return parent, target_path
+
+    if paint.Format == PaintFormat.PaintRadialGradient:
+        raw = [
+            (cs.StopOffset, self.get_color(cs.PaletteIndex, cs.Alpha))
+            for cs in paint.ColorLine.ColorStop
+        ]
+        t_min, t_max, norm_stops = _normalize_color_line(raw)
+        c0: tuple[float, float] = (paint.x0, paint.y0)
+        r0: float = paint.r0
+        c1: tuple[float, float] = (paint.x1, paint.y1)
+        r1: float = paint.r1
+        fx, fy = _lerp_pt(c0, c1, t_min)
+        cx, cy = _lerp_pt(c0, c1, t_max)
+        fr = max(_lerp(r0, r1, t_min), 0.0)
+        r = max(_lerp(r0, r1, t_max), 1e-6)
+        if paint.ColorLine.Extend == 2:  # REFLECT
+            spread_method = GradientSpreadMethod.REFLECT
+        elif paint.ColorLine.Extend == 1:  # REPEAT
+            spread_method = GradientSpreadMethod.REPEAT
+        else:  # PAD
+            spread_method = GradientSpreadMethod.PAD
+        radial_gradient = shape_radial_gradient(
+            cx=cx,
+            cy=cy,
+            r=r,
+            fx=fx,
+            fy=fy,
+            fr=fr,
+            stops=norm_stops,
+        )
+        target_path = target_path or self.get_paint_surface()
+        target_path.style.fill_color = GradientPaint(
+            gradient=radial_gradient,
+            units=GradientUnits.USER_SPACE_ON_USE,
+            gradient_transform=ctm,
+            apply_page_ctm=False,
+            spread_method=spread_method,
+        )
+        target_path.style.stroke_color = None
+        target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+        return parent, target_path
+
+    if paint.Format == PaintFormat.PaintSweepGradient:  # 8
+        stops = [
+            (cs.StopOffset, self.get_color(cs.PaletteIndex, cs.Alpha))
+            for cs in paint.ColorLine.ColorStop
+        ]
+
+        if paint.ColorLine.Extend == 2:  # REFLECT
+            spread_method = GradientSpreadMethod.REFLECT
+        elif paint.ColorLine.Extend == 1:  # REPEAT
+            spread_method = GradientSpreadMethod.REPEAT
+        else:
+            spread_method = GradientSpreadMethod.PAD
+
+        cx = paint.centerX
+        cy = paint.centerY
+
+        # COLRv1 defines sweep angles clockwise from the positive X axis.
+        # We build gradients in glyph space, which later undergoes a Y-axis flip
+        # when emitted to PDF coordinates. To compensate, convert the COLR angles
+        # directly to mathematical radians (counter-clockwise); the subsequent flip
+        # restores the expected clockwise visual direction.
+        start_angle, end_angle = self._sweep_angles(
+            paint.startAngle, paint.endAngle
+        )
+
+        # Build a lazy sweep gradient object (bbox-resolved at emit time)
+        sweep_gradient = SweepGradient(
+            cx=cx,
+            cy=cy,
+            start_angle=start_angle,
+            end_angle=end_angle,
+            stops=stops,
+            spread_method=spread_method,
+            segments=None,
+            inner_radius_factor=0.002,
+        )
+
+        target_path = target_path or self.get_paint_surface()
+        target_path.style.fill_color = GradientPaint(
+            gradient=sweep_gradient,
+            units=GradientUnits.USER_SPACE_ON_USE,
+            gradient_transform=ctm,
+            apply_page_ctm=False,
+            spread_method=spread_method,
+        )
+        target_path.style.stroke_color = None
+        target_path.style.paint_rule = PathPaintRule.FILL_NONZERO
+        return parent, target_path
+
+    if paint.Format == PaintFormat.PaintGlyph:  # 10
+        glyph_set = self.base_font.ttfont.getGlyphSet()
+        clipping_path = ClippingPath()
+        glyph_set[paint.Glyph].draw(GlyphPathPen(clipping_path, glyphSet=glyph_set))
+        clipping_path.transform = (
+            clipping_path.transform or Transform.identity()
+        ) @ ctm
+
+        if getattr(paint, &#34;Paint&#34;, None) is None:
+            return parent, None
+
+        group = GraphicsContext()
+        group.clipping_path = clipping_path
+
+        group, surface_path = self.draw_colrv1_paint(
+            paint=paint.Paint,
+            parent=group,
+            ctm=Transform.identity(),
+            visited_glyphs=visited_glyphs,
+        )
+        if surface_path is not None:
+            group.add_item(item=surface_path, clone=False)
+        parent.add_item(item=group, clone=False)
+        return parent, None
+
+    if paint.Format == PaintFormat.PaintColrGlyph:
+        ref: str = getattr(paint, &#34;Glyph&#34;, None) or getattr(paint, &#34;GlyphID&#34;, None)  # type: ignore[assignment]
+        if isinstance(ref, int):
+            ref_name = self.base_font.ttfont.getGlyphName(ref)
+        else:
+            ref_name = ref
+        if ref_name in visited_glyphs:
+            LOGGER.warning(&#34;Skipping recursive COLR glyph reference &#39;%s&#39;&#34;, ref_name)
+            return parent, target_path  # nothing to draw
+        rec = self.colrv1_glyphs.get(ref_name)
+        if rec is None or getattr(rec, &#34;Paint&#34;, None) is None:
+            return parent, target_path  # nothing to draw
+
+        visited_glyphs.add(ref_name)
+        try:
+            group = GraphicsContext()
+            clip_path = self._build_clip_path(ref_name)
+            if clip_path is not None:
+                group.clipping_path = clip_path
+            self.draw_colrv1_paint(
+                paint=rec.Paint,
+                parent=group,
+                ctm=ctm,
+                visited_glyphs=visited_glyphs,
+            )
+            parent.add_item(item=group, clone=False)
+        finally:
+            visited_glyphs.remove(ref_name)
+        return parent, target_path
+
+    if paint.Format in (
+        PaintFormat.PaintTransform,  # 12
+        PaintFormat.PaintVarTransform,  # 13
+        PaintFormat.PaintTranslate,  # 14
+        PaintFormat.PaintVarTranslate,  # 15
+        PaintFormat.PaintScale,  # 16
+        PaintFormat.PaintVarScale,  # 17
+        PaintFormat.PaintScaleAroundCenter,  # 18
+        PaintFormat.PaintVarScaleAroundCenter,  # 19
+        PaintFormat.PaintScaleUniform,  # 20
+        PaintFormat.PaintVarScaleUniform,  # 21
+        PaintFormat.PaintScaleUniformAroundCenter,  # 22
+        PaintFormat.PaintVarScaleUniformAroundCenter,  # 23
+        PaintFormat.PaintRotate,  # 24
+        PaintFormat.PaintVarRotate,  # 25
+        PaintFormat.PaintRotateAroundCenter,  # 26
+        PaintFormat.PaintVarRotateAroundCenter,  # 27
+        PaintFormat.PaintSkew,  # 28
+        PaintFormat.PaintVarSkew,  # 29
+        PaintFormat.PaintSkewAroundCenter,  # 30
+        PaintFormat.PaintVarSkewAroundCenter,  # 31
+    ):
+        transform = self._transform_from_paint(paint)
+        new_ctm = ctm @ transform
+        return self.draw_colrv1_paint(
+            paint=paint.Paint,
+            parent=parent,
+            target_path=target_path,
+            ctm=new_ctm,
+            visited_glyphs=visited_glyphs,
+        )
+
+    if paint.Format in (
+        PaintFormat.PaintVarLinearGradient,  # 5
+        PaintFormat.PaintVarRadialGradient,  # 7
+        PaintFormat.PaintVarSweepGradient,
+    ):  # 9
+        raise NotImplementedError(&#34;Variable fonts are not yet supported.&#34;)
+
+    if paint.Format == PaintFormat.PaintComposite:  # 32
+        backdrop_node = GraphicsContext()
+        _, backdrop_path = self.draw_colrv1_paint(
+            paint=paint.BackdropPaint,
+            parent=backdrop_node,
+            ctm=ctm,
+            visited_glyphs=visited_glyphs,
+        )
+        if backdrop_path is not None:
+            backdrop_node.add_item(item=backdrop_path, clone=False)
+
+        source_node = GraphicsContext()
+        _, source_path = self.draw_colrv1_paint(
+            paint=paint.SourcePaint,
+            parent=source_node,
+            ctm=ctm,
+            visited_glyphs=visited_glyphs,
+        )
+        if source_path is not None:
+            source_node.add_item(item=source_path, clone=False)
+
+        composite_type, composite_mode = self.get_composite_mode(
+            paint.CompositeMode
+        )
+        if composite_type == &#34;Blend&#34;:
+            if TYPE_CHECKING:
+                assert isinstance(composite_mode, BlendMode)
+            parent.add_item(
+                item=PaintBlendComposite(
+                    backdrop=backdrop_node,
+                    source=source_node,
+                    blend_mode=composite_mode,
+                ),
+                clone=False,
+            )
+        elif composite_type == &#34;Compositing&#34;:
+            if TYPE_CHECKING:
+                assert isinstance(composite_mode, CompositeMode)
+            composite_node = PaintComposite(
+                backdrop=backdrop_node,
+                source=source_node,
+                operation=composite_mode,  # pyright: ignore[reportArgumentType]
+            )
+            parent.add_item(item=composite_node, clone=False)
+        else:
+            raise ValueError(&#34;Composite operation not supported - {composite_type}&#34;)
+        return parent, None
+
+    raise NotImplementedError(f&#34;Unknown PaintFormat: {paint.Format}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Draw a COLRv1 Paint object into the given GraphicsContext.
+This is an implementation of the COLR version 1 rendering algorithm:
+<a href="https://learn.microsoft.com/en-us/typography/opentype/spec/colr#colr-version-1-rendering-algorithm">https://learn.microsoft.com/en-us/typography/opentype/spec/colr#colr-version-1-rendering-algorithm</a></p></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.draw_glyph_colrv0"><code class="name flex">
+<span>def <span class="ident">draw_glyph_colrv0</span></span>(<span>self,<br>layers: Sequence[<a title="fpdf.font_type_3.ColrV0Layer" href="#fpdf.font_type_3.ColrV0Layer">ColrV0Layer</a>]) ‑> <a title="fpdf.drawing.GraphicsContext" href="drawing.html#fpdf.drawing.GraphicsContext">GraphicsContext</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L398-L409" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def draw_glyph_colrv0(self, layers: Sequence[ColrV0Layer]) -&gt; GraphicsContext:
+    gc = GraphicsContext()
+    for layer in layers:
+        path = PaintedPath()
+        glyph_set = self.base_font.ttfont.getGlyphSet()
+        pen = GlyphPathPen(path, glyphSet=glyph_set)
+        glyph = glyph_set[layer.name]
+        glyph.draw(pen)
+        path.style.fill_color = self.get_color(layer.colorID)
+        path.style.stroke_color = self.get_color(layer.colorID)
+        gc.add_item(item=path, clone=False)
+    return gc</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.draw_glyph_colrv1"><code class="name flex">
+<span>def <span class="ident">draw_glyph_colrv1</span></span>(<span>self, glyph_name: str) ‑> <a title="fpdf.drawing.GraphicsContext" href="drawing.html#fpdf.drawing.GraphicsContext">GraphicsContext</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L411-L424" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def draw_glyph_colrv1(self, glyph_name: str) -&gt; GraphicsContext:
+    gc = GraphicsContext()
+    clip_path = self._build_clip_path(glyph_name)
+    if clip_path is not None:
+        gc.clipping_path = clip_path
+    glyph = self.colrv1_glyphs[glyph_name]
+    self.draw_colrv1_paint(
+        paint=glyph.Paint,
+        parent=gc,
+        target_path=None,
+        ctm=Transform.identity(),
+        visited_glyphs=set(glyph_name),
+    )
+    return gc</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.get_color"><code class="name flex">
+<span>def <span class="ident">get_color</span></span>(<span>self, color_index: int, alpha: float = 1) ‑> <a title="fpdf.drawing_primitives.DeviceRGB" href="drawing_primitives.html#fpdf.drawing_primitives.DeviceRGB">DeviceRGB</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L372-L396" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_color(self, color_index: int, alpha: float = 1) -&gt; DeviceRGB:
+    if self.palette is None:  # should never happen
+        return DeviceRGB(0, 0, 0, 1)
+    if color_index == 0xFFFF:
+        # Palette entry 0xFFFF requests the application text foreground color.
+        text_color = getattr(self.fpdf, &#34;text_color&#34;, DeviceGray(0))
+        if isinstance(text_color, DeviceRGB):
+            r, g, b = text_color.r, text_color.g, text_color.b
+            a = 1.0 if text_color.a is None else text_color.a
+        elif isinstance(text_color, DeviceGray):
+            r = g = b = text_color.g
+            a = 1.0 if text_color.a is None else text_color.a
+        elif isinstance(text_color, DeviceCMYK):
+            c, m, y, k = text_color.c, text_color.m, text_color.y, text_color.k
+            r = 1.0 - min(1.0, c + k)
+            g = 1.0 - min(1.0, m + k)
+            b = 1.0 - min(1.0, y + k)
+            a = 1.0 if text_color.a is None else text_color.a
+        else:
+            r = g = b = 0.0
+            a = 1.0
+    else:
+        r, g, b, a = self.palette[color_index]
+    a *= alpha
+    return DeviceRGB(r, g, b, a)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.get_paint_surface"><code class="name flex">
+<span>def <span class="ident">get_paint_surface</span></span>(<span>self) ‑> <a title="fpdf.drawing.PaintedPath" href="drawing.html#fpdf.drawing.PaintedPath">PaintedPath</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L803-L816" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_paint_surface(self) -&gt; PaintedPath:
+    &#34;&#34;&#34;
+    Creates a surface representing the whole glyph area for actions that require
+    painting an infinite surface and clipping to a geometry path
+    &#34;&#34;&#34;
+    paint_surface = PaintedPath()
+    surface_bbox = self.metric_bbox()
+    paint_surface.rectangle(
+        x=surface_bbox.x0,
+        y=surface_bbox.y0,
+        w=surface_bbox.width,
+        h=surface_bbox.height,
+    )
+    return paint_surface</code></pre>
+</details>
+<div class="desc"><p>Creates a surface representing the whole glyph area for actions that require
+painting an infinite surface and clipping to a geometry path</p></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.glyph_exists"><code class="name flex">
+<span>def <span class="ident">glyph_exists</span></span>(<span>self, glyph_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L353-L354" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def glyph_exists(self, glyph_name: str) -&gt; bool:
+    return glyph_name in self.colrv0_glyphs or glyph_name in self.colrv1_glyphs</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.load_glyph_image"><code class="name flex">
+<span>def <span class="ident">load_glyph_image</span></span>(<span>self,<br>glyph: <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L356-L370" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+    w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+    if glyph.glyph_name in self.colrv0_glyphs:
+        glyph_layers = self.colrv0_glyphs[glyph.glyph_name]
+        img = self.draw_glyph_colrv0(glyph_layers)
+    else:
+        if self.version &lt; 1 or glyph.glyph_name not in self.colrv1_glyphs:
+            raise NotImplementedError(
+                f&#34;No COLRv0 layers and no COLRv1 paint found for &#39;{glyph.glyph_name}&#39;.&#34;
+            )
+        img = self.draw_glyph_colrv1(glyph.glyph_name)
+    img.transform = Transform.scaling(self.scale, -self.scale)
+    output_stream = self.fpdf.draw_vector_glyph(img, self)
+    glyph.glyph = f&#34;{round(w * self.scale)} 0 d0\n&#34; &#34;q\n&#34; f&#34;{output_stream}\n&#34; &#34;Q&#34;
+    glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.COLRFont.metric_bbox"><code class="name flex">
+<span>def <span class="ident">metric_bbox</span></span>(<span>self) ‑> <a title="fpdf.drawing.BoundingBox" href="drawing.html#fpdf.drawing.BoundingBox">BoundingBox</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L345-L351" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def metric_bbox(self) -&gt; BoundingBox:
+    return BoundingBox(
+        self.base_font.ttfont[&#34;head&#34;].xMin,
+        self.base_font.ttfont[&#34;head&#34;].yMin,
+        self.base_font.ttfont[&#34;head&#34;].xMax,
+        self.base_font.ttfont[&#34;head&#34;].yMax,
+    )</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.ColrV0Layer"><code class="flex name class">
+<span>class <span class="ident">ColrV0Layer</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L256-L258" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class ColrV0Layer(Protocol):
+    name: str
+    colorID: int</code></pre>
+</details>
+<div class="desc"><p>Base class for protocol classes.</p>
+<p>Protocol classes are defined as::</p>
+<pre><code>class Proto(Protocol):
+    def meth(self) -&gt; int:
+        ...
+</code></pre>
+<p>Such classes are primarily used with static type checkers that recognize
+structural subtyping (static duck-typing).</p>
+<p>For example::</p>
+<pre><code>class C:
+    def meth(self) -&gt; int:
+        return 0
+
+def func(x: Proto) -&gt; int:
+    return x.meth()
+
+func(C())  # Passes static type check
+</code></pre>
+<p>See PEP 544 for details. Protocol classes decorated with
+@typing.runtime_checkable act as simple-minded runtime protocols that check
+only the presence of given attributes, ignoring their type signatures.
+Protocol classes can be generic, they are defined as::</p>
+<pre><code>class GenProto[T](Protocol):
+    def meth(self) -&gt; T:
+        ...
+</code></pre></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>typing.Protocol</li>
+<li>typing.Generic</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="fpdf.font_type_3.ColrV0Layer.colorID"><code class="name">var <span class="ident">colorID</span> : int</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.font_type_3.ColrV0Layer.name"><code class="name">var <span class="ident">name</span> : str</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.ColrV1Paint"><code class="flex name class">
+<span>class <span class="ident">ColrV1Paint</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L261-L262" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class ColrV1Paint(Protocol):
+    Paint: Paint</code></pre>
+</details>
+<div class="desc"><p>Base class for protocol classes.</p>
+<p>Protocol classes are defined as::</p>
+<pre><code>class Proto(Protocol):
+    def meth(self) -&gt; int:
+        ...
+</code></pre>
+<p>Such classes are primarily used with static type checkers that recognize
+structural subtyping (static duck-typing).</p>
+<p>For example::</p>
+<pre><code>class C:
+    def meth(self) -&gt; int:
+        return 0
+
+def func(x: Proto) -&gt; int:
+    return x.meth()
+
+func(C())  # Passes static type check
+</code></pre>
+<p>See PEP 544 for details. Protocol classes decorated with
+@typing.runtime_checkable act as simple-minded runtime protocols that check
+only the presence of given attributes, ignoring their type signatures.
+Protocol classes can be generic, they are defined as::</p>
+<pre><code>class GenProto[T](Protocol):
+    def meth(self) -&gt; T:
+        ...
+</code></pre></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>typing.Protocol</li>
+<li>typing.Generic</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="fpdf.font_type_3.ColrV1Paint.Paint"><code class="name">var <span class="ident">Paint</span> : fontTools.ttLib.tables.otTables.Paint</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.EBDTBitmapFont"><code class="flex name class">
+<span>class <span class="ident">EBDTBitmapFont</span></span>
+<span>(</span><span>fpdf: FPDF, base_font: TTFFont)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1020-L1241" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class EBDTBitmapFont(Type3Font):
+    &#34;&#34;&#34;Support for EBLC+EBDT bitmap fonts.&#34;&#34;&#34;
+
+    def __init__(self, fpdf: &#34;FPDF&#34;, base_font: &#34;TTFFont&#34;):
+        super().__init__(fpdf, base_font)
+        self._glyph_strike_indexes: dict[str, int] = {}
+
+    def _find_glyph_strike_index(self, glyph_name: str) -&gt; Optional[int]:
+        strike_index = self._glyph_strike_indexes.get(glyph_name)
+        if strike_index is not None:
+            return strike_index
+
+        strikes_data = self.base_font.ttfont[&#34;EBDT&#34;].strikeData
+        strikes = self.base_font.ttfont[&#34;EBLC&#34;].strikes
+        strike_indexes = [
+            i for i, strike_data in enumerate(strikes_data) if glyph_name in strike_data
+        ]
+        if not strike_indexes:
+            return None
+
+        target_ppem = self.get_target_ppem(self.base_font.biggest_size_pt)
+        bigger_or_equal = [
+            i for i in strike_indexes if strikes[i].bitmapSizeTable.ppemX &gt;= target_ppem
+        ]
+        if bigger_or_equal:
+            strike_index = min(bigger_or_equal, key=lambda i: self._ppem_x(strikes, i))
+        else:
+            strike_index = max(strike_indexes, key=lambda i: self._ppem_x(strikes, i))
+        self._glyph_strike_indexes[glyph_name] = strike_index
+        return strike_index
+
+    @staticmethod
+    def _ppem_x(strikes: Sequence[Any], strike_index: int) -&gt; int:
+        return int(strikes[strike_index].bitmapSizeTable.ppemX)
+
+    def _get_glyph_metrics(
+        self, strike_index: int, glyph_name: str, bitmap_glyph: Any
+    ) -&gt; Any:
+        metrics = getattr(bitmap_glyph, &#34;metrics&#34;, None)
+        if metrics is not None:
+            return metrics
+        for index_sub_table in (
+            self.base_font.ttfont[&#34;EBLC&#34;].strikes[strike_index].indexSubTables
+        ):
+            if glyph_name not in index_sub_table.names:
+                continue
+            metrics = getattr(index_sub_table, &#34;metrics&#34;, None)
+            if metrics is not None:
+                return metrics
+            break
+        return None
+
+    @classmethod
+    def _decode_row(cls, packed_row: bytes, width: int, bit_depth: int) -&gt; bytearray:
+        max_value = (1 &lt;&lt; bit_depth) - 1
+        row_values = bytearray(width)
+        bit_index = 0
+        for pixel_index in range(width):
+            byte_index = bit_index // 8
+            bit_offset = bit_index % 8
+            bits_in_first_byte = min(bit_depth, 8 - bit_offset)
+            if bits_in_first_byte == bit_depth:
+                shift = 8 - bit_offset - bit_depth
+                value = (packed_row[byte_index] &gt;&gt; shift) &amp; max_value
+            else:
+                first = packed_row[byte_index] &amp; ((1 &lt;&lt; bits_in_first_byte) - 1)
+                second_bits = bit_depth - bits_in_first_byte
+                second = packed_row[byte_index + 1] &gt;&gt; (8 - second_bits)
+                value = (first &lt;&lt; second_bits) | second
+            row_values[pixel_index] = round(value * 255 / max_value)
+            bit_index += bit_depth
+        return row_values
+
+    @classmethod
+    def _bitmap_to_alpha(
+        cls,
+        bitmap_glyph: Any,
+        metrics: Any,
+        bit_depth: int,
+    ) -&gt; bytes:
+        alpha = bytearray(metrics.width * metrics.height)
+        for row_index in range(metrics.height):
+            packed_row = bitmap_glyph.getRow(
+                row_index, bitDepth=bit_depth, metrics=metrics
+            )
+            row = cls._decode_row(packed_row, metrics.width, bit_depth)
+            start = row_index * metrics.width
+            alpha[start : start + metrics.width] = row
+        return bytes(alpha)
+
+    def glyph_exists(self, glyph_name: str) -&gt; bool:
+        return self._find_glyph_strike_index(glyph_name) is not None
+
+    def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+        if Image is None:
+            raise EnvironmentError(
+                f&#34;{glyph.glyph_name}: Pillow is required to render EBDT glyphs.&#34;
+            )
+
+        strike_index = self._find_glyph_strike_index(glyph.glyph_name)
+        if strike_index is None:
+            raise ValueError(f&#34;{glyph.glyph_name}: glyph not found in EBDT strikes.&#34;)
+
+        strike = self.base_font.ttfont[&#34;EBLC&#34;].strikes[strike_index]
+        bit_depth = strike.bitmapSizeTable.bitDepth
+        if bit_depth not in (1, 2, 4, 8):
+            raise NotImplementedError(
+                f&#34;{glyph.glyph_name}: unsupported EBDT bit depth {bit_depth}.&#34;
+            )
+
+        bitmap_glyph = self.base_font.ttfont[&#34;EBDT&#34;].strikeData[strike_index][
+            glyph.glyph_name
+        ]
+        metrics = self._get_glyph_metrics(strike_index, glyph.glyph_name, bitmap_glyph)
+        if metrics is None:
+            raise NotImplementedError(
+                f&#34;{glyph.glyph_name}: EBDT glyph metrics could not be resolved.&#34;
+            )
+        if not hasattr(bitmap_glyph, &#34;getRow&#34;):
+            raise NotImplementedError(
+                f&#34;{glyph.glyph_name}: unsupported EBDT glyph format ({type(bitmap_glyph).__name__}).&#34;
+            )
+
+        ppem_x = strike.bitmapSizeTable.ppemX or 1
+        ppem_y = strike.bitmapSizeTable.ppemY or ppem_x
+        if isinstance(metrics, SmallGlyphMetrics):
+            x_min = round(metrics.BearingX * self.upem / ppem_x)
+            y_min = round((metrics.BearingY - metrics.height) * self.upem / ppem_y)
+            x_max = round((metrics.BearingX + metrics.width) * self.upem / ppem_x)
+            y_max = round(metrics.BearingY * self.upem / ppem_y)
+        elif isinstance(metrics, BigGlyphMetrics):
+            x_min = round(metrics.horiBearingX * self.upem / ppem_x)
+            y_min = round((metrics.horiBearingY - metrics.height) * self.upem / ppem_y)
+            x_max = round((metrics.horiBearingX + metrics.width) * self.upem / ppem_x)
+            y_max = round(metrics.horiBearingY * self.upem / ppem_y)
+        else:  # fallback scenario: use font bounding box
+            x_min = self.base_font.ttfont[&#34;head&#34;].xMin
+            y_min = self.base_font.ttfont[&#34;head&#34;].yMin
+            x_max = self.base_font.ttfont[&#34;head&#34;].xMax
+            y_max = self.base_font.ttfont[&#34;head&#34;].yMax
+
+        w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+        if bit_depth == 1:
+            alpha = self._bitmap_to_alpha(bitmap_glyph, metrics, bit_depth)
+            pixel_w = (x_max - x_min) / max(metrics.width, 1)
+            pixel_h = (y_max - y_min) / max(metrics.height, 1)
+            path_cmds: list[str] = []
+            for row_index in range(metrics.height):
+                row_start = row_index * metrics.width
+                row = alpha[row_start : row_start + metrics.width]
+                col = 0
+                while col &lt; metrics.width:
+                    if row[col] == 0:
+                        col += 1
+                        continue
+                    start = col
+                    while col &lt; metrics.width and row[col] != 0:
+                        col += 1
+                    run_len = col - start
+                    x = (x_min + start * pixel_w) * self.scale
+                    y = (
+                        y_min + (metrics.height - row_index - 1) * pixel_h
+                    ) * self.scale
+                    w_run = (run_len * pixel_w) * self.scale
+                    h_run = pixel_h * self.scale
+                    path_cmds.append(f&#34;{x:.3f} {y:.3f} {w_run:.3f} {h_run:.3f} re&#34;)
+            if path_cmds:
+                glyph.glyph = (
+                    f&#34;{round(w * self.scale)} 0 d0\n&#34;
+                    &#34;q\n&#34;
+                    f&#34;{&#39; &#39;.join(path_cmds)} f\n&#34;
+                    &#34;Q&#34;
+                )
+            else:
+                glyph.glyph = f&#34;{round(w * self.scale)} 0 d0&#34;
+            glyph.glyph_width = w
+            return
+
+        alpha = self._bitmap_to_alpha(bitmap_glyph, metrics, bit_depth)
+        alpha_image = Image.frombytes(&#34;L&#34;, (metrics.width, metrics.height), alpha)
+        bio = BytesIO()
+        alpha_image.save(bio, format=&#34;PNG&#34;)
+        bio.seek(0)
+        _, _, info = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+
+        mask_matrix = Transform(
+            a=(x_max - x_min) * self.scale,
+            b=0,
+            c=0,
+            d=(y_max - y_min) * self.scale,
+            e=x_min * self.scale,
+            f=y_min * self.scale,
+        )
+        bbox = (
+            x_min * self.scale,
+            y_min * self.scale,
+            x_max * self.scale,
+            y_max * self.scale,
+        )
+        soft_mask = ImageSoftMask(cast(int, info[&#34;i&#34;]), bbox, mask_matrix)
+
+        soft_mask.object_id = self.fpdf._resource_catalog.register_soft_mask(  # pylint: disable=protected-access
+            soft_mask
+        )
+        style = GraphicsStyle()
+        style.soft_mask = soft_mask
+        gs_name = self.fpdf._resource_catalog.register_graphics_style(  # pylint: disable=protected-access
+            style
+        )
+        if gs_name is None:
+            raise RuntimeError(&#34;Failed to register soft mask graphics state.&#34;)
+        self.graphics_style_used.add(str(gs_name))
+
+        glyph.glyph = (
+            f&#34;{round(w * self.scale)} 0 d0\n&#34;
+            &#34;q\n&#34;
+            f&#34;/{gs_name} gs\n&#34;
+            f&#34;{x_min * self.scale} {y_min * self.scale} &#34;
+            f&#34;{(x_max - x_min) * self.scale} {(y_max - y_min) * self.scale} re f\n&#34;
+            &#34;Q&#34;
+        )
+        glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"><p>Support for EBLC+EBDT bitmap fonts.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.EBDTBitmapFont.glyph_exists"><code class="name flex">
+<span>def <span class="ident">glyph_exists</span></span>(<span>self, glyph_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1110-L1111" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def glyph_exists(self, glyph_name: str) -&gt; bool:
+    return self._find_glyph_strike_index(glyph_name) is not None</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.EBDTBitmapFont.load_glyph_image"><code class="name flex">
+<span>def <span class="ident">load_glyph_image</span></span>(<span>self,<br>glyph: <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1113-L1241" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+    if Image is None:
+        raise EnvironmentError(
+            f&#34;{glyph.glyph_name}: Pillow is required to render EBDT glyphs.&#34;
+        )
+
+    strike_index = self._find_glyph_strike_index(glyph.glyph_name)
+    if strike_index is None:
+        raise ValueError(f&#34;{glyph.glyph_name}: glyph not found in EBDT strikes.&#34;)
+
+    strike = self.base_font.ttfont[&#34;EBLC&#34;].strikes[strike_index]
+    bit_depth = strike.bitmapSizeTable.bitDepth
+    if bit_depth not in (1, 2, 4, 8):
+        raise NotImplementedError(
+            f&#34;{glyph.glyph_name}: unsupported EBDT bit depth {bit_depth}.&#34;
+        )
+
+    bitmap_glyph = self.base_font.ttfont[&#34;EBDT&#34;].strikeData[strike_index][
+        glyph.glyph_name
+    ]
+    metrics = self._get_glyph_metrics(strike_index, glyph.glyph_name, bitmap_glyph)
+    if metrics is None:
+        raise NotImplementedError(
+            f&#34;{glyph.glyph_name}: EBDT glyph metrics could not be resolved.&#34;
+        )
+    if not hasattr(bitmap_glyph, &#34;getRow&#34;):
+        raise NotImplementedError(
+            f&#34;{glyph.glyph_name}: unsupported EBDT glyph format ({type(bitmap_glyph).__name__}).&#34;
+        )
+
+    ppem_x = strike.bitmapSizeTable.ppemX or 1
+    ppem_y = strike.bitmapSizeTable.ppemY or ppem_x
+    if isinstance(metrics, SmallGlyphMetrics):
+        x_min = round(metrics.BearingX * self.upem / ppem_x)
+        y_min = round((metrics.BearingY - metrics.height) * self.upem / ppem_y)
+        x_max = round((metrics.BearingX + metrics.width) * self.upem / ppem_x)
+        y_max = round(metrics.BearingY * self.upem / ppem_y)
+    elif isinstance(metrics, BigGlyphMetrics):
+        x_min = round(metrics.horiBearingX * self.upem / ppem_x)
+        y_min = round((metrics.horiBearingY - metrics.height) * self.upem / ppem_y)
+        x_max = round((metrics.horiBearingX + metrics.width) * self.upem / ppem_x)
+        y_max = round(metrics.horiBearingY * self.upem / ppem_y)
+    else:  # fallback scenario: use font bounding box
+        x_min = self.base_font.ttfont[&#34;head&#34;].xMin
+        y_min = self.base_font.ttfont[&#34;head&#34;].yMin
+        x_max = self.base_font.ttfont[&#34;head&#34;].xMax
+        y_max = self.base_font.ttfont[&#34;head&#34;].yMax
+
+    w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+    if bit_depth == 1:
+        alpha = self._bitmap_to_alpha(bitmap_glyph, metrics, bit_depth)
+        pixel_w = (x_max - x_min) / max(metrics.width, 1)
+        pixel_h = (y_max - y_min) / max(metrics.height, 1)
+        path_cmds: list[str] = []
+        for row_index in range(metrics.height):
+            row_start = row_index * metrics.width
+            row = alpha[row_start : row_start + metrics.width]
+            col = 0
+            while col &lt; metrics.width:
+                if row[col] == 0:
+                    col += 1
+                    continue
+                start = col
+                while col &lt; metrics.width and row[col] != 0:
+                    col += 1
+                run_len = col - start
+                x = (x_min + start * pixel_w) * self.scale
+                y = (
+                    y_min + (metrics.height - row_index - 1) * pixel_h
+                ) * self.scale
+                w_run = (run_len * pixel_w) * self.scale
+                h_run = pixel_h * self.scale
+                path_cmds.append(f&#34;{x:.3f} {y:.3f} {w_run:.3f} {h_run:.3f} re&#34;)
+        if path_cmds:
+            glyph.glyph = (
+                f&#34;{round(w * self.scale)} 0 d0\n&#34;
+                &#34;q\n&#34;
+                f&#34;{&#39; &#39;.join(path_cmds)} f\n&#34;
+                &#34;Q&#34;
+            )
+        else:
+            glyph.glyph = f&#34;{round(w * self.scale)} 0 d0&#34;
+        glyph.glyph_width = w
+        return
+
+    alpha = self._bitmap_to_alpha(bitmap_glyph, metrics, bit_depth)
+    alpha_image = Image.frombytes(&#34;L&#34;, (metrics.width, metrics.height), alpha)
+    bio = BytesIO()
+    alpha_image.save(bio, format=&#34;PNG&#34;)
+    bio.seek(0)
+    _, _, info = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+
+    mask_matrix = Transform(
+        a=(x_max - x_min) * self.scale,
+        b=0,
+        c=0,
+        d=(y_max - y_min) * self.scale,
+        e=x_min * self.scale,
+        f=y_min * self.scale,
+    )
+    bbox = (
+        x_min * self.scale,
+        y_min * self.scale,
+        x_max * self.scale,
+        y_max * self.scale,
+    )
+    soft_mask = ImageSoftMask(cast(int, info[&#34;i&#34;]), bbox, mask_matrix)
+
+    soft_mask.object_id = self.fpdf._resource_catalog.register_soft_mask(  # pylint: disable=protected-access
+        soft_mask
+    )
+    style = GraphicsStyle()
+    style.soft_mask = soft_mask
+    gs_name = self.fpdf._resource_catalog.register_graphics_style(  # pylint: disable=protected-access
+        style
+    )
+    if gs_name is None:
+        raise RuntimeError(&#34;Failed to register soft mask graphics state.&#34;)
+    self.graphics_style_used.add(str(gs_name))
+
+    glyph.glyph = (
+        f&#34;{round(w * self.scale)} 0 d0\n&#34;
+        &#34;q\n&#34;
+        f&#34;/{gs_name} gs\n&#34;
+        f&#34;{x_min * self.scale} {y_min * self.scale} &#34;
+        f&#34;{(x_max - x_min) * self.scale} {(y_max - y_min) * self.scale} re f\n&#34;
+        &#34;Q&#34;
+    )
+    glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.SBIXColorFont"><code class="flex name class">
+<span>class <span class="ident">SBIXColorFont</span></span>
+<span>(</span><span>fpdf: FPDF, base_font: TTFFont)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1244-L1302" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SBIXColorFont(Type3Font):
+    &#34;&#34;&#34;Support for SBIX bitmap color fonts.&#34;&#34;&#34;
+
+    def glyph_exists(self, glyph_name: str) -&gt; bool:
+        glyph = (
+            self.base_font.ttfont[&#34;sbix&#34;]
+            .strikes[self.get_strike_index()]
+            .glyphs.get(glyph_name)
+        )
+        return glyph is not None and glyph.graphicType is not None
+
+    def get_strike_index(self) -&gt; int:
+        target_ppem = self.get_target_ppem(self.base_font.biggest_size_pt)
+        ppem_list: list[int] = [
+            ppem
+            for ppem in self.base_font.ttfont[&#34;sbix&#34;].strikes.keys()
+            if ppem &gt;= target_ppem
+        ]
+        if not ppem_list:
+            return max(list(self.base_font.ttfont[&#34;sbix&#34;].strikes.keys()))  # type: ignore[no-any-return]
+        return min(ppem_list)
+
+    def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+        ppem = self.get_strike_index()
+        sbix_glyph = (
+            self.base_font.ttfont[&#34;sbix&#34;].strikes[ppem].glyphs.get(glyph.glyph_name)
+        )
+        if sbix_glyph.graphicType == &#34;dupe&#34;:
+            raise NotImplementedError(
+                f&#34;{glyph.glyph_name}: Dupe SBIX graphic type not implemented.&#34;
+            )
+            # waiting for an example to test
+            # dupe_char = font.getBestCmap()[glyph.imageData]
+            # return self.get_color_glyph(dupe_char)
+
+        if sbix_glyph.graphicType not in (&#34;jpg &#34;, &#34;png &#34;, &#34;tiff&#34;):  # pdf or mask
+            raise NotImplementedError(
+                f&#34; {glyph.glyph_name}: Invalid SBIX graphic type {sbix_glyph.graphicType}.&#34;
+            )
+
+        bio = BytesIO(sbix_glyph.imageData)
+        bio.seek(0)
+        _, _, info = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+        w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+        glyf_metrics = self.base_font.ttfont[&#34;glyf&#34;].get(glyph.glyph_name)
+        assert glyf_metrics is not None
+        x_min = glyf_metrics.xMin + sbix_glyph.originOffsetX
+        x_max = glyf_metrics.xMax + sbix_glyph.originOffsetX
+        y_min = glyf_metrics.yMin + sbix_glyph.originOffsetY
+        y_max = glyf_metrics.yMax + sbix_glyph.originOffsetY
+
+        glyph.glyph = (
+            f&#34;{round(w * self.scale)} 0 d0\n&#34;
+            &#34;q\n&#34;
+            f&#34;{(x_max - x_min) * self.scale} 0 0 {(-y_min + y_max) * self.scale} {x_min * self.scale} {y_min * self.scale} cm\n&#34;
+            f&#34;/I{info[&#39;i&#39;]} Do\nQ&#34;
+        )
+        self.images_used.add(info[&#34;i&#34;])  # type: ignore[arg-type]
+        glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"><p>Support for SBIX bitmap color fonts.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.SBIXColorFont.get_strike_index"><code class="name flex">
+<span>def <span class="ident">get_strike_index</span></span>(<span>self) ‑> int</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1255-L1264" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_strike_index(self) -&gt; int:
+    target_ppem = self.get_target_ppem(self.base_font.biggest_size_pt)
+    ppem_list: list[int] = [
+        ppem
+        for ppem in self.base_font.ttfont[&#34;sbix&#34;].strikes.keys()
+        if ppem &gt;= target_ppem
+    ]
+    if not ppem_list:
+        return max(list(self.base_font.ttfont[&#34;sbix&#34;].strikes.keys()))  # type: ignore[no-any-return]
+    return min(ppem_list)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.SBIXColorFont.glyph_exists"><code class="name flex">
+<span>def <span class="ident">glyph_exists</span></span>(<span>self, glyph_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1247-L1253" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def glyph_exists(self, glyph_name: str) -&gt; bool:
+    glyph = (
+        self.base_font.ttfont[&#34;sbix&#34;]
+        .strikes[self.get_strike_index()]
+        .glyphs.get(glyph_name)
+    )
+    return glyph is not None and glyph.graphicType is not None</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.SBIXColorFont.load_glyph_image"><code class="name flex">
+<span>def <span class="ident">load_glyph_image</span></span>(<span>self,<br>glyph: <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L1266-L1302" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+    ppem = self.get_strike_index()
+    sbix_glyph = (
+        self.base_font.ttfont[&#34;sbix&#34;].strikes[ppem].glyphs.get(glyph.glyph_name)
+    )
+    if sbix_glyph.graphicType == &#34;dupe&#34;:
+        raise NotImplementedError(
+            f&#34;{glyph.glyph_name}: Dupe SBIX graphic type not implemented.&#34;
+        )
+        # waiting for an example to test
+        # dupe_char = font.getBestCmap()[glyph.imageData]
+        # return self.get_color_glyph(dupe_char)
+
+    if sbix_glyph.graphicType not in (&#34;jpg &#34;, &#34;png &#34;, &#34;tiff&#34;):  # pdf or mask
+        raise NotImplementedError(
+            f&#34; {glyph.glyph_name}: Invalid SBIX graphic type {sbix_glyph.graphicType}.&#34;
+        )
+
+    bio = BytesIO(sbix_glyph.imageData)
+    bio.seek(0)
+    _, _, info = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+    w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+    glyf_metrics = self.base_font.ttfont[&#34;glyf&#34;].get(glyph.glyph_name)
+    assert glyf_metrics is not None
+    x_min = glyf_metrics.xMin + sbix_glyph.originOffsetX
+    x_max = glyf_metrics.xMax + sbix_glyph.originOffsetX
+    y_min = glyf_metrics.yMin + sbix_glyph.originOffsetY
+    y_max = glyf_metrics.yMax + sbix_glyph.originOffsetY
+
+    glyph.glyph = (
+        f&#34;{round(w * self.scale)} 0 d0\n&#34;
+        &#34;q\n&#34;
+        f&#34;{(x_max - x_min) * self.scale} 0 0 {(-y_min + y_max) * self.scale} {x_min * self.scale} {y_min * self.scale} cm\n&#34;
+        f&#34;/I{info[&#39;i&#39;]} Do\nQ&#34;
+    )
+    self.images_used.add(info[&#34;i&#34;])  # type: ignore[arg-type]
+    glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.SVGColorFont"><code class="flex name class">
+<span>class <span class="ident">SVGColorFont</span></span>
+<span>(</span><span>fpdf: FPDF, base_font: TTFFont)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L223-L253" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class SVGColorFont(Type3Font):
+    &#34;&#34;&#34;Support for SVG OpenType vector color fonts.&#34;&#34;&#34;
+
+    def glyph_exists(self, glyph_name: str) -&gt; bool:
+        glyph_id = self.base_font.ttfont.getGlyphID(glyph_name)
+        return any(
+            svg_doc.startGlyphID &lt;= glyph_id &lt;= svg_doc.endGlyphID
+            for svg_doc in self.base_font.ttfont[&#34;SVG &#34;].docList
+        )
+
+    def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+        glyph_id = self.base_font.ttfont.getGlyphID(glyph.glyph_name)
+        glyph_svg_data = None
+        for svg_doc in self.base_font.ttfont[&#34;SVG &#34;].docList:
+            if svg_doc.startGlyphID &lt;= glyph_id &lt;= svg_doc.endGlyphID:
+                glyph_svg_data = svg_doc.data.encode(&#34;utf-8&#34;)
+                break
+        if not glyph_svg_data:
+            raise ValueError(
+                f&#34;Glyph {glyph.glyph_name} (ID: {glyph_id}) not found in SVG font.&#34;
+            )
+        bio = BytesIO(glyph_svg_data)
+        bio.seek(0)
+        _, img, _ = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+        if TYPE_CHECKING:
+            assert isinstance(img, SVGObject)
+        w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+        img.base_group.transform = Transform.scaling(self.scale, self.scale)
+        output_stream = self.fpdf.draw_vector_glyph(img.base_group, self)
+        glyph.glyph = f&#34;{round(w * self.scale)} 0 d0\n&#34; &#34;q\n&#34; f&#34;{output_stream}\n&#34; &#34;Q&#34;
+        glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"><p>Support for SVG OpenType vector color fonts.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.SVGColorFont.glyph_exists"><code class="name flex">
+<span>def <span class="ident">glyph_exists</span></span>(<span>self, glyph_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L226-L231" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def glyph_exists(self, glyph_name: str) -&gt; bool:
+    glyph_id = self.base_font.ttfont.getGlyphID(glyph_name)
+    return any(
+        svg_doc.startGlyphID &lt;= glyph_id &lt;= svg_doc.endGlyphID
+        for svg_doc in self.base_font.ttfont[&#34;SVG &#34;].docList
+    )</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.SVGColorFont.load_glyph_image"><code class="name flex">
+<span>def <span class="ident">load_glyph_image</span></span>(<span>self,<br>glyph: <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L233-L253" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+    glyph_id = self.base_font.ttfont.getGlyphID(glyph.glyph_name)
+    glyph_svg_data = None
+    for svg_doc in self.base_font.ttfont[&#34;SVG &#34;].docList:
+        if svg_doc.startGlyphID &lt;= glyph_id &lt;= svg_doc.endGlyphID:
+            glyph_svg_data = svg_doc.data.encode(&#34;utf-8&#34;)
+            break
+    if not glyph_svg_data:
+        raise ValueError(
+            f&#34;Glyph {glyph.glyph_name} (ID: {glyph_id}) not found in SVG font.&#34;
+        )
+    bio = BytesIO(glyph_svg_data)
+    bio.seek(0)
+    _, img, _ = self.fpdf.preload_glyph_image(glyph_image_bytes=bio)
+    if TYPE_CHECKING:
+        assert isinstance(img, SVGObject)
+    w = round(self.base_font.ttfont[&#34;hmtx&#34;].metrics[glyph.glyph_name][0] + 0.001)
+    img.base_group.transform = Transform.scaling(self.scale, self.scale)
+    output_stream = self.fpdf.draw_vector_glyph(img.base_group, self)
+    glyph.glyph = f&#34;{round(w * self.scale)} 0 d0\n&#34; &#34;q\n&#34; f&#34;{output_stream}\n&#34; &#34;Q&#34;
+    glyph.glyph_width = w</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.Type3Font"><code class="flex name class">
+<span>class <span class="ident">Type3Font</span></span>
+<span>(</span><span>fpdf: FPDF, base_font: TTFFont)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L124-L220" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3Font:
+
+    def __init__(self, fpdf: &#34;FPDF&#34;, base_font: &#34;TTFFont&#34;):
+        self.i: int = 1
+        self.type: str = &#34;type3&#34;
+        self.fpdf: &#34;FPDF&#34; = fpdf
+        self.base_font: &#34;TTFFont&#34; = base_font
+        self.upem: int = self.base_font.ttfont[&#34;head&#34;].unitsPerEm
+        self.scale: float = 1000 / self.upem  # pyright: ignore[reportUnknownMemberType]
+        self.images_used: set[int] = set()
+        self.graphics_style_used: set[str] = set()
+        self.patterns_used: set[str] = set()
+        self.glyphs: list[Type3FontGlyph] = []
+
+    def get_notdef_glyph(self, glyph_id: int) -&gt; Type3FontGlyph:
+        notdef = Type3FontGlyph()
+        notdef.glyph_id = glyph_id
+        notdef.unicode = glyph_id
+        notdef.glyph_name = &#34;.notdef&#34;
+        notdef.glyph_width = self.base_font.ttfont[&#34;hmtx&#34;].metrics[&#34;.notdef&#34;][0]
+        notdef.glyph = f&#34;{round(notdef.glyph_width * self.scale + 0.001)} 0 d0&#34;
+        return notdef
+
+    def get_space_glyph(self, glyph_id: int) -&gt; Type3FontGlyph:
+        space = Type3FontGlyph()
+        space.glyph_id = glyph_id
+        space.unicode = 0x20
+        space.glyph_name = &#34;space&#34;
+        w = (
+            self.base_font.ttfont[&#34;hmtx&#34;].metrics[&#34;space&#34;][0]
+            if &#34;space&#34; in self.base_font.ttfont[&#34;hmtx&#34;].metrics
+            else self.base_font.ttfont[&#34;hmtx&#34;].metrics[&#34;.notdef&#34;][0]
+        )
+        space.glyph_width = round(w + 0.001)
+        space.glyph = f&#34;{round(space.glyph_width * self.scale + 0.001)} 0 d0&#34;
+        return space
+
+    def load_glyphs(self) -&gt; None:
+        WHITES = {
+            0x0009,
+            0x000A,
+            0x000C,
+            0x000D,
+            0x0020,
+            0x00A0,
+            0x1680,
+            0x2000,
+            0x2001,
+            0x2002,
+            0x2003,
+            0x2004,
+            0x2005,
+            0x2006,
+            0x2007,
+            0x2008,
+            0x2009,
+            0x200A,
+            0x202F,
+            0x205F,
+            0x3000,
+        }
+        for glyph, char_id in self.base_font.subset.items():
+            if glyph is None:
+                continue
+            if glyph.unicode in WHITES or glyph.glyph_name in (&#34;space&#34;, &#34;uni00A0&#34;):
+                self.glyphs.append(self.get_space_glyph(char_id))
+                continue
+            if not self.glyph_exists(glyph.glyph_name):
+                if self.glyph_exists(&#34;.notdef&#34;):
+                    self.add_glyph(&#34;.notdef&#34;, char_id)
+                    continue
+                self.glyphs.append(self.get_notdef_glyph(char_id))
+                continue
+            self.add_glyph(glyph.glyph_name, char_id)
+
+    def add_glyph(self, glyph_name: str, char_id: int) -&gt; None:
+        g = Type3FontGlyph()
+        g.glyph_id = char_id
+        g.unicode = char_id
+        g.glyph_name = glyph_name
+        self.load_glyph_image(g)
+        self.glyphs.append(g)
+
+    @classmethod
+    def get_target_ppem(cls, font_size_pt: float) -&gt; float:
+        # Calculating the target ppem:
+        # https://learn.microsoft.com/en-us/typography/opentype/spec/ttch01#display-device-characteristics
+        # ppem = point_size * dpi / 72
+        # The default PDF dpi resolution is 72 dpi - and we have the 72 dpi hardcoded on our scale factor,
+        # so we can simplify the calculation.
+        return font_size_pt
+
+    def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+        raise NotImplementedError(&#34;Method must be implemented on child class&#34;)
+
+    def glyph_exists(self, glyph_name: str) -&gt; bool:
+        raise NotImplementedError(&#34;Method must be implemented on child class&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="fpdf.font_type_3.CBDTColorFont" href="#fpdf.font_type_3.CBDTColorFont">CBDTColorFont</a></li>
+<li><a title="fpdf.font_type_3.COLRFont" href="#fpdf.font_type_3.COLRFont">COLRFont</a></li>
+<li><a title="fpdf.font_type_3.EBDTBitmapFont" href="#fpdf.font_type_3.EBDTBitmapFont">EBDTBitmapFont</a></li>
+<li><a title="fpdf.font_type_3.SBIXColorFont" href="#fpdf.font_type_3.SBIXColorFont">SBIXColorFont</a></li>
+<li><a title="fpdf.font_type_3.SVGColorFont" href="#fpdf.font_type_3.SVGColorFont">SVGColorFont</a></li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.Type3Font.get_target_ppem"><code class="name flex">
+<span>def <span class="ident">get_target_ppem</span></span>(<span>font_size_pt: float) ‑> float</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.font_type_3.Type3Font.add_glyph"><code class="name flex">
+<span>def <span class="ident">add_glyph</span></span>(<span>self, glyph_name: str, char_id: int) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L199-L205" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def add_glyph(self, glyph_name: str, char_id: int) -&gt; None:
+    g = Type3FontGlyph()
+    g.glyph_id = char_id
+    g.unicode = char_id
+    g.glyph_name = glyph_name
+    self.load_glyph_image(g)
+    self.glyphs.append(g)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3Font.get_notdef_glyph"><code class="name flex">
+<span>def <span class="ident">get_notdef_glyph</span></span>(<span>self, glyph_id: int) ‑> <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L138-L145" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_notdef_glyph(self, glyph_id: int) -&gt; Type3FontGlyph:
+    notdef = Type3FontGlyph()
+    notdef.glyph_id = glyph_id
+    notdef.unicode = glyph_id
+    notdef.glyph_name = &#34;.notdef&#34;
+    notdef.glyph_width = self.base_font.ttfont[&#34;hmtx&#34;].metrics[&#34;.notdef&#34;][0]
+    notdef.glyph = f&#34;{round(notdef.glyph_width * self.scale + 0.001)} 0 d0&#34;
+    return notdef</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3Font.get_space_glyph"><code class="name flex">
+<span>def <span class="ident">get_space_glyph</span></span>(<span>self, glyph_id: int) ‑> <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L147-L159" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_space_glyph(self, glyph_id: int) -&gt; Type3FontGlyph:
+    space = Type3FontGlyph()
+    space.glyph_id = glyph_id
+    space.unicode = 0x20
+    space.glyph_name = &#34;space&#34;
+    w = (
+        self.base_font.ttfont[&#34;hmtx&#34;].metrics[&#34;space&#34;][0]
+        if &#34;space&#34; in self.base_font.ttfont[&#34;hmtx&#34;].metrics
+        else self.base_font.ttfont[&#34;hmtx&#34;].metrics[&#34;.notdef&#34;][0]
+    )
+    space.glyph_width = round(w + 0.001)
+    space.glyph = f&#34;{round(space.glyph_width * self.scale + 0.001)} 0 d0&#34;
+    return space</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3Font.glyph_exists"><code class="name flex">
+<span>def <span class="ident">glyph_exists</span></span>(<span>self, glyph_name: str) ‑> bool</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L219-L220" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def glyph_exists(self, glyph_name: str) -&gt; bool:
+    raise NotImplementedError(&#34;Method must be implemented on child class&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3Font.load_glyph_image"><code class="name flex">
+<span>def <span class="ident">load_glyph_image</span></span>(<span>self,<br>glyph: <a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a>) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L216-L217" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyph_image(self, glyph: Type3FontGlyph) -&gt; None:
+    raise NotImplementedError(&#34;Method must be implemented on child class&#34;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3Font.load_glyphs"><code class="name flex">
+<span>def <span class="ident">load_glyphs</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L161-L197" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def load_glyphs(self) -&gt; None:
+    WHITES = {
+        0x0009,
+        0x000A,
+        0x000C,
+        0x000D,
+        0x0020,
+        0x00A0,
+        0x1680,
+        0x2000,
+        0x2001,
+        0x2002,
+        0x2003,
+        0x2004,
+        0x2005,
+        0x2006,
+        0x2007,
+        0x2008,
+        0x2009,
+        0x200A,
+        0x202F,
+        0x205F,
+        0x3000,
+    }
+    for glyph, char_id in self.base_font.subset.items():
+        if glyph is None:
+            continue
+        if glyph.unicode in WHITES or glyph.glyph_name in (&#34;space&#34;, &#34;uni00A0&#34;):
+            self.glyphs.append(self.get_space_glyph(char_id))
+            continue
+        if not self.glyph_exists(glyph.glyph_name):
+            if self.glyph_exists(&#34;.notdef&#34;):
+                self.add_glyph(&#34;.notdef&#34;, char_id)
+                continue
+            self.glyphs.append(self.get_notdef_glyph(char_id))
+            continue
+        self.add_glyph(glyph.glyph_name, char_id)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.Type3FontGlyph"><code class="flex name class">
+<span>class <span class="ident">Type3FontGlyph</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.font_type_3.Type3FontGlyph.glyph"><code class="name">var <span class="ident">glyph</span> : str</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3FontGlyph.glyph_id"><code class="name">var <span class="ident">glyph_id</span> : int</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3FontGlyph.glyph_name"><code class="name">var <span class="ident">glyph_name</span> : str</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3FontGlyph.glyph_width"><code class="name">var <span class="ident">glyph_width</span> : int</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3FontGlyph.obj_id"><code class="name">var <span class="ident">obj_id</span> : int</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.font_type_3.Type3FontGlyph.unicode"><code class="name">var <span class="ident">unicode</span> : int</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L98-L121" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Type3FontGlyph:
+    # RAM usage optimization:
+    __slots__ = (
+        &#34;obj_id&#34;,
+        &#34;glyph_id&#34;,
+        &#34;unicode&#34;,
+        &#34;glyph_name&#34;,
+        &#34;glyph_width&#34;,
+        &#34;glyph&#34;,
+        &#34;_glyph_bounds&#34;,
+    )
+    obj_id: int
+    glyph_id: int
+    unicode: int
+    glyph_name: str
+    glyph_width: int
+    glyph: str
+    _glyph_bounds: tuple[int, int, int, int]
+
+    def __init__(self) -&gt; None:
+        pass
+
+    def __hash__(self) -&gt; int:
+        return self.glyph_id</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.font_type_3.VarTableWrapper"><code class="flex name class">
+<span>class <span class="ident">VarTableWrapper</span></span>
+<span>(</span><span>wrapped: Any,<br>instancer: fontTools.varLib.varStore.VarStoreInstancer,<br>var_index_map: Any = None,<br>format_override: int | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/font_type_3.py#L911-L975" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class VarTableWrapper:
+    def __init__(
+        self,
+        wrapped: Any,
+        instancer: VarStoreInstancer,
+        var_index_map: Any = None,
+        format_override: Optional[int] = None,
+    ) -&gt; None:
+        assert not isinstance(wrapped, VarTableWrapper)
+        self._wrapped = wrapped
+        self._instancer = instancer
+        self._var_index_map = var_index_map
+        self._format_override = format_override
+        self._var_attrs = {
+            attr: idx for idx, attr in enumerate(wrapped.getVariableAttrs())
+        }
+
+    def __repr__(self) -&gt; str:
+        return f&#34;VarTableWrapper({self._wrapped!r})&#34;
+
+    def _get_var_index_for_attr(self, attr_name: str) -&gt; Any:
+        offset = self._var_attrs.get(attr_name)
+        if offset is None:
+            return None
+        base_index = self._wrapped.VarIndexBase
+        if base_index == 0xFFFFFFFF:
+            return base_index
+        var_idx = base_index + offset
+        if self._var_index_map is not None:
+            try:
+                var_idx = self._var_index_map[var_idx]
+            except IndexError:
+                pass
+        return var_idx
+
+    def _get_delta_for_attr(self, attr_name: str, var_idx: Any) -&gt; Any:
+        delta = self._instancer[var_idx]
+        converter = self._wrapped.getConverterByName(attr_name)
+        if hasattr(converter, &#34;fromInt&#34;):
+            delta = converter.fromInt(delta)
+        return delta
+
+    def __getattr__(self, attr_name: str) -&gt; Any:
+        if attr_name == &#34;Format&#34; and self._format_override is not None:
+            return self._format_override
+
+        value = getattr(self._wrapped, attr_name)
+
+        var_idx = self._get_var_index_for_attr(attr_name)
+        if var_idx is not None:
+            if var_idx &lt; 0xFFFFFFFF:
+                value += self._get_delta_for_attr(attr_name, var_idx)
+        elif isinstance(value, (VarAffine2x3, VarColorLine)):
+            value = VarTableWrapper(value, self._instancer, self._var_index_map)
+        elif (
+            isinstance(value, (list, UserList))
+            and value
+            and isinstance(value[0], VarColorStop)
+        ):
+            value = [
+                VarTableWrapper(item, self._instancer, self._var_index_map)
+                for item in value
+            ]
+
+        return value</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fpdf" href="index.html">fpdf</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.get_color_font_object" href="#fpdf.font_type_3.get_color_font_object">get_color_font_object</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fpdf.font_type_3.CBDTColorFont" href="#fpdf.font_type_3.CBDTColorFont">CBDTColorFont</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.CBDTColorFont.glyph_exists" href="#fpdf.font_type_3.CBDTColorFont.glyph_exists">glyph_exists</a></code></li>
+<li><code><a title="fpdf.font_type_3.CBDTColorFont.load_glyph_image" href="#fpdf.font_type_3.CBDTColorFont.load_glyph_image">load_glyph_image</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.COLRFont" href="#fpdf.font_type_3.COLRFont">COLRFont</a></code></h4>
+<ul class="two-column">
+<li><code><a title="fpdf.font_type_3.COLRFont.draw_colrv1_paint" href="#fpdf.font_type_3.COLRFont.draw_colrv1_paint">draw_colrv1_paint</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.draw_glyph_colrv0" href="#fpdf.font_type_3.COLRFont.draw_glyph_colrv0">draw_glyph_colrv0</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.draw_glyph_colrv1" href="#fpdf.font_type_3.COLRFont.draw_glyph_colrv1">draw_glyph_colrv1</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.get_color" href="#fpdf.font_type_3.COLRFont.get_color">get_color</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.get_composite_mode" href="#fpdf.font_type_3.COLRFont.get_composite_mode">get_composite_mode</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.get_paint_surface" href="#fpdf.font_type_3.COLRFont.get_paint_surface">get_paint_surface</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.glyph_exists" href="#fpdf.font_type_3.COLRFont.glyph_exists">glyph_exists</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.load_glyph_image" href="#fpdf.font_type_3.COLRFont.load_glyph_image">load_glyph_image</a></code></li>
+<li><code><a title="fpdf.font_type_3.COLRFont.metric_bbox" href="#fpdf.font_type_3.COLRFont.metric_bbox">metric_bbox</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.ColrV0Layer" href="#fpdf.font_type_3.ColrV0Layer">ColrV0Layer</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.ColrV0Layer.colorID" href="#fpdf.font_type_3.ColrV0Layer.colorID">colorID</a></code></li>
+<li><code><a title="fpdf.font_type_3.ColrV0Layer.name" href="#fpdf.font_type_3.ColrV0Layer.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.ColrV1Paint" href="#fpdf.font_type_3.ColrV1Paint">ColrV1Paint</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.ColrV1Paint.Paint" href="#fpdf.font_type_3.ColrV1Paint.Paint">Paint</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.EBDTBitmapFont" href="#fpdf.font_type_3.EBDTBitmapFont">EBDTBitmapFont</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.EBDTBitmapFont.glyph_exists" href="#fpdf.font_type_3.EBDTBitmapFont.glyph_exists">glyph_exists</a></code></li>
+<li><code><a title="fpdf.font_type_3.EBDTBitmapFont.load_glyph_image" href="#fpdf.font_type_3.EBDTBitmapFont.load_glyph_image">load_glyph_image</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.SBIXColorFont" href="#fpdf.font_type_3.SBIXColorFont">SBIXColorFont</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.SBIXColorFont.get_strike_index" href="#fpdf.font_type_3.SBIXColorFont.get_strike_index">get_strike_index</a></code></li>
+<li><code><a title="fpdf.font_type_3.SBIXColorFont.glyph_exists" href="#fpdf.font_type_3.SBIXColorFont.glyph_exists">glyph_exists</a></code></li>
+<li><code><a title="fpdf.font_type_3.SBIXColorFont.load_glyph_image" href="#fpdf.font_type_3.SBIXColorFont.load_glyph_image">load_glyph_image</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.SVGColorFont" href="#fpdf.font_type_3.SVGColorFont">SVGColorFont</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.font_type_3.SVGColorFont.glyph_exists" href="#fpdf.font_type_3.SVGColorFont.glyph_exists">glyph_exists</a></code></li>
+<li><code><a title="fpdf.font_type_3.SVGColorFont.load_glyph_image" href="#fpdf.font_type_3.SVGColorFont.load_glyph_image">load_glyph_image</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.Type3Font" href="#fpdf.font_type_3.Type3Font">Type3Font</a></code></h4>
+<ul class="two-column">
+<li><code><a title="fpdf.font_type_3.Type3Font.add_glyph" href="#fpdf.font_type_3.Type3Font.add_glyph">add_glyph</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3Font.get_notdef_glyph" href="#fpdf.font_type_3.Type3Font.get_notdef_glyph">get_notdef_glyph</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3Font.get_space_glyph" href="#fpdf.font_type_3.Type3Font.get_space_glyph">get_space_glyph</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3Font.get_target_ppem" href="#fpdf.font_type_3.Type3Font.get_target_ppem">get_target_ppem</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3Font.glyph_exists" href="#fpdf.font_type_3.Type3Font.glyph_exists">glyph_exists</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3Font.load_glyph_image" href="#fpdf.font_type_3.Type3Font.load_glyph_image">load_glyph_image</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3Font.load_glyphs" href="#fpdf.font_type_3.Type3Font.load_glyphs">load_glyphs</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.Type3FontGlyph" href="#fpdf.font_type_3.Type3FontGlyph">Type3FontGlyph</a></code></h4>
+<ul class="two-column">
+<li><code><a title="fpdf.font_type_3.Type3FontGlyph.glyph" href="#fpdf.font_type_3.Type3FontGlyph.glyph">glyph</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3FontGlyph.glyph_id" href="#fpdf.font_type_3.Type3FontGlyph.glyph_id">glyph_id</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3FontGlyph.glyph_name" href="#fpdf.font_type_3.Type3FontGlyph.glyph_name">glyph_name</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3FontGlyph.glyph_width" href="#fpdf.font_type_3.Type3FontGlyph.glyph_width">glyph_width</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3FontGlyph.obj_id" href="#fpdf.font_type_3.Type3FontGlyph.obj_id">obj_id</a></code></li>
+<li><code><a title="fpdf.font_type_3.Type3FontGlyph.unicode" href="#fpdf.font_type_3.Type3FontGlyph.unicode">unicode</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.font_type_3.VarTableWrapper" href="#fpdf.font_type_3.VarTableWrapper">VarTableWrapper</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

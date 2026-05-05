@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>fpdf.unicode_script API documentation</title>
+<meta name="description" content="The hardcoded information on this module was loaded from the Unicode file Scripts-16.0.0.txt
+https://www.unicode.org/Public/UNIDATA/Scripts.txt
+…">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fpdf.unicode_script</code></h1>
+</header>
+<section id="section-intro">
+<p>The hardcoded information on this module was loaded from the Unicode file Scripts-16.0.0.txt
+<a href="https://www.unicode.org/Public/UNIDATA/Scripts.txt">https://www.unicode.org/Public/UNIDATA/Scripts.txt</a>
+Python's standard "unicodedata" library doesn't offer this table.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="fpdf.unicode_script.get_unicode_script"><code class="name flex">
+<span>def <span class="ident">get_unicode_script</span></span>(<span>char: str) ‑> <a title="fpdf.unicode_script.UnicodeScript" href="#fpdf.unicode_script.UnicodeScript">UnicodeScript</a></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/unicode_script.py#L1168-L1176" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@lru_cache(maxsize=None)
+def get_unicode_script(char: str) -&gt; UnicodeScript:
+    chr_search = ord(char)
+    for range_start, range_end, script_code in UNICODE_RANGE_TO_SCRIPT:
+        if range_start &lt;= chr_search &lt;= range_end:
+            return UnicodeScript(script_code)
+        if chr_search &lt; range_start:
+            break
+    return UnicodeScript(999)  # default to Unknown</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fpdf.unicode_script.UnicodeScript"><code class="flex name class">
+<span>class <span class="ident">UnicodeScript</span></span>
+<span>(</span><span>*values)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/unicode_script.py#L11-L182" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class UnicodeScript(IntEnum):
+    COMMON = 0
+    LATIN = 1
+    GREEK = 2
+    CYRILLIC = 3
+    ARMENIAN = 4
+    HEBREW = 5
+    ARABIC = 6
+    SYRIAC = 7
+    THAANA = 8
+    DEVANAGARI = 9
+    BENGALI = 10
+    GURMUKHI = 11
+    GUJARATI = 12
+    ORIYA = 13
+    TAMIL = 14
+    TELUGU = 15
+    KANNADA = 16
+    MALAYALAM = 17
+    SINHALA = 18
+    THAI = 19
+    LAO = 20
+    TIBETAN = 21
+    MYANMAR = 22
+    GEORGIAN = 23
+    HANGUL = 24
+    ETHIOPIC = 25
+    CHEROKEE = 26
+    CANADIAN_ABORIGINAL = 27
+    OGHAM = 28
+    RUNIC = 29
+    KHMER = 30
+    MONGOLIAN = 31
+    HIRAGANA = 32
+    KATAKANA = 33
+    BOPOMOFO = 34
+    HAN = 35
+    YI = 36
+    OLD_ITALIC = 37
+    GOTHIC = 38
+    DESERET = 39
+    INHERITED = 40
+    TAGALOG = 41
+    HANUNOO = 42
+    BUHID = 43
+    TAGBANWA = 44
+    LIMBU = 45
+    TAI_LE = 46
+    LINEAR_B = 47
+    UGARITIC = 48
+    SHAVIAN = 49
+    OSMANYA = 50
+    CYPRIOT = 51
+    BRAILLE = 52
+    BUGINESE = 53
+    COPTIC = 54
+    NEW_TAI_LUE = 55
+    GLAGOLITIC = 56
+    TIFINAGH = 57
+    SYLOTI_NAGRI = 58
+    OLD_PERSIAN = 59
+    KHAROSHTHI = 60
+    BALINESE = 61
+    CUNEIFORM = 62
+    PHOENICIAN = 63
+    PHAGS_PA = 64
+    NKO = 65
+    SUNDANESE = 66
+    LEPCHA = 67
+    OL_CHIKI = 68
+    VAI = 69
+    SAURASHTRA = 70
+    KAYAH_LI = 71
+    REJANG = 72
+    LYCIAN = 73
+    CARIAN = 74
+    LYDIAN = 75
+    CHAM = 76
+    TAI_THAM = 77
+    TAI_VIET = 78
+    AVESTAN = 79
+    EGYPTIAN_HIEROGLYPHS = 80
+    SAMARITAN = 81
+    LISU = 82
+    BAMUM = 83
+    JAVANESE = 84
+    MEETEI_MAYEK = 85
+    IMPERIAL_ARAMAIC = 86
+    OLD_SOUTH_ARABIAN = 87
+    INSCRIPTIONAL_PARTHIAN = 88
+    INSCRIPTIONAL_PAHLAVI = 89
+    OLD_TURKIC = 90
+    KAITHI = 91
+    BATAK = 92
+    BRAHMI = 93
+    MANDAIC = 94
+    CHAKMA = 95
+    MEROITIC_CURSIVE = 96
+    MEROITIC_HIEROGLYPHS = 97
+    MIAO = 98
+    SHARADA = 99
+    SORA_SOMPENG = 100
+    TAKRI = 101
+    CAUCASIAN_ALBANIAN = 102
+    BASSA_VAH = 103
+    DUPLOYAN = 104
+    ELBASAN = 105
+    GRANTHA = 106
+    PAHAWH_HMONG = 107
+    KHOJKI = 108
+    LINEAR_A = 109
+    MAHAJANI = 110
+    MANICHAEAN = 111
+    MENDE_KIKAKUI = 112
+    MODI = 113
+    MRO = 114
+    OLD_NORTH_ARABIAN = 115
+    NABATAEAN = 116
+    PALMYRENE = 117
+    PAU_CIN_HAU = 118
+    OLD_PERMIC = 119
+    PSALTER_PAHLAVI = 120
+    SIDDHAM = 121
+    KHUDAWADI = 122
+    TIRHUTA = 123
+    WARANG_CITI = 124
+    AHOM = 125
+    ANATOLIAN_HIEROGLYPHS = 126
+    HATRAN = 127
+    MULTANI = 128
+    OLD_HUNGARIAN = 129
+    SIGNWRITING = 130
+    ADLAM = 131
+    BHAIKSUKI = 132
+    MARCHEN = 133
+    NEWA = 134
+    OSAGE = 135
+    TANGUT = 136
+    MASARAM_GONDI = 137
+    NUSHU = 138
+    SOYOMBO = 139
+    ZANABAZAR_SQUARE = 140
+    DOGRA = 141
+    GUNJALA_GONDI = 142
+    MAKASAR = 143
+    MEDEFAIDRIN = 144
+    HANIFI_ROHINGYA = 145
+    SOGDIAN = 146
+    OLD_SOGDIAN = 147
+    ELYMAIC = 148
+    NANDINAGARI = 149
+    NYIAKENG_PUACHUE_HMONG = 150
+    WANCHO = 151
+    CHORASMIAN = 152
+    DIVES_AKURU = 153
+    KHITAN_SMALL_SCRIPT = 154
+    YEZIDI = 155
+    CYPRO_MINOAN = 156
+    OLD_UYGHUR = 157
+    TANGSA = 158
+    TOTO = 159
+    VITHKUQI = 160
+    KAWI = 161
+    NAG_MUNDARI = 162
+    GARAY = 163
+    GURUNG_KHEMA = 164
+    KIRAT_RAI = 165
+    OL_ONAL = 166
+    SUNUWAR = 167
+    TODHRI = 168
+    TULU_TIGALARI = 169
+    UNKNOWN = 999</code></pre>
+</details>
+<div class="desc"><p>Enum where members are also (and must be) ints</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.IntEnum</li>
+<li>builtins.int</li>
+<li>enum.ReprEnum</li>
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="fpdf.unicode_script.UnicodeScript.ADLAM"><code class="name">var <span class="ident">ADLAM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.AHOM"><code class="name">var <span class="ident">AHOM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ANATOLIAN_HIEROGLYPHS"><code class="name">var <span class="ident">ANATOLIAN_HIEROGLYPHS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ARABIC"><code class="name">var <span class="ident">ARABIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ARMENIAN"><code class="name">var <span class="ident">ARMENIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.AVESTAN"><code class="name">var <span class="ident">AVESTAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BALINESE"><code class="name">var <span class="ident">BALINESE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BAMUM"><code class="name">var <span class="ident">BAMUM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BASSA_VAH"><code class="name">var <span class="ident">BASSA_VAH</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BATAK"><code class="name">var <span class="ident">BATAK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BENGALI"><code class="name">var <span class="ident">BENGALI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BHAIKSUKI"><code class="name">var <span class="ident">BHAIKSUKI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BOPOMOFO"><code class="name">var <span class="ident">BOPOMOFO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BRAHMI"><code class="name">var <span class="ident">BRAHMI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BRAILLE"><code class="name">var <span class="ident">BRAILLE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BUGINESE"><code class="name">var <span class="ident">BUGINESE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.BUHID"><code class="name">var <span class="ident">BUHID</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CANADIAN_ABORIGINAL"><code class="name">var <span class="ident">CANADIAN_ABORIGINAL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CARIAN"><code class="name">var <span class="ident">CARIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CAUCASIAN_ALBANIAN"><code class="name">var <span class="ident">CAUCASIAN_ALBANIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CHAKMA"><code class="name">var <span class="ident">CHAKMA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CHAM"><code class="name">var <span class="ident">CHAM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CHEROKEE"><code class="name">var <span class="ident">CHEROKEE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CHORASMIAN"><code class="name">var <span class="ident">CHORASMIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.COMMON"><code class="name">var <span class="ident">COMMON</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.COPTIC"><code class="name">var <span class="ident">COPTIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CUNEIFORM"><code class="name">var <span class="ident">CUNEIFORM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CYPRIOT"><code class="name">var <span class="ident">CYPRIOT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CYPRO_MINOAN"><code class="name">var <span class="ident">CYPRO_MINOAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.CYRILLIC"><code class="name">var <span class="ident">CYRILLIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.DESERET"><code class="name">var <span class="ident">DESERET</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.DEVANAGARI"><code class="name">var <span class="ident">DEVANAGARI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.DIVES_AKURU"><code class="name">var <span class="ident">DIVES_AKURU</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.DOGRA"><code class="name">var <span class="ident">DOGRA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.DUPLOYAN"><code class="name">var <span class="ident">DUPLOYAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.EGYPTIAN_HIEROGLYPHS"><code class="name">var <span class="ident">EGYPTIAN_HIEROGLYPHS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ELBASAN"><code class="name">var <span class="ident">ELBASAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ELYMAIC"><code class="name">var <span class="ident">ELYMAIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ETHIOPIC"><code class="name">var <span class="ident">ETHIOPIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GARAY"><code class="name">var <span class="ident">GARAY</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GEORGIAN"><code class="name">var <span class="ident">GEORGIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GLAGOLITIC"><code class="name">var <span class="ident">GLAGOLITIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GOTHIC"><code class="name">var <span class="ident">GOTHIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GRANTHA"><code class="name">var <span class="ident">GRANTHA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GREEK"><code class="name">var <span class="ident">GREEK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GUJARATI"><code class="name">var <span class="ident">GUJARATI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GUNJALA_GONDI"><code class="name">var <span class="ident">GUNJALA_GONDI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GURMUKHI"><code class="name">var <span class="ident">GURMUKHI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.GURUNG_KHEMA"><code class="name">var <span class="ident">GURUNG_KHEMA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HAN"><code class="name">var <span class="ident">HAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HANGUL"><code class="name">var <span class="ident">HANGUL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HANIFI_ROHINGYA"><code class="name">var <span class="ident">HANIFI_ROHINGYA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HANUNOO"><code class="name">var <span class="ident">HANUNOO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HATRAN"><code class="name">var <span class="ident">HATRAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HEBREW"><code class="name">var <span class="ident">HEBREW</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.HIRAGANA"><code class="name">var <span class="ident">HIRAGANA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.IMPERIAL_ARAMAIC"><code class="name">var <span class="ident">IMPERIAL_ARAMAIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.INHERITED"><code class="name">var <span class="ident">INHERITED</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.INSCRIPTIONAL_PAHLAVI"><code class="name">var <span class="ident">INSCRIPTIONAL_PAHLAVI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.INSCRIPTIONAL_PARTHIAN"><code class="name">var <span class="ident">INSCRIPTIONAL_PARTHIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.JAVANESE"><code class="name">var <span class="ident">JAVANESE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KAITHI"><code class="name">var <span class="ident">KAITHI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KANNADA"><code class="name">var <span class="ident">KANNADA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KATAKANA"><code class="name">var <span class="ident">KATAKANA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KAWI"><code class="name">var <span class="ident">KAWI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KAYAH_LI"><code class="name">var <span class="ident">KAYAH_LI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KHAROSHTHI"><code class="name">var <span class="ident">KHAROSHTHI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KHITAN_SMALL_SCRIPT"><code class="name">var <span class="ident">KHITAN_SMALL_SCRIPT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KHMER"><code class="name">var <span class="ident">KHMER</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KHOJKI"><code class="name">var <span class="ident">KHOJKI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KHUDAWADI"><code class="name">var <span class="ident">KHUDAWADI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.KIRAT_RAI"><code class="name">var <span class="ident">KIRAT_RAI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LAO"><code class="name">var <span class="ident">LAO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LATIN"><code class="name">var <span class="ident">LATIN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LEPCHA"><code class="name">var <span class="ident">LEPCHA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LIMBU"><code class="name">var <span class="ident">LIMBU</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LINEAR_A"><code class="name">var <span class="ident">LINEAR_A</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LINEAR_B"><code class="name">var <span class="ident">LINEAR_B</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LISU"><code class="name">var <span class="ident">LISU</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LYCIAN"><code class="name">var <span class="ident">LYCIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.LYDIAN"><code class="name">var <span class="ident">LYDIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MAHAJANI"><code class="name">var <span class="ident">MAHAJANI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MAKASAR"><code class="name">var <span class="ident">MAKASAR</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MALAYALAM"><code class="name">var <span class="ident">MALAYALAM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MANDAIC"><code class="name">var <span class="ident">MANDAIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MANICHAEAN"><code class="name">var <span class="ident">MANICHAEAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MARCHEN"><code class="name">var <span class="ident">MARCHEN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MASARAM_GONDI"><code class="name">var <span class="ident">MASARAM_GONDI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MEDEFAIDRIN"><code class="name">var <span class="ident">MEDEFAIDRIN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MEETEI_MAYEK"><code class="name">var <span class="ident">MEETEI_MAYEK</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MENDE_KIKAKUI"><code class="name">var <span class="ident">MENDE_KIKAKUI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MEROITIC_CURSIVE"><code class="name">var <span class="ident">MEROITIC_CURSIVE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MEROITIC_HIEROGLYPHS"><code class="name">var <span class="ident">MEROITIC_HIEROGLYPHS</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MIAO"><code class="name">var <span class="ident">MIAO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MODI"><code class="name">var <span class="ident">MODI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MONGOLIAN"><code class="name">var <span class="ident">MONGOLIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MRO"><code class="name">var <span class="ident">MRO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MULTANI"><code class="name">var <span class="ident">MULTANI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.MYANMAR"><code class="name">var <span class="ident">MYANMAR</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NABATAEAN"><code class="name">var <span class="ident">NABATAEAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NAG_MUNDARI"><code class="name">var <span class="ident">NAG_MUNDARI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NANDINAGARI"><code class="name">var <span class="ident">NANDINAGARI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NEWA"><code class="name">var <span class="ident">NEWA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NEW_TAI_LUE"><code class="name">var <span class="ident">NEW_TAI_LUE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NKO"><code class="name">var <span class="ident">NKO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NUSHU"><code class="name">var <span class="ident">NUSHU</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.NYIAKENG_PUACHUE_HMONG"><code class="name">var <span class="ident">NYIAKENG_PUACHUE_HMONG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OGHAM"><code class="name">var <span class="ident">OGHAM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_HUNGARIAN"><code class="name">var <span class="ident">OLD_HUNGARIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_ITALIC"><code class="name">var <span class="ident">OLD_ITALIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_NORTH_ARABIAN"><code class="name">var <span class="ident">OLD_NORTH_ARABIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_PERMIC"><code class="name">var <span class="ident">OLD_PERMIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_PERSIAN"><code class="name">var <span class="ident">OLD_PERSIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_SOGDIAN"><code class="name">var <span class="ident">OLD_SOGDIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_SOUTH_ARABIAN"><code class="name">var <span class="ident">OLD_SOUTH_ARABIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_TURKIC"><code class="name">var <span class="ident">OLD_TURKIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OLD_UYGHUR"><code class="name">var <span class="ident">OLD_UYGHUR</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OL_CHIKI"><code class="name">var <span class="ident">OL_CHIKI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OL_ONAL"><code class="name">var <span class="ident">OL_ONAL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ORIYA"><code class="name">var <span class="ident">ORIYA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OSAGE"><code class="name">var <span class="ident">OSAGE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.OSMANYA"><code class="name">var <span class="ident">OSMANYA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.PAHAWH_HMONG"><code class="name">var <span class="ident">PAHAWH_HMONG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.PALMYRENE"><code class="name">var <span class="ident">PALMYRENE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.PAU_CIN_HAU"><code class="name">var <span class="ident">PAU_CIN_HAU</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.PHAGS_PA"><code class="name">var <span class="ident">PHAGS_PA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.PHOENICIAN"><code class="name">var <span class="ident">PHOENICIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.PSALTER_PAHLAVI"><code class="name">var <span class="ident">PSALTER_PAHLAVI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.REJANG"><code class="name">var <span class="ident">REJANG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.RUNIC"><code class="name">var <span class="ident">RUNIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SAMARITAN"><code class="name">var <span class="ident">SAMARITAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SAURASHTRA"><code class="name">var <span class="ident">SAURASHTRA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SHARADA"><code class="name">var <span class="ident">SHARADA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SHAVIAN"><code class="name">var <span class="ident">SHAVIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SIDDHAM"><code class="name">var <span class="ident">SIDDHAM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SIGNWRITING"><code class="name">var <span class="ident">SIGNWRITING</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SINHALA"><code class="name">var <span class="ident">SINHALA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SOGDIAN"><code class="name">var <span class="ident">SOGDIAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SORA_SOMPENG"><code class="name">var <span class="ident">SORA_SOMPENG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SOYOMBO"><code class="name">var <span class="ident">SOYOMBO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SUNDANESE"><code class="name">var <span class="ident">SUNDANESE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SUNUWAR"><code class="name">var <span class="ident">SUNUWAR</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SYLOTI_NAGRI"><code class="name">var <span class="ident">SYLOTI_NAGRI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.SYRIAC"><code class="name">var <span class="ident">SYRIAC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAGALOG"><code class="name">var <span class="ident">TAGALOG</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAGBANWA"><code class="name">var <span class="ident">TAGBANWA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAI_LE"><code class="name">var <span class="ident">TAI_LE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAI_THAM"><code class="name">var <span class="ident">TAI_THAM</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAI_VIET"><code class="name">var <span class="ident">TAI_VIET</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAKRI"><code class="name">var <span class="ident">TAKRI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TAMIL"><code class="name">var <span class="ident">TAMIL</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TANGSA"><code class="name">var <span class="ident">TANGSA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TANGUT"><code class="name">var <span class="ident">TANGUT</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TELUGU"><code class="name">var <span class="ident">TELUGU</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.THAANA"><code class="name">var <span class="ident">THAANA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.THAI"><code class="name">var <span class="ident">THAI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TIBETAN"><code class="name">var <span class="ident">TIBETAN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TIFINAGH"><code class="name">var <span class="ident">TIFINAGH</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TIRHUTA"><code class="name">var <span class="ident">TIRHUTA</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TODHRI"><code class="name">var <span class="ident">TODHRI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TOTO"><code class="name">var <span class="ident">TOTO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.TULU_TIGALARI"><code class="name">var <span class="ident">TULU_TIGALARI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.UGARITIC"><code class="name">var <span class="ident">UGARITIC</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.UNKNOWN"><code class="name">var <span class="ident">UNKNOWN</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.VAI"><code class="name">var <span class="ident">VAI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.VITHKUQI"><code class="name">var <span class="ident">VITHKUQI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.WANCHO"><code class="name">var <span class="ident">WANCHO</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.WARANG_CITI"><code class="name">var <span class="ident">WARANG_CITI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.YEZIDI"><code class="name">var <span class="ident">YEZIDI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.YI"><code class="name">var <span class="ident">YI</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="fpdf.unicode_script.UnicodeScript.ZANABAZAR_SQUARE"><code class="name">var <span class="ident">ZANABAZAR_SQUARE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fpdf" href="index.html">fpdf</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="fpdf.unicode_script.get_unicode_script" href="#fpdf.unicode_script.get_unicode_script">get_unicode_script</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fpdf.unicode_script.UnicodeScript" href="#fpdf.unicode_script.UnicodeScript">UnicodeScript</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ADLAM" href="#fpdf.unicode_script.UnicodeScript.ADLAM">ADLAM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.AHOM" href="#fpdf.unicode_script.UnicodeScript.AHOM">AHOM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ANATOLIAN_HIEROGLYPHS" href="#fpdf.unicode_script.UnicodeScript.ANATOLIAN_HIEROGLYPHS">ANATOLIAN_HIEROGLYPHS</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ARABIC" href="#fpdf.unicode_script.UnicodeScript.ARABIC">ARABIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ARMENIAN" href="#fpdf.unicode_script.UnicodeScript.ARMENIAN">ARMENIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.AVESTAN" href="#fpdf.unicode_script.UnicodeScript.AVESTAN">AVESTAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BALINESE" href="#fpdf.unicode_script.UnicodeScript.BALINESE">BALINESE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BAMUM" href="#fpdf.unicode_script.UnicodeScript.BAMUM">BAMUM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BASSA_VAH" href="#fpdf.unicode_script.UnicodeScript.BASSA_VAH">BASSA_VAH</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BATAK" href="#fpdf.unicode_script.UnicodeScript.BATAK">BATAK</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BENGALI" href="#fpdf.unicode_script.UnicodeScript.BENGALI">BENGALI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BHAIKSUKI" href="#fpdf.unicode_script.UnicodeScript.BHAIKSUKI">BHAIKSUKI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BOPOMOFO" href="#fpdf.unicode_script.UnicodeScript.BOPOMOFO">BOPOMOFO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BRAHMI" href="#fpdf.unicode_script.UnicodeScript.BRAHMI">BRAHMI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BRAILLE" href="#fpdf.unicode_script.UnicodeScript.BRAILLE">BRAILLE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BUGINESE" href="#fpdf.unicode_script.UnicodeScript.BUGINESE">BUGINESE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.BUHID" href="#fpdf.unicode_script.UnicodeScript.BUHID">BUHID</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CANADIAN_ABORIGINAL" href="#fpdf.unicode_script.UnicodeScript.CANADIAN_ABORIGINAL">CANADIAN_ABORIGINAL</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CARIAN" href="#fpdf.unicode_script.UnicodeScript.CARIAN">CARIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CAUCASIAN_ALBANIAN" href="#fpdf.unicode_script.UnicodeScript.CAUCASIAN_ALBANIAN">CAUCASIAN_ALBANIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CHAKMA" href="#fpdf.unicode_script.UnicodeScript.CHAKMA">CHAKMA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CHAM" href="#fpdf.unicode_script.UnicodeScript.CHAM">CHAM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CHEROKEE" href="#fpdf.unicode_script.UnicodeScript.CHEROKEE">CHEROKEE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CHORASMIAN" href="#fpdf.unicode_script.UnicodeScript.CHORASMIAN">CHORASMIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.COMMON" href="#fpdf.unicode_script.UnicodeScript.COMMON">COMMON</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.COPTIC" href="#fpdf.unicode_script.UnicodeScript.COPTIC">COPTIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CUNEIFORM" href="#fpdf.unicode_script.UnicodeScript.CUNEIFORM">CUNEIFORM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CYPRIOT" href="#fpdf.unicode_script.UnicodeScript.CYPRIOT">CYPRIOT</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CYPRO_MINOAN" href="#fpdf.unicode_script.UnicodeScript.CYPRO_MINOAN">CYPRO_MINOAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.CYRILLIC" href="#fpdf.unicode_script.UnicodeScript.CYRILLIC">CYRILLIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.DESERET" href="#fpdf.unicode_script.UnicodeScript.DESERET">DESERET</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.DEVANAGARI" href="#fpdf.unicode_script.UnicodeScript.DEVANAGARI">DEVANAGARI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.DIVES_AKURU" href="#fpdf.unicode_script.UnicodeScript.DIVES_AKURU">DIVES_AKURU</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.DOGRA" href="#fpdf.unicode_script.UnicodeScript.DOGRA">DOGRA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.DUPLOYAN" href="#fpdf.unicode_script.UnicodeScript.DUPLOYAN">DUPLOYAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.EGYPTIAN_HIEROGLYPHS" href="#fpdf.unicode_script.UnicodeScript.EGYPTIAN_HIEROGLYPHS">EGYPTIAN_HIEROGLYPHS</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ELBASAN" href="#fpdf.unicode_script.UnicodeScript.ELBASAN">ELBASAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ELYMAIC" href="#fpdf.unicode_script.UnicodeScript.ELYMAIC">ELYMAIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ETHIOPIC" href="#fpdf.unicode_script.UnicodeScript.ETHIOPIC">ETHIOPIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GARAY" href="#fpdf.unicode_script.UnicodeScript.GARAY">GARAY</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GEORGIAN" href="#fpdf.unicode_script.UnicodeScript.GEORGIAN">GEORGIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GLAGOLITIC" href="#fpdf.unicode_script.UnicodeScript.GLAGOLITIC">GLAGOLITIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GOTHIC" href="#fpdf.unicode_script.UnicodeScript.GOTHIC">GOTHIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GRANTHA" href="#fpdf.unicode_script.UnicodeScript.GRANTHA">GRANTHA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GREEK" href="#fpdf.unicode_script.UnicodeScript.GREEK">GREEK</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GUJARATI" href="#fpdf.unicode_script.UnicodeScript.GUJARATI">GUJARATI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GUNJALA_GONDI" href="#fpdf.unicode_script.UnicodeScript.GUNJALA_GONDI">GUNJALA_GONDI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GURMUKHI" href="#fpdf.unicode_script.UnicodeScript.GURMUKHI">GURMUKHI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.GURUNG_KHEMA" href="#fpdf.unicode_script.UnicodeScript.GURUNG_KHEMA">GURUNG_KHEMA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HAN" href="#fpdf.unicode_script.UnicodeScript.HAN">HAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HANGUL" href="#fpdf.unicode_script.UnicodeScript.HANGUL">HANGUL</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HANIFI_ROHINGYA" href="#fpdf.unicode_script.UnicodeScript.HANIFI_ROHINGYA">HANIFI_ROHINGYA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HANUNOO" href="#fpdf.unicode_script.UnicodeScript.HANUNOO">HANUNOO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HATRAN" href="#fpdf.unicode_script.UnicodeScript.HATRAN">HATRAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HEBREW" href="#fpdf.unicode_script.UnicodeScript.HEBREW">HEBREW</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.HIRAGANA" href="#fpdf.unicode_script.UnicodeScript.HIRAGANA">HIRAGANA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.IMPERIAL_ARAMAIC" href="#fpdf.unicode_script.UnicodeScript.IMPERIAL_ARAMAIC">IMPERIAL_ARAMAIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.INHERITED" href="#fpdf.unicode_script.UnicodeScript.INHERITED">INHERITED</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.INSCRIPTIONAL_PAHLAVI" href="#fpdf.unicode_script.UnicodeScript.INSCRIPTIONAL_PAHLAVI">INSCRIPTIONAL_PAHLAVI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.INSCRIPTIONAL_PARTHIAN" href="#fpdf.unicode_script.UnicodeScript.INSCRIPTIONAL_PARTHIAN">INSCRIPTIONAL_PARTHIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.JAVANESE" href="#fpdf.unicode_script.UnicodeScript.JAVANESE">JAVANESE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KAITHI" href="#fpdf.unicode_script.UnicodeScript.KAITHI">KAITHI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KANNADA" href="#fpdf.unicode_script.UnicodeScript.KANNADA">KANNADA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KATAKANA" href="#fpdf.unicode_script.UnicodeScript.KATAKANA">KATAKANA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KAWI" href="#fpdf.unicode_script.UnicodeScript.KAWI">KAWI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KAYAH_LI" href="#fpdf.unicode_script.UnicodeScript.KAYAH_LI">KAYAH_LI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KHAROSHTHI" href="#fpdf.unicode_script.UnicodeScript.KHAROSHTHI">KHAROSHTHI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KHITAN_SMALL_SCRIPT" href="#fpdf.unicode_script.UnicodeScript.KHITAN_SMALL_SCRIPT">KHITAN_SMALL_SCRIPT</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KHMER" href="#fpdf.unicode_script.UnicodeScript.KHMER">KHMER</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KHOJKI" href="#fpdf.unicode_script.UnicodeScript.KHOJKI">KHOJKI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KHUDAWADI" href="#fpdf.unicode_script.UnicodeScript.KHUDAWADI">KHUDAWADI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.KIRAT_RAI" href="#fpdf.unicode_script.UnicodeScript.KIRAT_RAI">KIRAT_RAI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LAO" href="#fpdf.unicode_script.UnicodeScript.LAO">LAO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LATIN" href="#fpdf.unicode_script.UnicodeScript.LATIN">LATIN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LEPCHA" href="#fpdf.unicode_script.UnicodeScript.LEPCHA">LEPCHA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LIMBU" href="#fpdf.unicode_script.UnicodeScript.LIMBU">LIMBU</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LINEAR_A" href="#fpdf.unicode_script.UnicodeScript.LINEAR_A">LINEAR_A</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LINEAR_B" href="#fpdf.unicode_script.UnicodeScript.LINEAR_B">LINEAR_B</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LISU" href="#fpdf.unicode_script.UnicodeScript.LISU">LISU</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LYCIAN" href="#fpdf.unicode_script.UnicodeScript.LYCIAN">LYCIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.LYDIAN" href="#fpdf.unicode_script.UnicodeScript.LYDIAN">LYDIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MAHAJANI" href="#fpdf.unicode_script.UnicodeScript.MAHAJANI">MAHAJANI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MAKASAR" href="#fpdf.unicode_script.UnicodeScript.MAKASAR">MAKASAR</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MALAYALAM" href="#fpdf.unicode_script.UnicodeScript.MALAYALAM">MALAYALAM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MANDAIC" href="#fpdf.unicode_script.UnicodeScript.MANDAIC">MANDAIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MANICHAEAN" href="#fpdf.unicode_script.UnicodeScript.MANICHAEAN">MANICHAEAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MARCHEN" href="#fpdf.unicode_script.UnicodeScript.MARCHEN">MARCHEN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MASARAM_GONDI" href="#fpdf.unicode_script.UnicodeScript.MASARAM_GONDI">MASARAM_GONDI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MEDEFAIDRIN" href="#fpdf.unicode_script.UnicodeScript.MEDEFAIDRIN">MEDEFAIDRIN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MEETEI_MAYEK" href="#fpdf.unicode_script.UnicodeScript.MEETEI_MAYEK">MEETEI_MAYEK</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MENDE_KIKAKUI" href="#fpdf.unicode_script.UnicodeScript.MENDE_KIKAKUI">MENDE_KIKAKUI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MEROITIC_CURSIVE" href="#fpdf.unicode_script.UnicodeScript.MEROITIC_CURSIVE">MEROITIC_CURSIVE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MEROITIC_HIEROGLYPHS" href="#fpdf.unicode_script.UnicodeScript.MEROITIC_HIEROGLYPHS">MEROITIC_HIEROGLYPHS</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MIAO" href="#fpdf.unicode_script.UnicodeScript.MIAO">MIAO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MODI" href="#fpdf.unicode_script.UnicodeScript.MODI">MODI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MONGOLIAN" href="#fpdf.unicode_script.UnicodeScript.MONGOLIAN">MONGOLIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MRO" href="#fpdf.unicode_script.UnicodeScript.MRO">MRO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MULTANI" href="#fpdf.unicode_script.UnicodeScript.MULTANI">MULTANI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.MYANMAR" href="#fpdf.unicode_script.UnicodeScript.MYANMAR">MYANMAR</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NABATAEAN" href="#fpdf.unicode_script.UnicodeScript.NABATAEAN">NABATAEAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NAG_MUNDARI" href="#fpdf.unicode_script.UnicodeScript.NAG_MUNDARI">NAG_MUNDARI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NANDINAGARI" href="#fpdf.unicode_script.UnicodeScript.NANDINAGARI">NANDINAGARI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NEWA" href="#fpdf.unicode_script.UnicodeScript.NEWA">NEWA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NEW_TAI_LUE" href="#fpdf.unicode_script.UnicodeScript.NEW_TAI_LUE">NEW_TAI_LUE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NKO" href="#fpdf.unicode_script.UnicodeScript.NKO">NKO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NUSHU" href="#fpdf.unicode_script.UnicodeScript.NUSHU">NUSHU</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.NYIAKENG_PUACHUE_HMONG" href="#fpdf.unicode_script.UnicodeScript.NYIAKENG_PUACHUE_HMONG">NYIAKENG_PUACHUE_HMONG</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OGHAM" href="#fpdf.unicode_script.UnicodeScript.OGHAM">OGHAM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_HUNGARIAN" href="#fpdf.unicode_script.UnicodeScript.OLD_HUNGARIAN">OLD_HUNGARIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_ITALIC" href="#fpdf.unicode_script.UnicodeScript.OLD_ITALIC">OLD_ITALIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_NORTH_ARABIAN" href="#fpdf.unicode_script.UnicodeScript.OLD_NORTH_ARABIAN">OLD_NORTH_ARABIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_PERMIC" href="#fpdf.unicode_script.UnicodeScript.OLD_PERMIC">OLD_PERMIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_PERSIAN" href="#fpdf.unicode_script.UnicodeScript.OLD_PERSIAN">OLD_PERSIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_SOGDIAN" href="#fpdf.unicode_script.UnicodeScript.OLD_SOGDIAN">OLD_SOGDIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_SOUTH_ARABIAN" href="#fpdf.unicode_script.UnicodeScript.OLD_SOUTH_ARABIAN">OLD_SOUTH_ARABIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_TURKIC" href="#fpdf.unicode_script.UnicodeScript.OLD_TURKIC">OLD_TURKIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OLD_UYGHUR" href="#fpdf.unicode_script.UnicodeScript.OLD_UYGHUR">OLD_UYGHUR</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OL_CHIKI" href="#fpdf.unicode_script.UnicodeScript.OL_CHIKI">OL_CHIKI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OL_ONAL" href="#fpdf.unicode_script.UnicodeScript.OL_ONAL">OL_ONAL</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ORIYA" href="#fpdf.unicode_script.UnicodeScript.ORIYA">ORIYA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OSAGE" href="#fpdf.unicode_script.UnicodeScript.OSAGE">OSAGE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.OSMANYA" href="#fpdf.unicode_script.UnicodeScript.OSMANYA">OSMANYA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.PAHAWH_HMONG" href="#fpdf.unicode_script.UnicodeScript.PAHAWH_HMONG">PAHAWH_HMONG</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.PALMYRENE" href="#fpdf.unicode_script.UnicodeScript.PALMYRENE">PALMYRENE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.PAU_CIN_HAU" href="#fpdf.unicode_script.UnicodeScript.PAU_CIN_HAU">PAU_CIN_HAU</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.PHAGS_PA" href="#fpdf.unicode_script.UnicodeScript.PHAGS_PA">PHAGS_PA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.PHOENICIAN" href="#fpdf.unicode_script.UnicodeScript.PHOENICIAN">PHOENICIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.PSALTER_PAHLAVI" href="#fpdf.unicode_script.UnicodeScript.PSALTER_PAHLAVI">PSALTER_PAHLAVI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.REJANG" href="#fpdf.unicode_script.UnicodeScript.REJANG">REJANG</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.RUNIC" href="#fpdf.unicode_script.UnicodeScript.RUNIC">RUNIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SAMARITAN" href="#fpdf.unicode_script.UnicodeScript.SAMARITAN">SAMARITAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SAURASHTRA" href="#fpdf.unicode_script.UnicodeScript.SAURASHTRA">SAURASHTRA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SHARADA" href="#fpdf.unicode_script.UnicodeScript.SHARADA">SHARADA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SHAVIAN" href="#fpdf.unicode_script.UnicodeScript.SHAVIAN">SHAVIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SIDDHAM" href="#fpdf.unicode_script.UnicodeScript.SIDDHAM">SIDDHAM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SIGNWRITING" href="#fpdf.unicode_script.UnicodeScript.SIGNWRITING">SIGNWRITING</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SINHALA" href="#fpdf.unicode_script.UnicodeScript.SINHALA">SINHALA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SOGDIAN" href="#fpdf.unicode_script.UnicodeScript.SOGDIAN">SOGDIAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SORA_SOMPENG" href="#fpdf.unicode_script.UnicodeScript.SORA_SOMPENG">SORA_SOMPENG</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SOYOMBO" href="#fpdf.unicode_script.UnicodeScript.SOYOMBO">SOYOMBO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SUNDANESE" href="#fpdf.unicode_script.UnicodeScript.SUNDANESE">SUNDANESE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SUNUWAR" href="#fpdf.unicode_script.UnicodeScript.SUNUWAR">SUNUWAR</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SYLOTI_NAGRI" href="#fpdf.unicode_script.UnicodeScript.SYLOTI_NAGRI">SYLOTI_NAGRI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.SYRIAC" href="#fpdf.unicode_script.UnicodeScript.SYRIAC">SYRIAC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAGALOG" href="#fpdf.unicode_script.UnicodeScript.TAGALOG">TAGALOG</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAGBANWA" href="#fpdf.unicode_script.UnicodeScript.TAGBANWA">TAGBANWA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAI_LE" href="#fpdf.unicode_script.UnicodeScript.TAI_LE">TAI_LE</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAI_THAM" href="#fpdf.unicode_script.UnicodeScript.TAI_THAM">TAI_THAM</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAI_VIET" href="#fpdf.unicode_script.UnicodeScript.TAI_VIET">TAI_VIET</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAKRI" href="#fpdf.unicode_script.UnicodeScript.TAKRI">TAKRI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TAMIL" href="#fpdf.unicode_script.UnicodeScript.TAMIL">TAMIL</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TANGSA" href="#fpdf.unicode_script.UnicodeScript.TANGSA">TANGSA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TANGUT" href="#fpdf.unicode_script.UnicodeScript.TANGUT">TANGUT</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TELUGU" href="#fpdf.unicode_script.UnicodeScript.TELUGU">TELUGU</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.THAANA" href="#fpdf.unicode_script.UnicodeScript.THAANA">THAANA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.THAI" href="#fpdf.unicode_script.UnicodeScript.THAI">THAI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TIBETAN" href="#fpdf.unicode_script.UnicodeScript.TIBETAN">TIBETAN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TIFINAGH" href="#fpdf.unicode_script.UnicodeScript.TIFINAGH">TIFINAGH</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TIRHUTA" href="#fpdf.unicode_script.UnicodeScript.TIRHUTA">TIRHUTA</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TODHRI" href="#fpdf.unicode_script.UnicodeScript.TODHRI">TODHRI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TOTO" href="#fpdf.unicode_script.UnicodeScript.TOTO">TOTO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.TULU_TIGALARI" href="#fpdf.unicode_script.UnicodeScript.TULU_TIGALARI">TULU_TIGALARI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.UGARITIC" href="#fpdf.unicode_script.UnicodeScript.UGARITIC">UGARITIC</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.UNKNOWN" href="#fpdf.unicode_script.UnicodeScript.UNKNOWN">UNKNOWN</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.VAI" href="#fpdf.unicode_script.UnicodeScript.VAI">VAI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.VITHKUQI" href="#fpdf.unicode_script.UnicodeScript.VITHKUQI">VITHKUQI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.WANCHO" href="#fpdf.unicode_script.UnicodeScript.WANCHO">WANCHO</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.WARANG_CITI" href="#fpdf.unicode_script.UnicodeScript.WARANG_CITI">WARANG_CITI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.YEZIDI" href="#fpdf.unicode_script.UnicodeScript.YEZIDI">YEZIDI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.YI" href="#fpdf.unicode_script.UnicodeScript.YI">YI</a></code></li>
+<li><code><a title="fpdf.unicode_script.UnicodeScript.ZANABAZAR_SQUARE" href="#fpdf.unicode_script.UnicodeScript.ZANABAZAR_SQUARE">ZANABAZAR_SQUARE</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

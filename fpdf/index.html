@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>fpdf API documentation</title>
+<meta name="description" content="Root module.
+Gives direct access to some classes defined in submodules: …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>fpdf</code></h1>
+</header>
+<section id="section-intro">
+<p>Root module.
+Gives direct access to some classes defined in submodules:</p>
+<ul>
+<li><code><a title="fpdf.fpdf.FPDF" href="fpdf.html#fpdf.fpdf.FPDF">FPDF</a></code></li>
+<li><code><a title="fpdf.enums.Align" href="enums.html#fpdf.enums.Align">Align</a></code></li>
+<li><code><a title="fpdf.enums.ResourceAccessPolicy" href="enums.html#fpdf.enums.ResourceAccessPolicy">ResourceAccessPolicy</a></code></li>
+<li><code><a title="fpdf.enums.TextMode" href="enums.html#fpdf.enums.TextMode">TextMode</a></code></li>
+<li><code><a title="fpdf.enums.XPos" href="enums.html#fpdf.enums.XPos">XPos</a></code></li>
+<li><code><a title="fpdf.enums.YPos" href="enums.html#fpdf.enums.YPos">YPos</a></code></li>
+<li><code><a title="fpdf.errors.FPDFException" href="errors.html#fpdf.errors.FPDFException">FPDFException</a></code></li>
+<li><code><a title="fpdf.errors.FPDFResourceAccessError" href="errors.html#fpdf.errors.FPDFResourceAccessError">FPDFResourceAccessError</a></code></li>
+<li><code><a title="fpdf.fonts.FontFace" href="fonts.html#fpdf.fonts.FontFace">FontFace</a></code></li>
+<li><code><a title="fpdf.fonts.TextStyle" href="fonts.html#fpdf.fonts.TextStyle">TextStyle</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences" href="prefs.html#fpdf.prefs.ViewerPreferences">ViewerPreferences</a></code></li>
+<li><code><a title="fpdf.template.Template" href="template.html#fpdf.template.Template">Template</a></code></li>
+<li><code><a title="fpdf.template.FlexTemplate" href="template.html#fpdf.template.FlexTemplate">FlexTemplate</a></code></li>
+</ul>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="fpdf.actions" href="actions.html">fpdf.actions</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.annotations" href="annotations.html">fpdf.annotations</a></code></dt>
+<dd>
+<div class="desc"><p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/Annotations.html">https://py-pdf.github.io/fpdf2/Annotations.html</a></p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.bidi" href="bidi.html">fpdf.bidi</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.data" href="data/index.html">fpdf.data</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.deprecation" href="deprecation.html">fpdf.deprecation</a></code></dt>
+<dd>
+<div class="desc"><p>Utilities to manage deprecation errors &amp; warnings …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.drawing" href="drawing.html">fpdf.drawing</a></code></dt>
+<dd>
+<div class="desc"><p>Vector drawing: managing colors, graphics states, paths, transforms …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.drawing_primitives" href="drawing_primitives.html">fpdf.drawing_primitives</a></code></dt>
+<dd>
+<div class="desc"><p>Core drawing primitives for fpdf2 …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.encryption" href="encryption.html">fpdf.encryption</a></code></dt>
+<dd>
+<div class="desc"><p>Utilities to perform encryption following the PDF standards …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.enums" href="enums.html">fpdf.enums</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.errors" href="errors.html">fpdf.errors</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.font_type_3" href="font_type_3.html">fpdf.font_type_3</a></code></dt>
+<dd>
+<div class="desc"><p>This module provides support for embedding and rendering various color font formats
+in PDF documents using Type 3 fonts. It defines classes and …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.fonts" href="fonts.html">fpdf.fonts</a></code></dt>
+<dd>
+<div class="desc"><p>Font-related classes &amp; constants.
+Includes the definition of the character widths of all PDF standard fonts …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.fpdf" href="fpdf.html">fpdf.fpdf</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.graphics_state" href="graphics_state.html">fpdf.graphics_state</a></code></dt>
+<dd>
+<div class="desc"><p>Mixin class for managing a stack of graphics state variables …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.html" href="html.html">fpdf.html</a></code></dt>
+<dd>
+<div class="desc"><p>HTML renderer …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.image_datastructures" href="image_datastructures.html">fpdf.image_datastructures</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.image_parsing" href="image_parsing.html">fpdf.image_parsing</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="fpdf.line_break" href="line_break.html">fpdf.line_break</a></code></dt>
+<dd>
+<div class="desc"><p>Routines for organizing lines and larger blocks of text, with manual and
+automatic line wrapping …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.linearization" href="linearization.html">fpdf.linearization</a></code></dt>
+<dd>
+<div class="desc"><p>This module is in work-in-progress state.
+Hint tables / hint streams have not been implemented yet,
+and there are a few "TODO" comment remaining.
+cf …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.outline" href="outline.html">fpdf.outline</a></code></dt>
+<dd>
+<div class="desc"><p>Quoting section 8.2.2 "Document Outline" of the 2006 PDF spec 1.7:</p>
+<blockquote>
+<p>The document outline consists of a tree-structured hierarchy of outline items …</p>
+</blockquote></div>
+</dd>
+<dt><code class="name"><a title="fpdf.output" href="output.html">fpdf.output</a></code></dt>
+<dd>
+<div class="desc"><p>This module contains the serialization logic that produces a PDF document from a FPDF instance.
+Most of the code in this module is used when …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.pattern" href="pattern.html">fpdf.pattern</a></code></dt>
+<dd>
+<div class="desc"><p>Handles the creation of patterns and gradients …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.prefs" href="prefs.html">fpdf.prefs</a></code></dt>
+<dd>
+<div class="desc"><p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/PageFormatAndOrientation.html#viewer-preferences">https://py-pdf.github.io/fpdf2/PageFormatAndOrientation.html#viewer-preferences</a></p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.recorder" href="recorder.html">fpdf.recorder</a></code></dt>
+<dd>
+<div class="desc"><p>A wrapper class to allow rewinding/replaying changes made to a FPDF instance …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.sign" href="sign.html">fpdf.sign</a></code></dt>
+<dd>
+<div class="desc"><p>Module dedicated to document signature generation …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.structure_tree" href="structure_tree.html">fpdf.structure_tree</a></code></dt>
+<dd>
+<div class="desc"><p>Quoting the PDF spec:</p>
+<blockquote>
+<p>PDF’s logical <em>structure facilities</em> provide a mechanism for incorporating
+structural information about a document’s content …</p>
+</blockquote></div>
+</dd>
+<dt><code class="name"><a title="fpdf.svg" href="svg.html">fpdf.svg</a></code></dt>
+<dd>
+<div class="desc"><p>Utilities to parse SVG graphics into fpdf.drawing objects …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.syntax" href="syntax.html">fpdf.syntax</a></code></dt>
+<dd>
+<div class="desc"><p>Classes &amp; functions that represent core elements of the PDF syntax …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.table" href="table.html">fpdf.table</a></code></dt>
+<dd>
+<div class="desc"><p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/Tables.html">https://py-pdf.github.io/fpdf2/Tables.html</a></p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.template" href="template.html">fpdf.template</a></code></dt>
+<dd>
+<div class="desc"><p>PDF template helpers for fpdf2 …</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.text_region" href="text_region.html">fpdf.text_region</a></code></dt>
+<dd>
+<div class="desc"><p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/TextRegion.html">https://py-pdf.github.io/fpdf2/TextRegion.html</a></p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.transitions" href="transitions.html">fpdf.transitions</a></code></dt>
+<dd>
+<div class="desc"><p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/Presentations.html#transitions">https://py-pdf.github.io/fpdf2/Presentations.html#transitions</a></p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.unicode_script" href="unicode_script.html">fpdf.unicode_script</a></code></dt>
+<dd>
+<div class="desc"><p>The hardcoded information on this module was loaded from the Unicode file Scripts-16.0.0.txt
+<a href="https://www.unicode.org/Public/UNIDATA/Scripts.txt">https://www.unicode.org/Public/UNIDATA/Scripts.txt</a>
+…</p></div>
+</dd>
+<dt><code class="name"><a title="fpdf.util" href="util.html">fpdf.util</a></code></dt>
+<dd>
+<div class="desc"><p>Various utilities that could not be gathered logically in a specific module …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="fpdf.FPDF_FONT_DIR"><code class="name">var <span class="ident">FPDF_FONT_DIR</span></code></dt>
+<dd>
+<div class="desc"><p>Extra filesystem folder where fpdf2 looks for fonts files, after the current directory</p></div>
+</dd>
+<dt id="fpdf.FPDF_VERSION"><code class="name">var <span class="ident">FPDF_VERSION</span></code></dt>
+<dd>
+<div class="desc"><p>Current fpdf2 version, also available as <code>__version__</code></p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="fpdf.actions" href="actions.html">fpdf.actions</a></code></li>
+<li><code><a title="fpdf.annotations" href="annotations.html">fpdf.annotations</a></code></li>
+<li><code><a title="fpdf.bidi" href="bidi.html">fpdf.bidi</a></code></li>
+<li><code><a title="fpdf.data" href="data/index.html">fpdf.data</a></code></li>
+<li><code><a title="fpdf.deprecation" href="deprecation.html">fpdf.deprecation</a></code></li>
+<li><code><a title="fpdf.drawing" href="drawing.html">fpdf.drawing</a></code></li>
+<li><code><a title="fpdf.drawing_primitives" href="drawing_primitives.html">fpdf.drawing_primitives</a></code></li>
+<li><code><a title="fpdf.encryption" href="encryption.html">fpdf.encryption</a></code></li>
+<li><code><a title="fpdf.enums" href="enums.html">fpdf.enums</a></code></li>
+<li><code><a title="fpdf.errors" href="errors.html">fpdf.errors</a></code></li>
+<li><code><a title="fpdf.font_type_3" href="font_type_3.html">fpdf.font_type_3</a></code></li>
+<li><code><a title="fpdf.fonts" href="fonts.html">fpdf.fonts</a></code></li>
+<li><code><a title="fpdf.fpdf" href="fpdf.html">fpdf.fpdf</a></code></li>
+<li><code><a title="fpdf.graphics_state" href="graphics_state.html">fpdf.graphics_state</a></code></li>
+<li><code><a title="fpdf.html" href="html.html">fpdf.html</a></code></li>
+<li><code><a title="fpdf.image_datastructures" href="image_datastructures.html">fpdf.image_datastructures</a></code></li>
+<li><code><a title="fpdf.image_parsing" href="image_parsing.html">fpdf.image_parsing</a></code></li>
+<li><code><a title="fpdf.line_break" href="line_break.html">fpdf.line_break</a></code></li>
+<li><code><a title="fpdf.linearization" href="linearization.html">fpdf.linearization</a></code></li>
+<li><code><a title="fpdf.outline" href="outline.html">fpdf.outline</a></code></li>
+<li><code><a title="fpdf.output" href="output.html">fpdf.output</a></code></li>
+<li><code><a title="fpdf.pattern" href="pattern.html">fpdf.pattern</a></code></li>
+<li><code><a title="fpdf.prefs" href="prefs.html">fpdf.prefs</a></code></li>
+<li><code><a title="fpdf.recorder" href="recorder.html">fpdf.recorder</a></code></li>
+<li><code><a title="fpdf.sign" href="sign.html">fpdf.sign</a></code></li>
+<li><code><a title="fpdf.structure_tree" href="structure_tree.html">fpdf.structure_tree</a></code></li>
+<li><code><a title="fpdf.svg" href="svg.html">fpdf.svg</a></code></li>
+<li><code><a title="fpdf.syntax" href="syntax.html">fpdf.syntax</a></code></li>
+<li><code><a title="fpdf.table" href="table.html">fpdf.table</a></code></li>
+<li><code><a title="fpdf.template" href="template.html">fpdf.template</a></code></li>
+<li><code><a title="fpdf.text_region" href="text_region.html">fpdf.text_region</a></code></li>
+<li><code><a title="fpdf.transitions" href="transitions.html">fpdf.transitions</a></code></li>
+<li><code><a title="fpdf.unicode_script" href="unicode_script.html">fpdf.unicode_script</a></code></li>
+<li><code><a title="fpdf.util" href="util.html">fpdf.util</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="fpdf.FPDF_FONT_DIR" href="#fpdf.FPDF_FONT_DIR">FPDF_FONT_DIR</a></code></li>
+<li><code><a title="fpdf.FPDF_VERSION" href="#fpdf.FPDF_VERSION">FPDF_VERSION</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

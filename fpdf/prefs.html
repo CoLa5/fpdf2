@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>fpdf.prefs API documentation</title>
+<meta name="description" content="Usage documentation at: &lt;https://py-pdf.github.io/fpdf2/PageFormatAndOrientation.html#viewer-preferences&gt;">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fpdf.prefs</code></h1>
+</header>
+<section id="section-intro">
+<p>Usage documentation at: <a href="https://py-pdf.github.io/fpdf2/PageFormatAndOrientation.html#viewer-preferences">https://py-pdf.github.io/fpdf2/PageFormatAndOrientation.html#viewer-preferences</a></p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fpdf.prefs.ViewerPreferences"><code class="flex name class">
+<span>class <span class="ident">ViewerPreferences</span></span>
+<span>(</span><span>hide_toolbar: bool = False,<br>hide_menubar: bool = False,<br>hide_window_u_i: bool = False,<br>fit_window: bool = False,<br>center_window: bool = False,<br>display_doc_title: bool = False,<br>non_full_screen_page_mode: <a title="fpdf.enums.PageMode" href="enums.html#fpdf.enums.PageMode">PageMode</a> = PageMode.USE_NONE,<br>num_copies: int | None = None,<br>print_page_range: list[int] | None = None,<br>direction: str | <a title="fpdf.enums.TextDirection" href="enums.html#fpdf.enums.TextDirection">TextDirection</a> | None = None,<br>duplex: <a title="fpdf.enums.Duplex" href="enums.html#fpdf.enums.Duplex">Duplex</a> | str | None = None,<br>view_area: <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | str | None = None,<br>view_clip: <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | str | None = None,<br>print_area: <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | str | None = None,<br>print_clip: <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | str | None = None,<br>print_scaling: str | None = None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L14-L275" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class ViewerPreferences:
+    &#34;Specifies the way the document shall be displayed on the screen&#34;
+
+    def __init__(
+        self,
+        hide_toolbar: bool = False,
+        hide_menubar: bool = False,
+        hide_window_u_i: bool = False,
+        fit_window: bool = False,
+        center_window: bool = False,
+        display_doc_title: bool = False,
+        non_full_screen_page_mode: PageMode = PageMode.USE_NONE,
+        num_copies: Optional[int] = None,
+        print_page_range: Optional[list[int]] = None,
+        direction: Optional[TextDirection | str] = None,
+        duplex: Optional[Duplex | str] = None,
+        view_area: Optional[PageBoundaries | str] = None,
+        view_clip: Optional[PageBoundaries | str] = None,
+        print_area: Optional[PageBoundaries | str] = None,
+        print_clip: Optional[PageBoundaries | str] = None,
+        print_scaling: Optional[str] = None,
+    ) -&gt; None:
+        self._min_pdf_version = &#34;1.3&#34;
+
+        self.hide_toolbar = hide_toolbar
+        &#34;&#34;&#34;
+        (`bool`)
+        A flag specifying whether to hide the conforming reader’s tool bars when the document is active
+        &#34;&#34;&#34;
+        self.hide_menubar = hide_menubar
+        &#34;&#34;&#34;
+        (`bool`)
+        A flag specifying whether to hide the conforming reader’s menu bar when the document is active
+        &#34;&#34;&#34;
+        self.hide_window_u_i = hide_window_u_i
+        &#34;&#34;&#34;
+        (`bool`)
+        A flag specifying whether to hide user interface elements in the document’s window
+        (such as scroll bars and navigation controls), leaving only the document’s contents displayed
+        &#34;&#34;&#34;
+        self.fit_window = fit_window
+        &#34;&#34;&#34;
+        (`bool`)
+        A flag specifying whether to resize the document’s window to fit the size of the first displayed page
+        &#34;&#34;&#34;
+        self.center_window = center_window
+        &#34;&#34;&#34;
+        (`bool`)
+        A flag specifying whether to position the document’s window in the center of the screen
+        &#34;&#34;&#34;
+        self.display_doc_title = display_doc_title
+        &#34;&#34;&#34;
+        (`bool`)
+        A flag specifying whether the window’s title bar should display the document title
+        taken from the Title entry of the document information dictionary.
+        If false, the title bar should instead display the name of the PDF file containing the document.
+        &#34;&#34;&#34;
+        self.non_full_screen_page_mode = non_full_screen_page_mode
+        &#34;&#34;&#34;
+        (`fpdf.enums.PageMode`)
+        The document’s page mode, specifying how to display the document on exiting full-screen mode
+        &#34;&#34;&#34;
+        self.num_copies = num_copies
+        &#34;&#34;&#34;
+        (`int`)
+        The number of copies that shall be printed when the print dialog is opened for this file.
+        Values outside this range shall be ignored. Default value: as defined by the conforming reader, but typically 1
+        &#34;&#34;&#34;
+        self.print_page_range = print_page_range
+        &#34;&#34;&#34;
+        (`list[int]`)
+        The page numbers used to initialize the print dialog box when the file is printed.
+        The array shall contain an even number of integers to be interpreted in pairs,
+        with each pair specifying the first and last pages in a sub-range of pages to be printed.
+        The first page of the PDF file shall be denoted by 1.
+        &#34;&#34;&#34;
+        self.direction = direction
+        &#34;&#34;&#34;
+        (`fpdf.enums.TextDirection`)
+        The predominant reading order for text.
+        &#34;&#34;&#34;
+        self.duplex = duplex
+        &#34;&#34;&#34;
+        (`fpdf.enums.Duplex`)
+        The paper handling option that shall be used when printing the file from the print dialog.
+        &#34;&#34;&#34;
+        self.view_area = view_area
+        &#34;&#34;&#34;
+        (`fpdf.enums.PageBoundaries`)
+        The name of the page boundary representing the area of a page that shall be displayed when viewing the document on the screen.
+        Default value: CropBox.
+        &#34;&#34;&#34;
+        self.view_clip = view_clip
+        &#34;&#34;&#34;
+        (`fpdf.enums.PageBoundaries`)
+        The name of the page boundary to which the contents of a page shall be clipped when viewing the document on the screen.
+        Default value: CropBox.
+        &#34;&#34;&#34;
+        self.print_area = print_area
+        &#34;&#34;&#34;
+        (`fpdf.enums.PageBoundaries`)
+        The name of the page boundary representing the area of a page that shall be rendered when printing the document.
+        Default value: CropBox.
+        &#34;&#34;&#34;
+        self.print_clip = print_clip
+        &#34;&#34;&#34;
+        (`fpdf.enums.PageBoundaries`)
+        The name of the page boundary to which the contents of a page shall be clipped when printing the document.
+        Default value: CropBox.
+        &#34;&#34;&#34;
+        self.print_scaling = print_scaling
+        &#34;&#34;&#34;
+        The page scaling option that shall be selected when a print dialogue is displayed for this document.
+        Valid values are:
+
+        * `&#34;None&#34;`, which indicates no page scaling
+        * `&#34;AppDefault&#34;`, which indicates the interactive PDF processor’s default print scaling
+
+        If this entry is not specified or has an unrecognised value, `AppDefault` shall be used.
+        &#34;&#34;&#34;
+
+    def _set_min_pdf_version(self, version: str) -&gt; None:
+        self._min_pdf_version = max(self._min_pdf_version, version)
+
+    @property
+    def non_full_screen_page_mode(self) -&gt; Optional[PageMode]:
+        return self._non_full_screen_page_mode
+
+    @non_full_screen_page_mode.setter
+    def non_full_screen_page_mode(self, page_mode: Optional[PageMode | str]) -&gt; None:
+        self._non_full_screen_page_mode = (
+            None if page_mode is None else PageMode.coerce(page_mode)
+        )
+        if self._non_full_screen_page_mode in (
+            PageMode.FULL_SCREEN,
+            PageMode.USE_ATTACHMENTS,
+        ):
+            raise ValueError(
+                f&#34;{self.non_full_screen_page_mode} is not a supported value for NonFullScreenPageMode&#34;
+            )
+
+    @property
+    def num_copies(self) -&gt; Optional[int]:
+        return self._num_copies
+
+    @num_copies.setter
+    def num_copies(self, num_copies: Optional[int]) -&gt; None:
+        if num_copies is not None:
+            self._set_min_pdf_version(&#34;1.7&#34;)
+        self._num_copies = num_copies
+
+    @property
+    def print_page_range(self) -&gt; Optional[list[int]]:
+        return self._print_page_range
+
+    @print_page_range.setter
+    def print_page_range(self, print_page_range: Optional[list[int]]) -&gt; None:
+        if print_page_range is not None:
+            self._set_min_pdf_version(&#34;1.7&#34;)
+        self._print_page_range = print_page_range
+
+    @property
+    def direction(self) -&gt; Optional[TextDirection]:
+        return self._direction
+
+    @direction.setter
+    def direction(self, direction: Optional[TextDirection | str]) -&gt; None:
+        self._direction = None if direction is None else TextDirection.coerce(direction)
+
+    @property
+    def display_doc_title(self) -&gt; bool:
+        return self._display_doc_title
+
+    @display_doc_title.setter
+    def display_doc_title(self, display_doc_title: bool) -&gt; None:
+        if display_doc_title:
+            self._set_min_pdf_version(&#34;1.4&#34;)
+        self._display_doc_title = display_doc_title
+
+    @property
+    def duplex(self) -&gt; Optional[Duplex]:
+        return self._duplex
+
+    @duplex.setter
+    def duplex(self, duplex: Optional[Duplex | str]) -&gt; None:
+        if duplex is not None:
+            self._set_min_pdf_version(&#34;1.7&#34;)
+        self._duplex = None if duplex is None else Duplex.coerce(duplex)
+
+    @property
+    def view_area(self) -&gt; Optional[PageBoundaries]:
+        return self._view_area
+
+    @view_area.setter
+    def view_area(self, view_area: Optional[PageBoundaries | str]) -&gt; None:
+        if view_area is not None:
+            self._set_min_pdf_version(&#34;1.4&#34;)
+        self._view_area = (
+            None if view_area is None else PageBoundaries.coerce(view_area)
+        )
+
+    @property
+    def view_clip(self) -&gt; Optional[PageBoundaries]:
+        return self._view_clip
+
+    @view_clip.setter
+    def view_clip(self, view_clip: Optional[PageBoundaries | str]) -&gt; None:
+        if view_clip is not None:
+            self._set_min_pdf_version(&#34;1.4&#34;)
+        self._view_clip = (
+            None if view_clip is None else PageBoundaries.coerce(view_clip)
+        )
+
+    @property
+    def print_area(self) -&gt; Optional[PageBoundaries]:
+        return self._print_area
+
+    @print_area.setter
+    def print_area(self, print_area: Optional[PageBoundaries | str]) -&gt; None:
+        if print_area is not None:
+            self._set_min_pdf_version(&#34;1.4&#34;)
+        self._print_area = (
+            None if print_area is None else PageBoundaries.coerce(print_area)
+        )
+
+    @property
+    def print_clip(self) -&gt; Optional[PageBoundaries]:
+        return self._print_clip
+
+    @print_clip.setter
+    def print_clip(self, print_clip: Optional[PageBoundaries | str]) -&gt; None:
+        if print_clip is not None:
+            self._set_min_pdf_version(&#34;1.4&#34;)
+        self._print_clip = (
+            None if print_clip is None else PageBoundaries.coerce(print_clip)
+        )
+
+    @property
+    def print_scaling(self) -&gt; Optional[Name]:
+        return self._print_scaling
+
+    @print_scaling.setter
+    def print_scaling(self, print_scaling: Optional[str]) -&gt; None:
+        if print_scaling is None:
+            self._print_scaling = None
+            return
+        self._set_min_pdf_version(&#34;1.6&#34;)
+        if print_scaling not in (&#34;None&#34;, &#34;AppDefault&#34;):
+            raise ValueError(f&#34;Invalid {print_scaling=} value provided&#34;)
+        self._print_scaling = Name(print_scaling)
+
+    def serialize(
+        self,
+        _security_handler: Optional[&#34;StandardSecurityHandler&#34;] = None,
+        _obj_id: Optional[int] = None,
+    ) -&gt; str:
+        obj_dict = build_obj_dict(
+            {key: getattr(self, key) for key in dir(self)},
+            _security_handler=_security_handler,
+            _obj_id=_obj_id,
+        )
+        return create_dictionary_string(obj_dict)</code></pre>
+</details>
+<div class="desc"><p>Specifies the way the document shall be displayed on the screen</p></div>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.prefs.ViewerPreferences.center_window"><code class="name">var <span class="ident">center_window</span></code></dt>
+<dd>
+<div class="desc"><p>(<code>bool</code>)
+A flag specifying whether to position the document’s window in the center of the screen</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.direction"><code class="name">var <span class="ident">direction</span> : <a title="fpdf.enums.TextDirection" href="enums.html#fpdf.enums.TextDirection">TextDirection</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L175-L177" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def direction(self) -&gt; Optional[TextDirection]:
+    return self._direction</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.TextDirection" href="enums.html#fpdf.enums.TextDirection">TextDirection</a></code>)
+The predominant reading order for text.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.display_doc_title"><code class="name">var <span class="ident">display_doc_title</span> : bool</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L183-L185" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def display_doc_title(self) -&gt; bool:
+    return self._display_doc_title</code></pre>
+</details>
+<div class="desc"><p>(<code>bool</code>)
+A flag specifying whether the window’s title bar should display the document title
+taken from the Title entry of the document information dictionary.
+If false, the title bar should instead display the name of the PDF file containing the document.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.duplex"><code class="name">var <span class="ident">duplex</span> : <a title="fpdf.enums.Duplex" href="enums.html#fpdf.enums.Duplex">Duplex</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L193-L195" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def duplex(self) -&gt; Optional[Duplex]:
+    return self._duplex</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.Duplex" href="enums.html#fpdf.enums.Duplex">Duplex</a></code>)
+The paper handling option that shall be used when printing the file from the print dialog.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.fit_window"><code class="name">var <span class="ident">fit_window</span></code></dt>
+<dd>
+<div class="desc"><p>(<code>bool</code>)
+A flag specifying whether to resize the document’s window to fit the size of the first displayed page</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.hide_menubar"><code class="name">var <span class="ident">hide_menubar</span></code></dt>
+<dd>
+<div class="desc"><p>(<code>bool</code>)
+A flag specifying whether to hide the conforming reader’s menu bar when the document is active</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.hide_toolbar"><code class="name">var <span class="ident">hide_toolbar</span></code></dt>
+<dd>
+<div class="desc"><p>(<code>bool</code>)
+A flag specifying whether to hide the conforming reader’s tool bars when the document is active</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.hide_window_u_i"><code class="name">var <span class="ident">hide_window_u_i</span></code></dt>
+<dd>
+<div class="desc"><p>(<code>bool</code>)
+A flag specifying whether to hide user interface elements in the document’s window
+(such as scroll bars and navigation controls), leaving only the document’s contents displayed</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.non_full_screen_page_mode"><code class="name">var <span class="ident">non_full_screen_page_mode</span> : <a title="fpdf.enums.PageMode" href="enums.html#fpdf.enums.PageMode">PageMode</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L138-L140" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def non_full_screen_page_mode(self) -&gt; Optional[PageMode]:
+    return self._non_full_screen_page_mode</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.PageMode" href="enums.html#fpdf.enums.PageMode">PageMode</a></code>)
+The document’s page mode, specifying how to display the document on exiting full-screen mode</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.num_copies"><code class="name">var <span class="ident">num_copies</span> : int | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L155-L157" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def num_copies(self) -&gt; Optional[int]:
+    return self._num_copies</code></pre>
+</details>
+<div class="desc"><p>(<code>int</code>)
+The number of copies that shall be printed when the print dialog is opened for this file.
+Values outside this range shall be ignored. Default value: as defined by the conforming reader, but typically 1</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.print_area"><code class="name">var <span class="ident">print_area</span> : <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L227-L229" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def print_area(self) -&gt; Optional[PageBoundaries]:
+    return self._print_area</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a></code>)
+The name of the page boundary representing the area of a page that shall be rendered when printing the document.
+Default value: CropBox.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.print_clip"><code class="name">var <span class="ident">print_clip</span> : <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L239-L241" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def print_clip(self) -&gt; Optional[PageBoundaries]:
+    return self._print_clip</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a></code>)
+The name of the page boundary to which the contents of a page shall be clipped when printing the document.
+Default value: CropBox.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.print_page_range"><code class="name">var <span class="ident">print_page_range</span> : list[int] | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L165-L167" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def print_page_range(self) -&gt; Optional[list[int]]:
+    return self._print_page_range</code></pre>
+</details>
+<div class="desc"><p>(<code>list[int]</code>)
+The page numbers used to initialize the print dialog box when the file is printed.
+The array shall contain an even number of integers to be interpreted in pairs,
+with each pair specifying the first and last pages in a sub-range of pages to be printed.
+The first page of the PDF file shall be denoted by 1.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.print_scaling"><code class="name">var <span class="ident">print_scaling</span> : <a title="fpdf.syntax.Name" href="syntax.html#fpdf.syntax.Name">Name</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L251-L253" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def print_scaling(self) -&gt; Optional[Name]:
+    return self._print_scaling</code></pre>
+</details>
+<div class="desc"><p>The page scaling option that shall be selected when a print dialogue is displayed for this document.
+Valid values are:</p>
+<ul>
+<li><code>"None"</code>, which indicates no page scaling</li>
+<li><code>"AppDefault"</code>, which indicates the interactive PDF processor’s default print scaling</li>
+</ul>
+<p>If this entry is not specified or has an unrecognised value, <code>AppDefault</code> shall be used.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.view_area"><code class="name">var <span class="ident">view_area</span> : <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L203-L205" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def view_area(self) -&gt; Optional[PageBoundaries]:
+    return self._view_area</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a></code>)
+The name of the page boundary representing the area of a page that shall be displayed when viewing the document on the screen.
+Default value: CropBox.</p></div>
+</dd>
+<dt id="fpdf.prefs.ViewerPreferences.view_clip"><code class="name">var <span class="ident">view_clip</span> : <a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a> | None</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L215-L217" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">@property
+def view_clip(self) -&gt; Optional[PageBoundaries]:
+    return self._view_clip</code></pre>
+</details>
+<div class="desc"><p>(<code><a title="fpdf.enums.PageBoundaries" href="enums.html#fpdf.enums.PageBoundaries">PageBoundaries</a></code>)
+The name of the page boundary to which the contents of a page shall be clipped when viewing the document on the screen.
+Default value: CropBox.</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="fpdf.prefs.ViewerPreferences.serialize"><code class="name flex">
+<span>def <span class="ident">serialize</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/prefs.py#L265-L275" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def serialize(
+    self,
+    _security_handler: Optional[&#34;StandardSecurityHandler&#34;] = None,
+    _obj_id: Optional[int] = None,
+) -&gt; str:
+    obj_dict = build_obj_dict(
+        {key: getattr(self, key) for key in dir(self)},
+        _security_handler=_security_handler,
+        _obj_id=_obj_id,
+    )
+    return create_dictionary_string(obj_dict)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fpdf" href="index.html">fpdf</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fpdf.prefs.ViewerPreferences" href="#fpdf.prefs.ViewerPreferences">ViewerPreferences</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.prefs.ViewerPreferences.center_window" href="#fpdf.prefs.ViewerPreferences.center_window">center_window</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.direction" href="#fpdf.prefs.ViewerPreferences.direction">direction</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.display_doc_title" href="#fpdf.prefs.ViewerPreferences.display_doc_title">display_doc_title</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.duplex" href="#fpdf.prefs.ViewerPreferences.duplex">duplex</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.fit_window" href="#fpdf.prefs.ViewerPreferences.fit_window">fit_window</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.hide_menubar" href="#fpdf.prefs.ViewerPreferences.hide_menubar">hide_menubar</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.hide_toolbar" href="#fpdf.prefs.ViewerPreferences.hide_toolbar">hide_toolbar</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.hide_window_u_i" href="#fpdf.prefs.ViewerPreferences.hide_window_u_i">hide_window_u_i</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.non_full_screen_page_mode" href="#fpdf.prefs.ViewerPreferences.non_full_screen_page_mode">non_full_screen_page_mode</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.num_copies" href="#fpdf.prefs.ViewerPreferences.num_copies">num_copies</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.print_area" href="#fpdf.prefs.ViewerPreferences.print_area">print_area</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.print_clip" href="#fpdf.prefs.ViewerPreferences.print_clip">print_clip</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.print_page_range" href="#fpdf.prefs.ViewerPreferences.print_page_range">print_page_range</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.print_scaling" href="#fpdf.prefs.ViewerPreferences.print_scaling">print_scaling</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.serialize" href="#fpdf.prefs.ViewerPreferences.serialize">serialize</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.view_area" href="#fpdf.prefs.ViewerPreferences.view_area">view_area</a></code></li>
+<li><code><a title="fpdf.prefs.ViewerPreferences.view_clip" href="#fpdf.prefs.ViewerPreferences.view_clip">view_clip</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

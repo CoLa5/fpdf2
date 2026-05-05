@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>fpdf.util API documentation</title>
+<meta name="description" content="Various utilities that could not be gathered logically in a specific module …">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fpdf.util</code></h1>
+</header>
+<section id="section-intro">
+<p>Various utilities that could not be gathered logically in a specific module.</p>
+<p>The contents of this module are internal to fpdf2, and not part of the public API.
+They may change at any time without prior warning or any deprecation period,
+in non-backward-compatible ways.</p>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="fpdf.util.buffer_subst"><code class="name flex">
+<span>def <span class="ident">buffer_subst</span></span>(<span>buffer: bytearray, placeholder: str, value: str) ‑> bytearray</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L80-L85" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def buffer_subst(buffer: bytearray, placeholder: str, value: str) -&gt; bytearray:
+    buffer_size = len(buffer)
+    assert len(placeholder) == len(value), f&#34;placeholder={placeholder} value={value}&#34;
+    buffer = buffer.replace(placeholder.encode(), value.encode(), 1)
+    assert len(buffer) == buffer_size
+    return buffer</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.util.builtin_srgb2014_bytes"><code class="name flex">
+<span>def <span class="ident">builtin_srgb2014_bytes</span></span>(<span>) ‑> bytes</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L212-L214" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def builtin_srgb2014_bytes() -&gt; bytes:
+    pkg = &#34;fpdf.data.color_profiles&#34;
+    return (resources.files(pkg) / &#34;sRGB2014.icc&#34;).read_bytes()</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.util.convert_unit"><code class="name flex">
+<span>def <span class="ident">convert_unit</span></span>(<span>to_convert: int | float | decimal.Decimal | Iterable[Any],<br>old_unit: str | int | float | decimal.Decimal,<br>new_unit: str | int | float | decimal.Decimal) ‑> float | tuple[typing.Any, ...]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L138-L158" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def convert_unit(
+    to_convert: Number | Iterable[Any],
+    old_unit: Union[str, Number],
+    new_unit: Union[str, Number],
+) -&gt; Union[float, tuple[Any, ...]]:
+    &#34;&#34;&#34;
+     Convert a number or sequence of numbers from one unit to another.
+
+     If either unit is a number it will be treated as the number of points per unit.  So 72 would mean 1 inch.
+
+     Args:
+        to_convert (float, int, Iterable): The number / list of numbers, or points, to convert
+        old_unit (str, float, int): A unit accepted by `fpdf.fpdf.FPDF` or a number
+        new_unit (str, float, int): A unit accepted by `fpdf.fpdf.FPDF` or a number
+    Returns:
+        (float, tuple): to_convert converted from old_unit to new_unit or a tuple of the same
+    &#34;&#34;&#34;
+    unit_conversion_factor = get_scale_factor(new_unit) / get_scale_factor(old_unit)
+    if isinstance(to_convert, Iterable):
+        return tuple(convert_unit(i, 1, unit_conversion_factor) for i in to_convert)
+    return float(to_convert) / unit_conversion_factor</code></pre>
+</details>
+<div class="desc"><p>Convert a number or sequence of numbers from one unit to another.</p>
+<p>If either unit is a number it will be treated as the number of points per unit.
+So 72 would mean 1 inch.</p>
+<p>Args:
+to_convert (float, int, Iterable): The number / list of numbers, or points, to convert
+old_unit (str, float, int): A unit accepted by <code><a title="fpdf.fpdf.FPDF" href="fpdf.html#fpdf.fpdf.FPDF">FPDF</a></code> or a number
+new_unit (str, float, int): A unit accepted by <code><a title="fpdf.fpdf.FPDF" href="fpdf.html#fpdf.fpdf.FPDF">FPDF</a></code> or a number</p>
+<h2 id="returns">Returns</h2>
+<p>(float, tuple): to_convert converted from old_unit to new_unit or a tuple of the same</p></div>
+</dd>
+<dt id="fpdf.util.escape_parens"><code class="name flex">
+<span>def <span class="ident">escape_parens</span></span>(<span>s: ~_StrBytes) ‑> ~_StrBytes</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L96-L110" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def escape_parens(s: _StrBytes) -&gt; _StrBytes:
+    &#34;&#34;&#34;Add a backslash character before , ( and )&#34;&#34;&#34;
+    if isinstance(s, str):
+        return (
+            s.replace(&#34;\\&#34;, &#34;\\\\&#34;)
+            .replace(&#34;)&#34;, &#34;\\)&#34;)
+            .replace(&#34;(&#34;, &#34;\\(&#34;)
+            .replace(&#34;\r&#34;, &#34;\\r&#34;)
+        )
+    return (
+        s.replace(b&#34;\\&#34;, b&#34;\\\\&#34;)
+        .replace(b&#34;)&#34;, b&#34;\\)&#34;)
+        .replace(b&#34;(&#34;, b&#34;\\(&#34;)
+        .replace(b&#34;\r&#34;, b&#34;\\r&#34;)
+    )</code></pre>
+</details>
+<div class="desc"><p>Add a backslash character before , ( and )</p></div>
+</dd>
+<dt id="fpdf.util.format_number"><code class="name flex">
+<span>def <span class="ident">format_number</span></span>(<span>x: float, digits: int = 8) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L217-L230" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def format_number(x: float, digits: int = 8) -&gt; str:
+    # snap tiny values to zero to avoid &#34;-0&#34; and scientific notation
+    if abs(x) &lt; 1e-12:
+        x = 0.0
+    s = f&#34;{x:.{digits}f}&#34;
+    if &#34;.&#34; in s:
+        s = s.rstrip(&#34;0&#34;).rstrip(&#34;.&#34;)
+    if s == &#34;-0&#34;:
+        s = &#34;0&#34;
+    if s.startswith(&#34;.&#34;):
+        s = &#34;0&#34; + s
+    if s.startswith(&#34;-.&#34;):
+        s = s.replace(&#34;-.&#34;, &#34;-0.&#34;, 1)
+    return s</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="fpdf.util.get_parsed_unicode_range"><code class="name flex">
+<span>def <span class="ident">get_parsed_unicode_range</span></span>(<span>unicode_range: str | Sequence[str | int | tuple[int, int]]) ‑> set[int]</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L233-L304" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_parsed_unicode_range(
+    unicode_range: str | Sequence[str | int | tuple[int, int]],
+) -&gt; set[int]:
+    &#34;&#34;&#34;
+    Parse unicode_range parameter into a set of codepoints.
+
+    Supports CSS-style formats:
+
+    - String with comma-separated ranges: &#34;U+1F600-1F64F, U+2600-26FF, U+2615&#34;
+    - List of strings: [&#34;U+1F600-1F64F&#34;, &#34;U+2600&#34;, &#34;U+26FF&#34;]
+    - List of tuples: [(0x1F600, 0x1F64F), (0x2600, 0x26FF)]
+    - List of integers: [0x1F600, 0x2600, 128512]
+    - Mixed formats: [(0x1F600, 0x1F64F), &#34;U+2600&#34;, 128512]
+
+    Returns a set of integer codepoints.
+    &#34;&#34;&#34;
+    if unicode_range is not None and len(unicode_range) == 0:
+        raise ValueError(&#34;unicode_range cannot be empty&#34;)
+
+    codepoints: set[int] = set()
+
+    if isinstance(unicode_range, str):
+        unicode_range = [item.strip() for item in unicode_range.split(&#34;,&#34;)]
+
+    for item in unicode_range:
+        if isinstance(item, tuple):
+            if len(item) != 2:
+                raise ValueError(f&#34;Tuple must have exactly 2 elements: {item}&#34;)
+            start, end = item
+
+            if isinstance(start, str):
+                start = int(start.replace(&#34;U+&#34;, &#34;&#34;).replace(&#34;u+&#34;, &#34;&#34;), 16)
+            if isinstance(end, str):
+                end = int(end.replace(&#34;U+&#34;, &#34;&#34;).replace(&#34;u+&#34;, &#34;&#34;), 16)
+
+            if start &gt; end:
+                raise ValueError(f&#34;Invalid range: start ({start}) &gt; end ({end})&#34;)
+
+            codepoints.update(range(start, end + 1))
+
+        elif isinstance(item, str):
+            item_stripped = item.strip().replace(&#34;u+&#34;, &#34;U+&#34;)
+
+            if &#34;-&#34; in item_stripped and not item_stripped.startswith(&#34;-&#34;):
+                parts = item_stripped.split(&#34;-&#34;)
+                if len(parts) != 2:
+                    raise ValueError(f&#34;Invalid range format: {item_stripped}&#34;)
+
+                start = int(parts[0].replace(&#34;U+&#34;, &#34;&#34;), 16)
+                end = int(parts[1].replace(&#34;U+&#34;, &#34;&#34;), 16)
+
+                if start &gt; end:
+                    raise ValueError(
+                        f&#34;Invalid range: start ({hex(start)}) &gt; end ({hex(end)})&#34;
+                    )
+
+                codepoints.update(range(start, end + 1))
+            else:
+                codepoint = int(item_stripped.replace(&#34;U+&#34;, &#34;&#34;), 16)
+                codepoints.add(codepoint)
+
+        elif isinstance(item, int):
+            if item &lt; 0:
+                raise ValueError(f&#34;Invalid codepoint: {item} (must be non-negative)&#34;)
+            codepoints.add(item)
+
+        else:
+            raise ValueError(
+                f&#34;Unsupported unicode_range item type: {type(item).__name__}&#34;
+            )
+
+    return codepoints</code></pre>
+</details>
+<div class="desc"><p>Parse unicode_range parameter into a set of codepoints.</p>
+<p>Supports CSS-style formats:</p>
+<ul>
+<li>String with comma-separated ranges: "U+1F600-1F64F, U+2600-26FF, U+2615"</li>
+<li>List of strings: ["U+1F600-1F64F", "U+2600", "U+26FF"]</li>
+<li>List of tuples: [(0x1F600, 0x1F64F), (0x2600, 0x26FF)]</li>
+<li>List of integers: [0x1F600, 0x2600, 128512]</li>
+<li>Mixed formats: [(0x1F600, 0x1F64F), "U+2600", 128512]</li>
+</ul>
+<p>Returns a set of integer codepoints.</p></div>
+</dd>
+<dt id="fpdf.util.get_scale_factor"><code class="name flex">
+<span>def <span class="ident">get_scale_factor</span></span>(<span>unit: str | int | float | decimal.Decimal) ‑> float</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L113-L135" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def get_scale_factor(unit: Union[str, Number]) -&gt; float:
+    &#34;&#34;&#34;
+    Get how many pts are in a unit. (k)
+
+    Args:
+        unit (str, float, int): Any of &#34;pt&#34;, &#34;mm&#34;, &#34;cm&#34;, &#34;in&#34;, or a number.
+    Returns:
+        float: The number of points in that unit (assuming 72dpi)
+    Raises:
+        ValueError
+    &#34;&#34;&#34;
+    if isinstance(unit, NumberClass):
+        return float(unit)
+
+    if unit == &#34;pt&#34;:
+        return 1
+    if unit == &#34;mm&#34;:
+        return 72 / 25.4
+    if unit == &#34;cm&#34;:
+        return 72 / 2.54
+    if unit == &#34;in&#34;:
+        return 72.0
+    raise ValueError(f&#34;Incorrect unit: {unit}&#34;)</code></pre>
+</details>
+<div class="desc"><p>Get how many pts are in a unit. (k)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>unit</code></strong> :&ensp;<code>str, float, int</code></dt>
+<dd>Any of "pt", "mm", "cm", "in", or a number.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>The number of points in that unit (assuming 72dpi)</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<p>ValueError</p></div>
+</dd>
+<dt id="fpdf.util.int2roman"><code class="name flex">
+<span>def <span class="ident">int2roman</span></span>(<span>n: int) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L193-L202" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def int2roman(n: int) -&gt; str:
+    &#34;Convert an integer to Roman numeral&#34;
+    result = &#34;&#34;
+    if n is None:
+        return result
+    for numeral, integer in ROMAN_NUMERAL_MAP:
+        while n &gt;= integer:
+            result += numeral
+            n -= integer
+    return result</code></pre>
+</details>
+<div class="desc"><p>Convert an integer to Roman numeral</p></div>
+</dd>
+<dt id="fpdf.util.int_to_letters"><code class="name flex">
+<span>def <span class="ident">int_to_letters</span></span>(<span>n: int) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L205-L209" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def int_to_letters(n: int) -&gt; str:
+    &#34;Convert an integer to a letter value (A to Z for the first 26, then AA to ZZ, and so on)&#34;
+    if n &gt; 25:
+        return int_to_letters(int((n / 26) - 1)) + int_to_letters(n % 26)
+    return chr(n + ord(&#34;A&#34;))</code></pre>
+</details>
+<div class="desc"><p>Convert an integer to a letter value (A to Z for the first 26, then AA to ZZ, and so on)</p></div>
+</dd>
+<dt id="fpdf.util.number_to_str"><code class="name flex">
+<span>def <span class="ident">number_to_str</span></span>(<span>number: int | float | decimal.Decimal) ‑> str</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L161-L173" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">def number_to_str(number: Number) -&gt; str:
+    &#34;&#34;&#34;
+    Convert a decimal number to a minimal string representation (no trailing 0 or .).
+
+    Args:
+        number (Number): the number to be converted to a string.
+
+    Returns:
+        The number&#39;s string representation.
+    &#34;&#34;&#34;
+    # this approach tries to produce minimal representations of floating point numbers
+    # but can also produce &#34;-0&#34;.
+    return f&#34;{number:.4f}&#34;.rstrip(&#34;0&#34;).rstrip(&#34;.&#34;)</code></pre>
+</details>
+<div class="desc"><p>Convert a decimal number to a minimal string representation (no trailing 0 or .).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>number</code></strong> :&ensp;<code>Number</code></dt>
+<dd>the number to be converted to a string.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>The number's string representation.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fpdf.util.FloatTolerance"><code class="flex name class">
+<span>class <span class="ident">FloatTolerance</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L307-L345" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class FloatTolerance:
+    &#34;&#34;&#34;Utility class for floating point math with a defined tolerance.&#34;&#34;&#34;
+
+    TOLERANCE = 1e-9
+
+    @classmethod
+    def equal(cls, a: float, b: float) -&gt; bool:
+        &#34;&#34;&#34;Check if two floats are almost equal within the defined tolerance.&#34;&#34;&#34;
+        return abs(a - b) &lt;= cls.TOLERANCE
+
+    @classmethod
+    def not_equal(cls, a: float, b: float) -&gt; bool:
+        &#34;&#34;&#34;Check if two floats are not almost equal within the defined tolerance.&#34;&#34;&#34;
+        return not cls.equal(a, b)
+
+    @classmethod
+    def is_zero(cls, a: float) -&gt; bool:
+        &#34;&#34;&#34;Check if a float is almost zero within the defined tolerance.&#34;&#34;&#34;
+        return abs(a) &lt;= cls.TOLERANCE
+
+    @classmethod
+    def less_than(cls, a: float, b: float) -&gt; bool:
+        &#34;&#34;&#34;Check if a is less than b considering the defined tolerance.&#34;&#34;&#34;
+        return (b - a) &gt; cls.TOLERANCE
+
+    @classmethod
+    def greater_than(cls, a: float, b: float) -&gt; bool:
+        &#34;&#34;&#34;Check if a is greater than b considering the defined tolerance.&#34;&#34;&#34;
+        return (a - b) &gt; cls.TOLERANCE
+
+    @classmethod
+    def less_equal(cls, a: float, b: float) -&gt; bool:
+        &#34;&#34;&#34;Check if a is less than or almost equal to b considering the defined tolerance.&#34;&#34;&#34;
+        return cls.less_than(a, b) or cls.equal(a, b)
+
+    @classmethod
+    def greater_equal(cls, a: float, b: float) -&gt; bool:
+        &#34;&#34;&#34;Check if a is greater than or almost equal to b considering the defined tolerance.&#34;&#34;&#34;
+        return cls.greater_than(a, b) or cls.equal(a, b)</code></pre>
+</details>
+<div class="desc"><p>Utility class for floating point math with a defined tolerance.</p></div>
+<h3>Class variables</h3>
+<dl>
+<dt id="fpdf.util.FloatTolerance.TOLERANCE"><code class="name">var <span class="ident">TOLERANCE</span></code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="fpdf.util.FloatTolerance.equal"><code class="name flex">
+<span>def <span class="ident">equal</span></span>(<span>a: float, b: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if two floats are almost equal within the defined tolerance.</p></div>
+</dd>
+<dt id="fpdf.util.FloatTolerance.greater_equal"><code class="name flex">
+<span>def <span class="ident">greater_equal</span></span>(<span>a: float, b: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a is greater than or almost equal to b considering the defined tolerance.</p></div>
+</dd>
+<dt id="fpdf.util.FloatTolerance.greater_than"><code class="name flex">
+<span>def <span class="ident">greater_than</span></span>(<span>a: float, b: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a is greater than b considering the defined tolerance.</p></div>
+</dd>
+<dt id="fpdf.util.FloatTolerance.is_zero"><code class="name flex">
+<span>def <span class="ident">is_zero</span></span>(<span>a: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a float is almost zero within the defined tolerance.</p></div>
+</dd>
+<dt id="fpdf.util.FloatTolerance.less_equal"><code class="name flex">
+<span>def <span class="ident">less_equal</span></span>(<span>a: float, b: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a is less than or almost equal to b considering the defined tolerance.</p></div>
+</dd>
+<dt id="fpdf.util.FloatTolerance.less_than"><code class="name flex">
+<span>def <span class="ident">less_than</span></span>(<span>a: float, b: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if a is less than b considering the defined tolerance.</p></div>
+</dd>
+<dt id="fpdf.util.FloatTolerance.not_equal"><code class="name flex">
+<span>def <span class="ident">not_equal</span></span>(<span>a: float, b: float) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Check if two floats are not almost equal within the defined tolerance.</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="fpdf.util.Padding"><code class="flex name class">
+<span>class <span class="ident">Padding</span></span>
+<span>(</span><span>top: float = 0, right: float = 0, bottom: float = 0, left: float = 0)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L40-L77" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Padding(NamedTuple):
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+    @classmethod
+    def new(cls, padding: Union[Number, Sequence[Number], &#34;Padding&#34;]) -&gt; &#34;Padding&#34;:
+        &#34;&#34;&#34;Return a 4-tuple of padding values from a single value or a 2, 3 or 4-tuple according to CSS rules&#34;&#34;&#34;
+        if isinstance(padding, NumberClass):
+            return Padding(
+                float(padding), float(padding), float(padding), float(padding)
+            )
+        if len(padding) == 2:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[0]),
+                float(padding[1]),
+            )
+        if len(padding) == 3:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[1]),
+            )
+        if len(padding) == 4:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[3]),
+            )
+
+        raise ValueError(
+            f&#34;padding shall be a number or a sequence of 2, 3 or 4 numbers, got {str(padding)}&#34;
+        )</code></pre>
+</details>
+<div class="desc"><p>Padding(top, right, bottom, left)</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Static methods</h3>
+<dl>
+<dt id="fpdf.util.Padding.new"><code class="name flex">
+<span>def <span class="ident">new</span></span>(<span>padding: int | float | decimal.Decimal | Sequence[int | float | decimal.Decimal] | <a title="fpdf.util.Padding" href="#fpdf.util.Padding">Padding</a>) ‑> <a title="fpdf.util.Padding" href="#fpdf.util.Padding">Padding</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return a 4-tuple of padding values from a single value or a 2, 3 or 4-tuple according to CSS rules</p></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="fpdf.util.Padding.bottom"><code class="name">var <span class="ident">bottom</span> : float</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L40-L77" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Padding(NamedTuple):
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+    @classmethod
+    def new(cls, padding: Union[Number, Sequence[Number], &#34;Padding&#34;]) -&gt; &#34;Padding&#34;:
+        &#34;&#34;&#34;Return a 4-tuple of padding values from a single value or a 2, 3 or 4-tuple according to CSS rules&#34;&#34;&#34;
+        if isinstance(padding, NumberClass):
+            return Padding(
+                float(padding), float(padding), float(padding), float(padding)
+            )
+        if len(padding) == 2:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[0]),
+                float(padding[1]),
+            )
+        if len(padding) == 3:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[1]),
+            )
+        if len(padding) == 4:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[3]),
+            )
+
+        raise ValueError(
+            f&#34;padding shall be a number or a sequence of 2, 3 or 4 numbers, got {str(padding)}&#34;
+        )</code></pre>
+</details>
+<div class="desc"><p>Alias for field number 2</p></div>
+</dd>
+<dt id="fpdf.util.Padding.left"><code class="name">var <span class="ident">left</span> : float</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L40-L77" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Padding(NamedTuple):
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+    @classmethod
+    def new(cls, padding: Union[Number, Sequence[Number], &#34;Padding&#34;]) -&gt; &#34;Padding&#34;:
+        &#34;&#34;&#34;Return a 4-tuple of padding values from a single value or a 2, 3 or 4-tuple according to CSS rules&#34;&#34;&#34;
+        if isinstance(padding, NumberClass):
+            return Padding(
+                float(padding), float(padding), float(padding), float(padding)
+            )
+        if len(padding) == 2:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[0]),
+                float(padding[1]),
+            )
+        if len(padding) == 3:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[1]),
+            )
+        if len(padding) == 4:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[3]),
+            )
+
+        raise ValueError(
+            f&#34;padding shall be a number or a sequence of 2, 3 or 4 numbers, got {str(padding)}&#34;
+        )</code></pre>
+</details>
+<div class="desc"><p>Alias for field number 3</p></div>
+</dd>
+<dt id="fpdf.util.Padding.right"><code class="name">var <span class="ident">right</span> : float</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L40-L77" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Padding(NamedTuple):
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+    @classmethod
+    def new(cls, padding: Union[Number, Sequence[Number], &#34;Padding&#34;]) -&gt; &#34;Padding&#34;:
+        &#34;&#34;&#34;Return a 4-tuple of padding values from a single value or a 2, 3 or 4-tuple according to CSS rules&#34;&#34;&#34;
+        if isinstance(padding, NumberClass):
+            return Padding(
+                float(padding), float(padding), float(padding), float(padding)
+            )
+        if len(padding) == 2:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[0]),
+                float(padding[1]),
+            )
+        if len(padding) == 3:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[1]),
+            )
+        if len(padding) == 4:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[3]),
+            )
+
+        raise ValueError(
+            f&#34;padding shall be a number or a sequence of 2, 3 or 4 numbers, got {str(padding)}&#34;
+        )</code></pre>
+</details>
+<div class="desc"><p>Alias for field number 1</p></div>
+</dd>
+<dt id="fpdf.util.Padding.top"><code class="name">var <span class="ident">top</span> : float</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/py-pdf/fpdf2/blob/40c4df3e600ca032a287a273c96b21048c35cc52/fpdf/util.py#L40-L77" class="git-link" target="_blank">Browse git</a>
+</summary>
+<pre><code class="python">class Padding(NamedTuple):
+    top: float = 0
+    right: float = 0
+    bottom: float = 0
+    left: float = 0
+
+    @classmethod
+    def new(cls, padding: Union[Number, Sequence[Number], &#34;Padding&#34;]) -&gt; &#34;Padding&#34;:
+        &#34;&#34;&#34;Return a 4-tuple of padding values from a single value or a 2, 3 or 4-tuple according to CSS rules&#34;&#34;&#34;
+        if isinstance(padding, NumberClass):
+            return Padding(
+                float(padding), float(padding), float(padding), float(padding)
+            )
+        if len(padding) == 2:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[0]),
+                float(padding[1]),
+            )
+        if len(padding) == 3:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[1]),
+            )
+        if len(padding) == 4:
+            return Padding(
+                float(padding[0]),
+                float(padding[1]),
+                float(padding[2]),
+                float(padding[3]),
+            )
+
+        raise ValueError(
+            f&#34;padding shall be a number or a sequence of 2, 3 or 4 numbers, got {str(padding)}&#34;
+        )</code></pre>
+</details>
+<div class="desc"><p>Alias for field number 0</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fpdf" href="index.html">fpdf</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="fpdf.util.buffer_subst" href="#fpdf.util.buffer_subst">buffer_subst</a></code></li>
+<li><code><a title="fpdf.util.builtin_srgb2014_bytes" href="#fpdf.util.builtin_srgb2014_bytes">builtin_srgb2014_bytes</a></code></li>
+<li><code><a title="fpdf.util.convert_unit" href="#fpdf.util.convert_unit">convert_unit</a></code></li>
+<li><code><a title="fpdf.util.escape_parens" href="#fpdf.util.escape_parens">escape_parens</a></code></li>
+<li><code><a title="fpdf.util.format_number" href="#fpdf.util.format_number">format_number</a></code></li>
+<li><code><a title="fpdf.util.get_parsed_unicode_range" href="#fpdf.util.get_parsed_unicode_range">get_parsed_unicode_range</a></code></li>
+<li><code><a title="fpdf.util.get_scale_factor" href="#fpdf.util.get_scale_factor">get_scale_factor</a></code></li>
+<li><code><a title="fpdf.util.int2roman" href="#fpdf.util.int2roman">int2roman</a></code></li>
+<li><code><a title="fpdf.util.int_to_letters" href="#fpdf.util.int_to_letters">int_to_letters</a></code></li>
+<li><code><a title="fpdf.util.number_to_str" href="#fpdf.util.number_to_str">number_to_str</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fpdf.util.FloatTolerance" href="#fpdf.util.FloatTolerance">FloatTolerance</a></code></h4>
+<ul class="two-column">
+<li><code><a title="fpdf.util.FloatTolerance.TOLERANCE" href="#fpdf.util.FloatTolerance.TOLERANCE">TOLERANCE</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.equal" href="#fpdf.util.FloatTolerance.equal">equal</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.greater_equal" href="#fpdf.util.FloatTolerance.greater_equal">greater_equal</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.greater_than" href="#fpdf.util.FloatTolerance.greater_than">greater_than</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.is_zero" href="#fpdf.util.FloatTolerance.is_zero">is_zero</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.less_equal" href="#fpdf.util.FloatTolerance.less_equal">less_equal</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.less_than" href="#fpdf.util.FloatTolerance.less_than">less_than</a></code></li>
+<li><code><a title="fpdf.util.FloatTolerance.not_equal" href="#fpdf.util.FloatTolerance.not_equal">not_equal</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="fpdf.util.Padding" href="#fpdf.util.Padding">Padding</a></code></h4>
+<ul class="">
+<li><code><a title="fpdf.util.Padding.bottom" href="#fpdf.util.Padding.bottom">bottom</a></code></li>
+<li><code><a title="fpdf.util.Padding.left" href="#fpdf.util.Padding.left">left</a></code></li>
+<li><code><a title="fpdf.util.Padding.new" href="#fpdf.util.Padding.new">new</a></code></li>
+<li><code><a title="fpdf.util.Padding.right" href="#fpdf.util.Padding.right">right</a></code></li>
+<li><code><a title="fpdf.util.Padding.top" href="#fpdf.util.Padding.top">top</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
