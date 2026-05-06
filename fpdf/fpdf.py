@@ -223,6 +223,10 @@ class ToCPlaceholder(NamedTuple):
     pages: int = 1
     reset_page_indices: bool = True
 
+    @property
+    def end_page(self) -> int:
+        return self.start_page + self.pages - 1
+
 
 # Disabling this check due to the "format" parameter below:
 # pylint: disable=redefined-builtin
@@ -1146,13 +1150,20 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         stretching = self.font_stretching
         char_spacing = self.char_spacing
         dash_pattern = self.dash_pattern
-
-        in_toc_extra_page = (
-            self.in_toc_rendering
-            and self._toc_allow_page_insertion
-            and self.page > self.toc_placeholder.start_page  # type: ignore[union-attr]
+        in_toc_page = (
+            self.toc_placeholder is not None
+            and self.toc_placeholder.start_page
+            <= self.page
+            <= self.toc_placeholder.end_page
         )
-        if self.page > 0 and (not self.in_toc_rendering or in_toc_extra_page):
+        in_toc_extra_page = (
+            self._toc_allow_page_insertion
+            and self.toc_placeholder is not None
+            and self.page > self.toc_placeholder.end_page
+        )
+        in_toc = self.in_toc_rendering and (in_toc_page or in_toc_extra_page)
+        not_in_toc = not self.in_toc_rendering and not in_toc_page
+        if self.page > 0 and not_in_toc or in_toc:
             # Page footer
             self._render_footer()
 
@@ -1243,15 +1254,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
 
     def _render_footer(self) -> None:
         self.in_footer = True
-        if self.toc_placeholder:
-            # The ToC is rendered AFTER the footer,
-            # so we must ensure there is no "style leak":
-            self._push_local_stack()
-            self._start_local_context()
         self.footer()
-        if self.toc_placeholder:
-            self._end_local_context()
-            self._pop_local_stack()
         self.in_footer = False
 
     def _beginpage(
@@ -1475,7 +1478,8 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
     @contextmanager
     @check_page
     def drawing_context(
-        self, debug_stream: Optional[bool] = None  # pylint: disable=unused-argument
+        self,
+        debug_stream: Optional[bool] = None,  # pylint: disable=unused-argument
     ) -> Generator[DrawingContext, None, None]:
         """
         Create a context for drawing paths on the current page.
@@ -1639,7 +1643,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
             if gap:
                 dstr = f"[{dash * self.k:.3f} {gap * self.k:.3f}] {phase *self.k:.3f} d"
             else:
-                dstr = f"[{dash * self.k:.3f}] {phase *self.k:.3f} d"
+                dstr = f"[{dash * self.k:.3f}] {phase * self.k:.3f} d"
         else:
             dstr = "[] 0 d"
         self._out(dstr)
