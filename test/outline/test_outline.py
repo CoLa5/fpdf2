@@ -181,6 +181,7 @@ def test_toc_with_nb_and_footer(tmp_path):  # issue-548
         def footer(self):
             self.set_y(-15)
             self.set_font("helvetica", style="I", size=8)
+            self.set_text_color("#ff0000")
             self.cell(0, 10, f"Page {self.page_no()}/{{nb}}", align="C")
 
     pdf = TestPDF()
@@ -540,16 +541,16 @@ def test_toc_extra_pages_with_labels(tmp_path, test_number):
         },
     ]
 
-    def footer():
-        if pdf.page == 1:
-            return
-        pdf.set_y(pdf.h - 10)
-        pdf.set_font("helvetica", "", 12)
-        pdf.cell(text=pdf.get_page_label(), center=True)
+    class CustomFPDF(FPDF):
+        def footer(self):
+            if self.page == 1:
+                return
+            self.set_y(-15)
+            self.set_font("helvetica", size=12)
+            self.set_text_color("#ff0000")
+            self.cell(text=pdf.get_page_label(), center=True)
 
-    pdf = FPDF()
-    pdf.footer = footer
-
+    pdf = CustomFPDF()
     pdf.add_page()
     pdf.set_font("helvetica", "", 60)
     pdf.cell(w=pdf.epw, text="TITLE", align="C")
@@ -743,6 +744,7 @@ def test_footer_leaking_style_on_toc(tmp_path):
         def footer(self):
             self.set_y(-15)
             self.set_font("Helvetica", size=8)
+            self.set_text_color("#ff0000")
             self.cell(w=0, text=f"PAGE {self.get_page_label()}", align="C")
 
     pdf = CustomFPDF()
