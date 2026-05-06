@@ -1151,6 +1151,8 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         stretching = self.font_stretching
         char_spacing = self.char_spacing
         dash_pattern = self.dash_pattern
+
+        # Page footer (on non ToC-page and on ToC-page, if rendering ToC)
         in_toc_page = (
             self.toc_placeholder is not None
             and self.toc_placeholder.start_page
@@ -1165,7 +1167,6 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         in_toc = self.in_toc_rendering and (in_toc_page or in_toc_extra_page)
         not_in_toc = not self.in_toc_rendering and not in_toc_page
         if self.page > 0 and not_in_toc or in_toc:
-            # Page footer
             self._render_footer()
 
         current_page_label = (
@@ -1224,6 +1225,14 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
             self._out(fc.serialize().lower())
         self.text_color = tc
 
+        # Set stretching, character spacing and dash pattern
+        if stretching != 100:
+            self.set_stretching(stretching)
+        if char_spacing != 0:
+            self.set_char_spacing(char_spacing)
+        if dash_pattern != dict(dash=0, gap=0, phase=0):
+            self.set_dash_pattern(**dash_pattern)
+
         # BEGIN Page header
         if (not self.in_toc_rendering) or self._toc_allow_page_insertion:
             self.header()
@@ -1243,14 +1252,12 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
             self._out(fc.serialize().lower())
         self.text_color = tc
 
-        if stretching != 100:  # Restore stretching
+        if self.font_stretching != stretching:  # Restore stretching
             self.set_stretching(stretching)
-        if char_spacing != 0:
+        if self.char_spacing != char_spacing:  # Restore char spacing
             self.set_char_spacing(char_spacing)
-        if dash_pattern != dict(dash=0, gap=0, phase=0):
-            self._write_dash_pattern(
-                dash_pattern["dash"], dash_pattern["gap"], dash_pattern["phase"]
-            )
+        if self.dash_pattern != dash_pattern:  # Restore dash pattern
+            self.set_dash_pattern(**dash_pattern)
         # END Page header
 
     def _render_footer(self) -> None:
@@ -5924,6 +5931,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         self.in_toc_rendering = True
         self._set_orientation(tocp.page_orientation, self.dw_pt, self.dh_pt)
         tocp.render_function(self, self._outline)
+        self._render_footer()
         self.in_toc_rendering = False  # set ToC rendering flag off
         expected_final_page = tocp.start_page + tocp.pages - 1
         if self.page != expected_final_page and not self._toc_allow_page_insertion:
@@ -5932,8 +5940,6 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
             error_msg += f"ToC ended on page {self.page} while it was expected to span exactly {tocp.pages} pages"
             raise FPDFException(error_msg)
         if self._toc_inserted_pages:
-            # Generating final page footer after more pages were inserted:
-            self._render_footer()
             # We need to reorder the pages, because some new pages have been inserted in the ToC,
             # but they have been inserted at the end of self.pages:
             new_pages = [
