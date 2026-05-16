@@ -310,8 +310,9 @@ def test_multi_cell_markdown_dry_run_lines_output_print(tmp_path):
     text = (
         LOREM_IPSUM[: len(LOREM_IPSUM) // 2]
         + "\n**Start** ~~test~~ "
-        + "[fpdf2 github](https://github.com/py-pdf/fpdf2) "
-        + "--test--\n__End__ "
+        # Note: Order matters - test that text will be underlined after link
+        + "[fpdf2 github](https://github.com/py-pdf/fpdf2) --test--\n"
+        + "__End__ "
         + LOREM_IPSUM[len(LOREM_IPSUM) // 2 :]
     )
 
@@ -356,8 +357,10 @@ def test_multi_cell_markdown_dry_run_lines_output_escape(tmp_path):
     # Test that escaped markdown markers stay escaped
     text = (
         LOREM_IPSUM[: len(LOREM_IPSUM) // 2]
-        + "\n**Start** \\** [fpdf2 **github**](https://github.com/py-pdf/fpdf2) "
-        + "\\__ \\~~ \\--\n__End__ "  # Important test underline after link
+        + "\n**Start** \\** "
+        + "[fpdf2 **github**](https://github.com/py-pdf/fpdf2) \\__ "
+        + "\\~~ \\-- \\\\ \\\\\\\\ \n"
+        + "__End__ "
         + LOREM_IPSUM[len(LOREM_IPSUM) // 2 :]
     )
 
@@ -394,5 +397,7 @@ def test_multi_cell_markdown_dry_run_lines_output_escape(tmp_path):
     )
 
     assert_pdf_equal(
-        pdf, HERE / "multi_cell_markdown_dry_run_lines_output_escape.pdf", tmp_path
+        pdf,
+        HERE / "multi_cell_markdown_dry_run_lines_output_escape.pdf",
+        tmp_path,
     )

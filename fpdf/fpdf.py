@@ -4774,8 +4774,8 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
             }
             marker_pattern: str = "|".join(
                 re.escape(m)
-                for te, m in emphasis_markers.items()
-                if te != TextEmphasis.NONE
+                for m in (*emphasis_markers.values(), self.MARKDOWN_ESCAPE_CHARACTER)
+                if m
             )
             escape_pattern: re.Pattern[str] = re.compile(rf"({marker_pattern:s})")
 
