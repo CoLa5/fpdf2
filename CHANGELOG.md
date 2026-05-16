@@ -19,6 +19,7 @@ This can also be enabled programmatically with `warnings.simplefilter('default',
 ## [2.8.8] - Not released yet
 ### Added
 * Punjabi (pa) tutorial translation - thanks to @Pawansingh3889
+* basic support for SVG `<symbol>` elements in the SVG parser
 * `resource_access_policy` and [Security considerations](https://py-pdf.github.io/fpdf2/Security.html) documentation
 ### Fixed
 * text rendering when the first text on a page starts with a fallback glyph - _cf._ [issue #1772](https://github.com/py-pdf/fpdf2/issues/1772)
@@ -28,6 +29,7 @@ This can also be enabled programmatically with `warnings.simplefilter('default',
 * preserve link annotations during dry-run of `FPDF.multi_cell` - _cf._ [issue #1807](https://github.com/py-pdf/fpdf2/issues/1807)
 * preserve two consecutive markdown links (without space inbetween) - _cf._ [issue #1814](https://github.com/py-pdf/fpdf2/issues/1814)
 * support markdown style around markdown links - _cf._ [issue #1826](https://github.com/py-pdf/fpdf2/issues/1826)
+* Reset gstate for ToC-rendering - _cf._ [issue #1837](https://github.com/py-pdf/fpdf2/issues/1837)
 * preserve markdown format in `FPDF.multi_cell` in dry-run - _cf._ [issue #1840](https://github.com/py-pdf/fpdf2/issues/1840)
 * fix page order after dry-run of `FPDF.multi_cell` in ToC - _cf._ [issue #1836](https://github.com/py-pdf/fpdf2/issues/1836)
 * rendering SVG arcs with very small sweeps that previously rounded to zero - _cf._ [issue #1831](https://github.com/py-pdf/fpdf2/issues/1831)
