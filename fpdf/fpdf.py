@@ -4481,77 +4481,6 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
             yield Fragment(text, self._get_current_graphics_state(), self.k)
             return
 
-        if not markdown:
-            current_chars: list[str] = []
-            current_fallback_font: Optional[str] = None
-            current_text_script: Optional[UnicodeScript] = None
-            font_glyphs: dict[int, str] = self.current_font.cmap if self.is_ttf_font else {}  # type: ignore[union-attr]
-
-            def frag() -> Iterator[Fragment]:
-                nonlocal current_chars, current_fallback_font, current_text_script
-                if not current_chars:
-                    return
-                gstate = self._get_current_graphics_state()
-                if current_fallback_font:
-                    gstate.current_font = self.fonts[current_fallback_font]
-                    gstate.font_family = current_fallback_font.replace("B", "").replace(
-                        "I", ""
-                    )
-                    gstate.font_style = "".join(
-                        c for c in current_fallback_font[-2:] if c in "BI"
-                    )
-                    current_fallback_font = None
-                    current_text_script = None
-                fragment = Fragment(current_chars, gstate, self.k)
-                current_chars = []
-                yield fragment
-
-            i = 0
-            n = len(text)
-            while i < n:
-                # Handle alias for total number of pages in document
-                if (
-                    self.str_alias_nb_pages
-                    and text[i : i + len(self.str_alias_nb_pages)]
-                    == self.str_alias_nb_pages
-                ):
-                    yield from frag()
-                    yield TotalPagesSubstitutionFragment(
-                        self.str_alias_nb_pages,
-                        self._get_current_graphics_state(),
-                        self.k,
-                    )
-                    i += len(self.str_alias_nb_pages)
-                    continue
-                # Handle change of `UnicodeScript`
-                text_script = get_unicode_script(text[i])
-                if text_script not in (
-                    UnicodeScript.COMMON,
-                    UnicodeScript.UNKNOWN,
-                    current_text_script,
-                ):
-                    if current_text_script:
-                        yield from frag()
-                    current_text_script = text_script
-                # Handle character in fallback font
-                if (
-                    self.is_ttf_font
-                    and text[i] != "\n"
-                    and ord(text[i]) not in font_glyphs
-                ):
-                    fallback_font = self.get_fallback_font(text[i], self.font_style)
-                else:
-                    fallback_font = None
-                if fallback_font != current_fallback_font:
-                    yield from frag()
-                    current_fallback_font = fallback_font
-                # Handle all other characters
-                current_chars.append(text[i])
-                i += 1
-            # Final fragment
-            yield from frag()
-            return
-
         current_chars: list[str] = []
         current_fallback_font: Optional[str] = None
         current_text_script: Optional[UnicodeScript] = None
@@ -4593,10 +4522,12 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
         )
         for chars, emph, link, link_color in text_emph_iter:
             # Merge local emphasis (markdown style) with global emphasis
-            emph |= global_emphasis
+            emph |= global_emphasis  # pylint: disable=redefined-loop-name
             # Handle a digit-based link as link to a page number
             if isinstance(link, str) and link.isdigit():
-                link = self.add_link(page=int(link))
+                link = self.add_link(  # pylint: disable=redefined-loop-name
+                    page=int(link)
+                )
 
             i = 0
             n = len(chars)
