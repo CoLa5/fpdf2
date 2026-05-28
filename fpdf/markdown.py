@@ -240,10 +240,12 @@ class MarkdownMixin(ABC):
             if current_emphasis != TextEmphasis.NONE:
                 return
             for t in tokens:
-                # assert t.text
+                if not t.text and not t.link:
+                    continue
                 if t.link:
                     yield t.text, t.emphasis | t.link_emphasis, t.link, link_color
-                yield t.text, t.emphasis, None, None
+                else:
+                    yield t.text, t.emphasis, None, None
             tokens = []
 
         i = 0
@@ -336,9 +338,6 @@ class MarkdownMixin(ABC):
             ):
                 tok.text += tokens[i + 1].text
                 del tokens[i + 1]
-            # Delete empty token (but not first one)
-            if i > 0 and not tok:
-                del tokens[i]
             current_emphasis = new_emphasis
         if current_emphasis != TextEmphasis.NONE:
             new_emphasis = current_emphasis & tokens[0].emphasis

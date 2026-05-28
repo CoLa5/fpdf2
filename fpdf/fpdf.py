@@ -4054,7 +4054,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
             self._add_quad_points(self.x, self.y, w, h)
 
         s_start = self.x
-        s_width: float = 0
+        s_width: float = 0.0
         # We try to avoid modifying global settings for temporary changes.
         current_ws = frag_ws = 0.0
         current_lift = 0.0
@@ -4100,6 +4100,8 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                         wrap_in_text_object=False,
                     )
                 )
+            # Fragment links: last fragment index, link destination, start width, link width, max font size of composing fragments
+            frag_links: list[tuple[int, int | str, float, float, float]] = []
             underlines: list[
                 tuple[
                     float,
@@ -4229,18 +4231,44 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                         )
                     )
                 if frag.link:
-                    self.link(
-                        x=self.x + dx + s_width,
-                        y=self.y + (0.5 * h) - (0.5 * frag.font_size),
-                        w=frag_width,
-                        h=frag.font_size,
-                        link=frag.link,
-                    )
+                    if (
+                        frag_links
+                        # Consecutive fragments
+                        and i == frag_links[-1][0] + 1
+                        # Fragments with equal link destination
+                        and frag.link == frag_links[-1][1]
+                    ):
+                        frag_links[-1] = (
+                            i,
+                            *frag_links[-1][1:3],
+                            frag_links[-1][3] + frag_width,
+                            max(frag_links[-1][4], frag.font_size),
+                        )
+                    else:
+                        frag_links.append(
+                            (
+                                i,
+                                frag.link,
+                                self.x + dx + s_width,
+                                frag_width,
+                                frag.font_size,
+                            )
+                        )
                 if not frag.is_ttf_font:
                     current_ws = frag_ws
                 s_width += frag_width
 
             sl.append("ET")
+
+            if frag_links:
+                for _, link_dest, x0, w_link, max_font_size in frag_links:
+                    self.link(
+                        x=x0,
+                        y=self.y + 0.5 * (h - max_font_size),
+                        w=w_link,
+                        h=max_font_size,
+                        link=link_dest,
+                    )
 
             # Underlines & strikethrough must be rendred OUTSIDE BT/ET contexts,
             # cf. https://github.com/py-pdf/fpdf2/issues/1456
