@@ -237,6 +237,47 @@ def test_multi_cell_markdown_link_inner_style(tmp_path):
     assert_pdf_equal(pdf, HERE / "multi_cell_markdown_link_inner_style.pdf", tmp_path)
 
 
+def test_multi_cell_markdown_link_mixed_style(tmp_path):
+    # Mixed inner and outer link styles
+    styles = (
+        ("Bold", "**"),
+        ("Italics", "__"),
+        ("Strikethrough", "~~"),
+        ("Underline", "--"),
+    )
+    style_combinations = []
+    for i in range(1, len(styles) + 1):
+        for combo in itertools.combinations(styles, i):
+            style = "-".join(c[0] for c in combo)
+            marker = "".join(c[1] for c in combo)
+            style_combinations.append((style, marker))
+
+    pdf = fpdf.FPDF()
+    pdf.set_font("Helvetica")
+    pdf.add_page()
+
+    for link_color, link_underline in itertools.product(
+        (None, "#0000ff"),
+        (False, True),
+    ):
+        pdf.MARKDOWN_LINK_COLOR = link_color
+        pdf.MARKDOWN_LINK_UNDERLINE = link_underline
+        for style, marker in style_combinations:
+            for i in range(2, len(marker), 2):
+                m1 = marker[:i]
+                m2 = marker[i:]
+                pdf.multi_cell(
+                    pdf.epw,
+                    text=f"**Start** {m1:s}[{m2:s}{style:s}{m2:s} Link](https://github.com/py-pdf/fpdf2){m1:s} __End__",
+                    markdown=True,
+                    new_x="left",
+                    new_y="next",
+                )
+        pdf.ln()
+
+    assert_pdf_equal(pdf, HERE / "multi_cell_markdown_link_mixed_style.pdf", tmp_path)
+
+
 def test_multi_cell_markdown_link_outer_style(tmp_path):
     styles = (
         ("Bold", "**"),
