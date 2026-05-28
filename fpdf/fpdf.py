@@ -4100,10 +4100,12 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                         wrap_in_text_object=False,
                     )
                 )
-            # Fragment links: last fragment index, link destination, start width, link width, max font size of composing fragments
-            frag_links: list[tuple[int, int | str, float, float, float]] = []
+            # Underlines / strikethroughs:
+            # last fragment index, start pos, line width, font, font size,
+            # text color
             underlines: list[
                 tuple[
+                    int,
                     float,
                     float,
                     CoreFont | TTFFont,
@@ -4113,6 +4115,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
             ] = []
             strikethroughs: list[
                 tuple[
+                    int,
                     float,
                     float,
                     CoreFont | TTFFont,
@@ -4120,6 +4123,11 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                     DeviceRGB | DeviceGray | DeviceCMYK | None,
                 ]
             ] = []
+            # Fragment links:
+            # last fragment index, link destination, start pos, link width,
+            # font size
+            frag_links: list[tuple[int, int | str, float, float, float]] = []
+
             for i, frag in enumerate(fragments):
                 if isinstance(frag, TotalPagesSubstitutionFragment):
                     self.pages[self.page].add_text_substitution(frag)
@@ -4211,38 +4219,73 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                     initial_cs=i != 0
                 ) + word_spacing * frag.characters.count(" ")
                 if frag.underline:
-                    underlines.append(
-                        (
-                            self.x + dx + s_width,
-                            frag_width,
-                            frag.font,
-                            frag.font_size,
-                            frag.text_color,
+                    # Draw a single line for consecutive fragments with equal
+                    # font, font size, text color
+                    if (
+                        underlines
+                        and i == underlines[-1][0] + 1
+                        and frag.font == underlines[-1][3]
+                        and FloatTolerance.equal(frag.font_size, underlines[-1][4])
+                        and frag.text_color == underlines[-1][5]
+                    ):
+                        underlines[-1] = (
+                            i,
+                            underlines[-1][1],
+                            underlines[-1][2] + frag_width,
+                            *underlines[-1][3:],
                         )
-                    )
+                    else:
+                        underlines.append(
+                            (
+                                i,
+                                self.x + dx + s_width,
+                                frag_width,
+                                frag.font,
+                                frag.font_size,
+                                frag.text_color,
+                            )
+                        )
                 if frag.strikethrough:
-                    strikethroughs.append(
-                        (
-                            self.x + dx + s_width,
-                            frag_width,
-                            frag.font,
-                            frag.font_size,
-                            frag.text_color,
+                    # Draw a single line for consecutive fragments with equal
+                    # font, font size, text color
+                    if (
+                        strikethroughs
+                        and i == strikethroughs[-1][0] + 1
+                        and frag.font == strikethroughs[-1][3]
+                        and FloatTolerance.equal(frag.font_size, strikethroughs[-1][4])
+                        and frag.text_color == strikethroughs[-1][5]
+                    ):
+                        strikethroughs[-1] = (
+                            i,
+                            strikethroughs[-1][1],
+                            strikethroughs[-1][2] + frag_width,
+                            *strikethroughs[-1][3:],
                         )
-                    )
+                    else:
+                        strikethroughs.append(
+                            (
+                                i,
+                                self.x + dx + s_width,
+                                frag_width,
+                                frag.font,
+                                frag.font_size,
+                                frag.text_color,
+                            )
+                        )
                 if frag.link:
+                    # Add a single link annotation for consecutive fragments
+                    # with equal link destination and font size
                     if (
                         frag_links
-                        # Consecutive fragments
                         and i == frag_links[-1][0] + 1
-                        # Fragments with equal link destination
                         and frag.link == frag_links[-1][1]
+                        and FloatTolerance.equal(frag.font_size, frag_links[-1][4])
                     ):
                         frag_links[-1] = (
                             i,
                             *frag_links[-1][1:3],
                             frag_links[-1][3] + frag_width,
-                            max(frag_links[-1][4], frag.font_size),
+                            frag_links[-1][4],
                         )
                     else:
                         frag_links.append(
@@ -4273,7 +4316,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
             # Underlines & strikethrough must be rendred OUTSIDE BT/ET contexts,
             # cf. https://github.com/py-pdf/fpdf2/issues/1456
             if underlines:
-                for start_x, width, font, font_size, text_color in underlines:
+                for _, start_x, width, font, font_size, text_color in underlines:
                     # Change color of the underlines
                     if text_color != last_used_color:
                         last_used_color = text_color
@@ -4286,7 +4329,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                         )
                     )
             if strikethroughs:
-                for start_x, width, font, font_size, text_color in strikethroughs:
+                for _, start_x, width, font, font_size, text_color in strikethroughs:
                     # Change color of the strikethroughs
                     if text_color != last_used_color:
                         last_used_color = text_color
