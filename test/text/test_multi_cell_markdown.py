@@ -384,11 +384,11 @@ def test_multi_cell_markdown_link_sequence(tmp_path):
 @pytest.mark.parametrize(
     "text",
     [
-        "**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2)\n__End__",
+        "**Start** [fpdf2 __github__](https://github.com/py-pdf/fpdf2)\n__End__",
         LOREM_IPSUM
-        + "\n**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2)\n__End__",
+        + "\n**Start** [fpdf2 __github__](https://github.com/py-pdf/fpdf2)\n__End__",
         LOREM_IPSUM[: len(LOREM_IPSUM) // 2]
-        + " **\nStart** [fpdf2 github](https://github.com/py-pdf/fpdf2)\n__End__ "
+        + " **\nStart** [fpdf2 __github__](https://github.com/py-pdf/fpdf2)\n__End__ "
         + LOREM_IPSUM[len(LOREM_IPSUM) // 2 :],
     ],
 )
@@ -406,23 +406,23 @@ def test_multi_cell_markdown_dry_run_lines_output(text):
         new_y="next",
         output=fpdf.enums.MethodReturnValue.LINES,
     )
-
+    joined_text = "\n".join(lines)
     # The parts of the special markdown text must be in the lines list, but not
     # in the same line
-    assert any("**Start**" in line for line in lines)
+
+    assert any("**Start**" in line for line in lines), joined_text
     assert any(
-        "[fpdf2 github](https://github.com/py-pdf/fpdf2)" in line for line in lines
-    )
-    assert any("__End__" in line for line in lines)
+        "[fpdf2 __github__](https://github.com/py-pdf/fpdf2)" in line for line in lines
+    ), joined_text
+    assert any("__End__" in line for line in lines), joined_text
     start_line = next(i for i, line in enumerate(lines) if "**Start**" in line)
     end_line = next(i for i, line in enumerate(lines) if "__End__" in line)
-    assert start_line + 1 == end_line
+    assert start_line + 1 == end_line, joined_text
 
-    parsed_text = "\n".join(lines)
     assert (
-        "**Start** [fpdf2 github](https://github.com/py-pdf/fpdf2)\n__End__"
-        in parsed_text
-    )
+        "**Start** [fpdf2 __github__](https://github.com/py-pdf/fpdf2)\n__End__"
+        in joined_text
+    ), joined_text
 
 
 def test_multi_cell_markdown_dry_run_lines_output_print(tmp_path):
@@ -431,7 +431,7 @@ def test_multi_cell_markdown_dry_run_lines_output_print(tmp_path):
         LOREM_IPSUM[: len(LOREM_IPSUM) // 2]
         + "\n**Start** ~~test~~ "
         # Note: Order matters - test that text will be underlined after link
-        + "[fpdf2 github](https://github.com/py-pdf/fpdf2) --test--\n"
+        + "[fpdf2 __github__](https://github.com/py-pdf/fpdf2) --test--\n"
         + "__End__ "
         + LOREM_IPSUM[len(LOREM_IPSUM) // 2 :]
     )
@@ -478,7 +478,8 @@ def test_multi_cell_markdown_dry_run_lines_output_escape(tmp_path):
     text = (
         LOREM_IPSUM[: len(LOREM_IPSUM) // 2]
         + "\n**Start** \\** "
-        + "[fpdf2 **github**](https://github.com/py-pdf/fpdf2) \\__ "
+        # NOTE: Second bold marker inside of link text is implicitly escaped
+        + "[fpdf2 \\**github**](https://github.com/py-pdf/fpdf2) \\__ "
         + "\\~~ \\-- \\\\ \\\\\\\\ \n"
         + "__End__ "
         + LOREM_IPSUM[len(LOREM_IPSUM) // 2 :]
