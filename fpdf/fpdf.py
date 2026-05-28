@@ -14,7 +14,6 @@ import logging
 import math
 import mimetypes
 import os
-import re
 import sys
 import types
 import warnings
@@ -148,6 +147,7 @@ from .line_break import (
     TotalPagesSubstitutionFragment,
 )
 from .linearization import LinearizedOutputProducer
+from .markdown import MarkdownMixin
 from .outline import OutlineSection
 from .output import (
     ZOOM_CONFIGS,
@@ -285,19 +285,10 @@ def check_page(fn: Callable[P, R]) -> Callable[P, R]:
     return wrapper
 
 
-class FPDF(GraphicsStateMixin, TextRegionMixin):
+class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
     "PDF Generation class"
 
-    MARKDOWN_BOLD_MARKER = "**"
-    MARKDOWN_ITALICS_MARKER = "__"
-    MARKDOWN_STRIKETHROUGH_MARKER = "~~"
-    MARKDOWN_UNDERLINE_MARKER = "--"
-    MARKDOWN_ESCAPE_CHARACTER = "\\"
-    MARKDOWN_LINK_REGEX = re.compile(r"^\[([^][]+)\]\(([^()]+)\)(.*)$", re.DOTALL)
-    MARKDOWN_LINK_COLOR = None
-    MARKDOWN_LINK_UNDERLINE = True
-
-    HTML2FPDF_CLASS = HTML2FPDF
+    HTML2FPDF_CLASS: type[HTML2FPDF] = HTML2FPDF
 
     def __init__(
         self,
@@ -1028,7 +1019,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         if image_filter == "JPXDecode":
             self._set_min_pdf_version("1.5")
 
-    def alias_nb_pages(self, alias: str = "{nb}") -> None:
+    def alias_nb_pages(self, alias: str | None = "{nb}") -> None:
         """
         Defines an alias for the total number of pages.
         It will be substituted as the document is closed.
@@ -4458,7 +4449,16 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         return fonts_with_char[0]
 
     def _parse_chars(self, text: str, markdown: bool) -> Iterator[Fragment]:
-        "Split text into fragments"
+        """Splits text into fragments.
+
+        Args:
+            text (str): The text to parse.
+            markdown (bool): Whether the text should be parsed by a markdown
+                parser.
+
+        Yields:
+            The fragments.
+        """
         if not markdown and not self.text_shaping and not self._fallback_font_ids:
             if self.str_alias_nb_pages:
                 for seq, fragment_text in enumerate(
@@ -4472,191 +4472,176 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
                         )
                     if fragment_text:
                         yield Fragment(
-                            fragment_text, self._get_current_graphics_state(), self.k
+                            fragment_text,
+                            self._get_current_graphics_state(),
+                            self.k,
                         )
                 return
 
             yield Fragment(text, self._get_current_graphics_state(), self.k)
             return
-        txt_frag: list[str] = []
-        in_bold: bool = "B" in self.font_style
-        in_italics: bool = "I" in self.font_style
-        in_strikethrough: bool = bool(self.strikethrough)
-        in_underline: bool = bool(self.underline)
-        current_fallback_font = None
-        current_text_script = None
 
-        def frag() -> Fragment:
-            nonlocal txt_frag, current_fallback_font, current_text_script
-            gstate = self._get_current_graphics_state()
-            gstate.font_style = ("B" if in_bold else "") + ("I" if in_italics else "")
-            gstate.strikethrough = in_strikethrough
-            gstate.underline = in_underline
-            if current_fallback_font:
-                style = "".join(c for c in current_fallback_font if c in ("BI"))
-                family = current_fallback_font.replace("B", "").replace("I", "")
-                gstate.font_family = family
-                gstate.font_style = style
-                gstate.current_font = self.fonts[current_fallback_font]
-                current_fallback_font = None
-                current_text_script = None
-            fragment = Fragment(
-                txt_frag,
-                gstate,
-                self.k,
-            )
-            txt_frag = []
-            return fragment
+        if not markdown:
+            current_chars: list[str] = []
+            current_fallback_font: Optional[str] = None
+            current_text_script: Optional[UnicodeScript] = None
+            font_glyphs: dict[int, str] = self.current_font.cmap if self.is_ttf_font else {}  # type: ignore[union-attr]
 
-        if self.is_ttf_font:
-            font_glyphs = self.current_font.cmap  # type: ignore[union-attr]
-        else:
-            font_glyphs = []
-
-        escape_next_marker = 0
-        escape_run = 0
-
-        while text:
-            if markdown and text[0] == self.MARKDOWN_ESCAPE_CHARACTER:
-                escape_run += 1
-                text = text[1:]
-                continue
-
-            if markdown and escape_run:
-                is_escape_target = text[:2] in (
-                    self.MARKDOWN_BOLD_MARKER,
-                    self.MARKDOWN_ITALICS_MARKER,
-                    self.MARKDOWN_STRIKETHROUGH_MARKER,
-                    self.MARKDOWN_UNDERLINE_MARKER,
-                )
-                if is_escape_target and escape_run % 2 == 1:
-                    for _ in range(escape_run // 2):
-                        txt_frag.append(self.MARKDOWN_ESCAPE_CHARACTER)
-                    if current_fallback_font:
-                        if txt_frag:
-                            yield frag()
-                        current_fallback_font = None
-                    escape_next_marker = 2
-                    escape_run = 0
-                    continue
-                for _ in range((escape_run + 1) // 2):
-                    txt_frag.append(self.MARKDOWN_ESCAPE_CHARACTER)
-                escape_run = 0
-
-            is_marker = text[:2] in (
-                self.MARKDOWN_BOLD_MARKER,
-                self.MARKDOWN_ITALICS_MARKER,
-                self.MARKDOWN_STRIKETHROUGH_MARKER,
-                self.MARKDOWN_UNDERLINE_MARKER,
-            )
-            if markdown and escape_next_marker:
-                is_marker = False
-            half_marker = text[0]
-            text_script = get_unicode_script(text[0])
-            if text_script not in (
-                UnicodeScript.COMMON,
-                UnicodeScript.UNKNOWN,
-                current_text_script,
-            ):
-                if txt_frag and current_text_script:
-                    yield frag()
-                current_text_script = text_script
-
-            if self.str_alias_nb_pages:
-                if text[: len(self.str_alias_nb_pages)] == self.str_alias_nb_pages:
-                    if txt_frag:
-                        yield frag()
-                    gstate = self._get_current_graphics_state()
-                    gstate.font_style = ("B" if in_bold else "") + (
-                        "I" if in_italics else ""
+            def frag() -> Iterator[Fragment]:
+                nonlocal current_chars, current_fallback_font, current_text_script
+                if not current_chars:
+                    return
+                gstate = self._get_current_graphics_state()
+                if current_fallback_font:
+                    gstate.current_font = self.fonts[current_fallback_font]
+                    gstate.font_family = current_fallback_font.replace("B", "").replace(
+                        "I", ""
                     )
-                    gstate.strikethrough = in_strikethrough
-                    gstate.underline = in_underline
+                    gstate.font_style = "".join(
+                        c for c in current_fallback_font[-2:] if c in "BI"
+                    )
+                    current_fallback_font = None
+                    current_text_script = None
+                fragment = Fragment(current_chars, gstate, self.k)
+                current_chars = []
+                yield fragment
+
+            i = 0
+            n = len(text)
+            while i < n:
+                # Handle alias for total number of pages in document
+                if (
+                    self.str_alias_nb_pages
+                    and text[i : i + len(self.str_alias_nb_pages)]
+                    == self.str_alias_nb_pages
+                ):
+                    yield from frag()
                     yield TotalPagesSubstitutionFragment(
                         self.str_alias_nb_pages,
-                        gstate,
+                        self._get_current_graphics_state(),
                         self.k,
                     )
-                    text = text[len(self.str_alias_nb_pages) :]
+                    i += len(self.str_alias_nb_pages)
                     continue
-
-            # Check that previous & next characters are not identical to the marker:
-            if markdown:
-                if (
-                    is_marker
-                    and (not txt_frag or txt_frag[-1] != half_marker)
-                    and (len(text) < 3 or text[2] != half_marker)
+                # Handle change of `UnicodeScript`
+                text_script = get_unicode_script(text[i])
+                if text_script not in (
+                    UnicodeScript.COMMON,
+                    UnicodeScript.UNKNOWN,
+                    current_text_script,
                 ):
-                    if txt_frag:
-                        yield frag()
-                    if text[:2] == self.MARKDOWN_BOLD_MARKER:
-                        in_bold = not in_bold
-                    if text[:2] == self.MARKDOWN_ITALICS_MARKER:
-                        in_italics = not in_italics
-                    if text[:2] == self.MARKDOWN_STRIKETHROUGH_MARKER:
-                        in_strikethrough = not in_strikethrough
-                    if text[:2] == self.MARKDOWN_UNDERLINE_MARKER:
-                        in_underline = not in_underline
-                    text = text[2:]
-                    continue
-
-                is_link = self.MARKDOWN_LINK_REGEX.match(text)
-                if is_link:
-                    link_text, link_dest, text = is_link.groups()
-                    if txt_frag:
-                        yield frag()
-                    gstate = self._get_current_graphics_state()
-                    gstate.font_style = ("B" if in_bold else "") + (
-                        "I" if in_italics else ""
-                    )
-                    gstate.strikethrough = in_strikethrough
-                    gstate.underline = self.MARKDOWN_LINK_UNDERLINE or in_underline
-                    if self.MARKDOWN_LINK_COLOR:
-                        gstate.text_color = convert_to_device_color(
-                            self.MARKDOWN_LINK_COLOR
-                        )
-                    try:
-                        page = int(link_dest)
-                        link_dest = self.add_link(page=page)
-                    except ValueError:
-                        pass
-                    yield Fragment(
-                        list(link_text),
-                        gstate,
-                        self.k,
-                        link=link_dest,
-                    )
-                    continue
-            if self.is_ttf_font and text[0] != "\n" and not ord(text[0]) in font_glyphs:
-                style = ("B" if in_bold else "") + ("I" if in_italics else "")
-                fallback_font = self.get_fallback_font(text[0], style)
-                if fallback_font:
-                    if fallback_font == current_fallback_font:
-                        txt_frag.append(text[0])
-                        text = text[1:]
-                        continue
-                    if txt_frag:
-                        yield frag()
+                    if current_text_script:
+                        yield from frag()
+                    current_text_script = text_script
+                # Handle character in fallback font
+                if (
+                    self.is_ttf_font
+                    and text[i] != "\n"
+                    and ord(text[i]) not in font_glyphs
+                ):
+                    fallback_font = self.get_fallback_font(text[i], self.font_style)
+                else:
+                    fallback_font = None
+                if fallback_font != current_fallback_font:
+                    yield from frag()
                     current_fallback_font = fallback_font
-                    txt_frag.append(text[0])
-                    text = text[1:]
-                    continue
+                # Handle all other characters
+                current_chars.append(text[i])
+                i += 1
+            # Final fragment
+            yield from frag()
+            return
+
+        current_chars: list[str] = []
+        current_fallback_font: Optional[str] = None
+        current_text_script: Optional[UnicodeScript] = None
+        font_glyphs: dict[int, str] = self.current_font.cmap if self.is_ttf_font else {}  # type: ignore[union-attr]
+        global_emphasis: TextEmphasis = self.emphasis
+        link: str | int | None = None
+        link_color: Color | None = None
+
+        def frag() -> Iterator[Fragment]:
+            nonlocal current_chars, current_fallback_font, current_text_script
+            if not current_chars and not link:
+                return
+            gstate = self._get_current_graphics_state()
+            gstate.font_style = ("B" if emph & TextEmphasis.B else "") + (
+                "I" if emph & TextEmphasis.I else ""
+            )
+            gstate.strikethrough = bool(emph & TextEmphasis.S)
+            gstate.underline = bool(emph & TextEmphasis.U)
+            if link and link_color:
+                gstate.text_color = link_color
             if current_fallback_font:
-                if txt_frag:
-                    yield frag()
+                gstate.current_font = self.fonts[current_fallback_font]
+                gstate.font_family = current_fallback_font.replace("B", "").replace(
+                    "I", ""
+                )
+                gstate.font_style = "".join(
+                    c for c in current_fallback_font[-2:] if c in "BI"
+                )
                 current_fallback_font = None
-            txt_frag.append(text[0])
-            text = text[1:]
-            if markdown and escape_next_marker:
-                escape_next_marker -= 1
-                if escape_next_marker == 0:
-                    yield frag()
-        if markdown and escape_run:
-            for _ in range(escape_run):
-                txt_frag.append(self.MARKDOWN_ESCAPE_CHARACTER)
-            escape_run = 0
-        if txt_frag:
-            yield frag()
+                current_text_script = None
+            fragment = Fragment(current_chars, gstate, self.k, link=link)
+            current_chars = []
+            yield fragment
+
+        text_emph_iter = (
+            self._parse_markdown_chars(text)
+            if markdown
+            else ((text, TextEmphasis.NONE, None, None),)
+        )
+        for chars, emph, link, link_color in text_emph_iter:
+            # Merge local emphasis (markdown style) with global emphasis
+            emph |= global_emphasis
+            # Handle a digit-based link as link to a page number
+            if isinstance(link, str) and link.isdigit():
+                link = self.add_link(page=int(link))
+
+            i = 0
+            n = len(chars)
+            while i < n:
+                # Handle alias for total number of pages in document
+                if (
+                    self.str_alias_nb_pages
+                    and chars[i : i + len(self.str_alias_nb_pages)]
+                    == self.str_alias_nb_pages
+                ):
+                    yield from frag()
+                    yield TotalPagesSubstitutionFragment(
+                        self.str_alias_nb_pages,
+                        self._get_current_graphics_state(),
+                        self.k,
+                    )
+                    i += len(self.str_alias_nb_pages)
+                    continue
+                # Handle change of `UnicodeScript`
+                text_script = get_unicode_script(chars[i])
+                if text_script not in (
+                    UnicodeScript.COMMON,
+                    UnicodeScript.UNKNOWN,
+                    current_text_script,
+                ):
+                    if current_text_script:
+                        yield from frag()
+                    current_text_script = text_script
+                # Handle character in fallback font
+                if (
+                    self.is_ttf_font
+                    and chars[i] != "\n"
+                    and ord(chars[i]) not in font_glyphs
+                ):
+                    fallback_font = self.get_fallback_font(chars[i], self.font_style)
+                else:
+                    fallback_font = None
+                if fallback_font != current_fallback_font:
+                    yield from frag()
+                    current_fallback_font = fallback_font
+                # Handle all other characters
+                current_chars.append(chars[i])
+                i += 1
+            # Yield final fragment
+            yield from frag()
 
     def will_page_break(self, height: float) -> bool:
         """
@@ -4757,68 +4742,15 @@ class FPDF(GraphicsStateMixin, TextRegionMixin):
         text_lines: list[TextLine],
         markdown: bool = False,
     ) -> list[str]:
+        if markdown:
+            return self._join_markdown_text_lines(text_lines)
+
         output_lines: list[str] = []
-        if not markdown:
-            for text_line in text_lines:
-                characters: list[str] = []
-                for frag in text_line.fragments:
-                    characters.extend(frag.characters)
-                output_lines.append("".join(characters))
-        else:
-            emphasis_markers: dict[TextEmphasis, str] = {
-                TextEmphasis.NONE: "",
-                TextEmphasis.B: self.MARKDOWN_BOLD_MARKER,
-                TextEmphasis.I: self.MARKDOWN_ITALICS_MARKER,
-                TextEmphasis.U: self.MARKDOWN_UNDERLINE_MARKER,
-                TextEmphasis.S: self.MARKDOWN_STRIKETHROUGH_MARKER,
-            }
-            marker_pattern: str = "|".join(
-                re.escape(m)
-                for m in (*emphasis_markers.values(), self.MARKDOWN_ESCAPE_CHARACTER)
-                if m
-            )
-            escape_pattern: re.Pattern[str] = re.compile(rf"({marker_pattern:s})")
-
-            def escape(text: str) -> str:
-                return escape_pattern.sub(
-                    rf"{self.MARKDOWN_ESCAPE_CHARACTER:s}\\1", text
-                )
-
-            for text_line in text_lines:
-                text_parts: list[str] = []
-                last_emphasis: TextEmphasis = TextEmphasis.NONE
-                for frag in text_line.fragments:
-                    if markdown:
-                        next_emphasis = TextEmphasis.coerce(
-                            frag.font_style
-                            + ("U" if frag.underline else "")
-                            + ("S" if frag.strikethrough else "")
-                        )
-                        # If fragment has a link and link underline is true,
-                        # the underline marker must not be added
-                        if frag.link and self.MARKDOWN_LINK_UNDERLINE:
-                            next_emphasis &= ~TextEmphasis.U
-                        removed_emphasis = last_emphasis & ~next_emphasis
-                        for te in reversed(TextEmphasis):
-                            if removed_emphasis & te:
-                                text_parts.append(emphasis_markers[te])
-                        added_emphasis = next_emphasis & ~last_emphasis
-                        for te in TextEmphasis:
-                            if added_emphasis & te:
-                                text_parts.append(emphasis_markers[te])
-                        last_emphasis = next_emphasis
-                    text = "".join(frag.characters)
-                    # NOTE: Currently, markdown format inside of links is not handled
-                    #       so only escape markdown markers outside of links
-                    text_parts.append(
-                        f"[{text:s}]({frag.link!s:s})" if frag.link else escape(text)
-                    )
-                next_emphasis = TextEmphasis.NONE
-                removed_emphasis = last_emphasis & ~next_emphasis
-                for te in reversed(TextEmphasis):
-                    if removed_emphasis & te:
-                        text_parts.append(emphasis_markers[te])
-                output_lines.append("".join(text_parts))
+        for text_line in text_lines:
+            characters: list[str] = []
+            for frag in text_line.fragments:
+                characters.extend(frag.characters)
+            output_lines.append("".join(characters))
         return output_lines
 
     # multi_cell has dynamic results depending on the `output` parameter
