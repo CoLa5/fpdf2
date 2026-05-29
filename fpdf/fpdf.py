@@ -4308,7 +4308,8 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                     self.link(
                         x=x0,
                         y=self.y + 0.5 * (h - max_font_size),
-                        w=w_link,
+                        # If link width is zero, use a default width of 1pt instead
+                        w=w_link if w_link else 1.0 / self.k,
                         h=max_font_size,
                         link=link_dest,
                     )
@@ -4562,7 +4563,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
 
         def frag() -> Iterator[Fragment]:
             nonlocal current_chars, current_fallback_font, current_text_script
-            if not current_chars and not link:
+            if not current_chars and link is None:
                 return
             gstate = self._get_current_graphics_state()
             gstate.font_style = ("B" if emph & TextEmphasis.B else "") + (
@@ -4570,7 +4571,7 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
             )
             gstate.strikethrough = bool(emph & TextEmphasis.S)
             gstate.underline = bool(emph & TextEmphasis.U)
-            if link and link_color:
+            if link is not None and link_color:
                 gstate.text_color = link_color
             if current_fallback_font:
                 gstate.current_font = self.fonts[current_fallback_font]

@@ -806,6 +806,19 @@ class MultiLineBreak:
                     max_width -= self.first_line_indent
 
             if self.character_index >= len(current_fragment.characters):
+                # Catch empty fragments with link
+                if (
+                    not current_fragment.characters
+                    and current_fragment.link is not None
+                ):
+                    current_line.add_character(
+                        "",
+                        0.0,
+                        current_fragment,
+                        self.fragment_index,
+                        self.character_index,
+                        current_font_height * self.line_height,
+                    )
                 self.character_index = 0
                 self.fragment_index += 1
                 continue
@@ -869,7 +882,7 @@ class MultiLineBreak:
 
             self.character_index += 1
 
-        if current_line.width:
+        if current_line.fragments:
             self._is_first_line = False
             return current_line.manual_break(
                 Align.L if self.align == Align.J else self.align,

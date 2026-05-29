@@ -1,5 +1,6 @@
 import itertools
 from pathlib import Path
+from typing import Iterator
 
 import fpdf
 from test.conftest import assert_pdf_equal
@@ -518,7 +519,503 @@ def test_multi_cell_markdown_dry_run_lines_output_escape(tmp_path):
     )
 
     assert_pdf_equal(
-        pdf,
-        HERE / "multi_cell_markdown_dry_run_lines_output_escape.pdf",
-        tmp_path,
+        pdf, HERE / "multi_cell_markdown_dry_run_lines_output_escape.pdf", tmp_path
     )
+
+
+def commonmark_header(msg: str, *example_num: int) -> str:
+    numbers = ", ".join(str(n) for n in example_num)
+    return f"CommonMark Spec - {msg:s} - Example{'s' if len(example_num) > 1 else '':s} {numbers:s}"
+
+
+def commonmark_msg(msg: str, *example_num: int) -> str:
+    links = ", ".join(
+        f"https://spec.commonmark.org/0.31.2/#example-{n:d}" for n in example_num
+    )
+    return f"CommonMark Spec - {msg:s} - {links:s}"
+
+
+def markdown_markers() -> Iterator[str]:
+    for mt in ("bold", "italics", "strikethrough", "underline"):
+        yield getattr(fpdf.FPDF, f"MARKDOWN_{mt.upper():s}_MARKER")
+
+
+def emph_examples() -> Iterator[tuple[str, str, str, tuple[int, ...]]]:
+    esc = fpdf.FPDF.MARKDOWN_ESCAPE_CHARACTER
+    lf = ("\n", "\n", "", tuple())
+    yield from (
+        (
+            f"{m:s}foo bar{m:s}",
+            f"{m:s}foo bar{m:s}",
+            "Default",
+            (350, 357, 378, 382),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"foo{m:s}bar{m:s}",
+            f"foo{m:s}bar{m:s}",
+            "Intraword emphasis",
+            (355, 381),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"5{m:s}6{m:s}78",
+            f"5{m:s}6{m:s}78",
+            "Intraword emphasis",
+            (356,),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"{m1:s}foo{m2:s}",
+            f"{esc:s}{m1:s}foo{esc:s}{m2:s}",
+            "Not matching markers",
+            (365,),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield lf
+    yield from (
+        (
+            f"{m:s}foo{m:s}bar",
+            f"{m:s}foo{m:s}bar",
+            "Intraword emphasis",
+            (370, 396),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"{m:s}fpdf2 on [GitHub](https://github.com/py-pdf/fpdf2){m:s}",
+            f"{m:s}fpdf2 on {m if m == "--" else "":s}"
+            f"[GitHub](https://github.com/py-pdf/fpdf2){m if m != "--" else "":s}",
+            "Link inside emphasis",
+            (404, 422),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"{m:s}foo\nbar{m:s}",
+            f"{m:s}foo{m:s}\n{m:s}bar{m:s}",
+            "Line ending between markers",
+            (405, 423),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"{m1:s}foo {m2:s}bar{m2:s} baz{m1:s}",
+            f"{m1:s}foo {m2:s}bar{m2:s} baz{m1:s}",
+            "Nested emphasis",
+            (406, 407, 410, 424, 428),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield from (
+        (
+            f"{m1:s}foo {m2:s}bar {m3:s}baz{m3:s} qux{m2:s} quux{m1:s}",
+            f"{m1:s}foo {m2:s}bar {m3:s}baz{m3:s} qux{m2:s} quux{m1:s}",
+            "Nested emphasis",
+            (406, 407, 410),
+        )
+        for m1, m2, m3 in itertools.permutations(markdown_markers(), 3)
+    )
+    yield from (
+        (
+            f"{m1:s}foo {m2:s}bar {m3:s}baz {m4:s}qux{m4:s} quux{m3:s} quux{m2:s} quuux{m1:s}",
+            f"{m1:s}foo {m2:s}bar {m3:s}baz {m4:s}qux{m4:s} quux{m3:s} quux{m2:s} quuux{m1:s}",
+            "Nested emphasis",
+            (406, 407, 410),
+        )
+        for m1, m2, m3, m4 in itertools.permutations(markdown_markers(), 4)
+    )
+    yield from (
+        (
+            f"{m1:s}{m2:s}foo{m2:s} bar{m1:s}",
+            f"{m1:s}{m2:s}foo{m2:s} bar{m1:s}",
+            "Nested emphasis",
+            (408, 430),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield from (
+        (
+            f"{m1:s}foo {m2:s}bar{m2:s}{m1:s}",
+            f"{m1:s}foo {m2:s}bar{m2:s}{m1:s}",
+            "Nested emphasis",
+            (409, 431),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield from (
+        (
+            f"{m1:s}foo{m2:s}bar{m2:s}baz{m1:s}",
+            f"{m1:s}foo{m2:s}bar{m2:s}baz{m1:s}",
+            "Nested emphasis",
+            (411, 429),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield lf
+    yield from (
+        (
+            f"{m:s}foo{m:s}{m:s}bar{m:s}",
+            f"{m:s}foo{esc:s}{m:s}{esc:s}{m:s}bar{m:s}",
+            "Nested emphasis",
+            (412,),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"{m1:s}{m2:s}foo{m2:s} bar{m1:s}",
+            f"{m1:s}{m2:s}foo{m2:s} bar{m1:s}",
+            "Nested emphasis",
+            (413, 426),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield from (
+        (
+            f"{m1:s}foo {m2:s}bar{m2:s}{m1:s}",
+            f"{m1:s}foo {m2:s}bar{m2:s}{m1:s}",
+            "Nested emphasis",
+            (414, 427),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield from (
+        (
+            f"{m1:s}foo{m2:s}bar{m2:s}{m1:s}",
+            f"{m1:s}foo{m2:s}bar{m2:s}{m1:s}",
+            "Nested emphasis",
+            (415,),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield lf
+    yield from (
+        (
+            f"{m:s}{m:s} is not an empty emphasis",
+            f"{esc:s}{m:s}{esc:s}{m:s} is not an empty emphasis",
+            "No empty emphasis",
+            (420, 421, 434, 435),
+        )
+        for m in markdown_markers()
+    )
+    yield lf
+    yield from (
+        (
+            f"foo {m:s}{m[0]:s}",
+            f"foo {esc:s}{m:s}{m[0]:s}",
+            "Half emphasis",
+            (436,),
+        )
+        for m in markdown_markers()
+    )
+    yield from (
+        (
+            f"foo {m[0]:s}{esc:s}{m:s}",
+            f"foo {esc:s}{m:s}{m[0]:s}",
+            "Nested half emphasis",
+            (437,),
+        )
+        for m in markdown_markers()
+    )
+    yield from (
+        (
+            f"foo {m1:s}{m2:s}{m1:s}",
+            f"foo {m1:s}{esc:s}{m2:s}{m1:s}",
+            "Nested unclosed emphasis",
+            (438,),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield from (
+        (
+            f"foo {m:s}{m[0]:s}{m:s}",
+            f"foo {esc:s}{m:s}{esc:s}{m:s}{m[0]:s}",
+            "Nested half emphasis",
+            (439,),
+        )
+        for m in markdown_markers()
+    )
+    yield from (
+        (
+            f"foo {m:s}{esc:s}{m[0]:s}{m:s}",
+            f"foo {esc:s}{m:s}{esc:s}{m:s}{m[0]:s}",
+            "Nested half escapeds emphasis",
+            (440,),
+        )
+        for m in markdown_markers()
+    )
+    yield from (
+        (
+            f"foo {m1:s}{m2[0]:s}{m1:s} {m2[0]:s}",
+            f"foo {m1:s}{m2[0]:s}{m1:s} {m2[0]:s}",
+            "Nested half emphasis",
+            (441,),
+        )
+        for m1, m2 in itertools.permutations(markdown_markers(), 2)
+    )
+    yield lf
+
+
+def test_multi_cell_markdown_emphasis_cm(tmp_path) -> None:
+    # NOTE:
+    # Reference is CommonMark 0.31.2 - https://spec.commonmark.org/0.31.2/#links
+    # fpdf2 DOES NOT fulfill the specification, but the specs are used here as
+    # a reference for the examples to find bugs in the markdown parser
+    w0 = 20.0
+
+    pdf = fpdf.FPDF()
+    pdf.set_font("Helvetica")
+    pdf.add_page()
+
+    for text, parsed_text, msg, example_num in emph_examples():
+        # LF
+        if text == "\n":
+            pdf.ln()
+            continue
+        # New page (3 lines per example case)
+        if pdf.y + 3 * pdf.font_size > pdf.page_break_trigger:
+            pdf.add_page()
+        # Title
+        pdf.set_font(style="B")
+        pdf.cell(
+            w=pdf.epw,
+            text=commonmark_header(msg, *example_num),
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+        )
+        pdf.set_font(style="")
+        # Normal
+        pdf.cell(text="Normal: ")
+        pdf.set_x(pdf.l_margin + w0)
+        pdf.multi_cell(
+            w=pdf.epw - w0,
+            text=text,
+            markdown=True,
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+        )
+        # Dry-run
+        pdf.cell(text="Dry-Run: ")
+        pdf.set_x(pdf.l_margin + w0)
+        lines = pdf.multi_cell(
+            w=pdf.epw - w0,
+            text=text,
+            dry_run=True,
+            markdown=True,
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+            output=fpdf.enums.MethodReturnValue.LINES,
+        )
+        joined_lines = "\n".join(lines)
+        assert joined_lines == parsed_text, commonmark_msg(msg, *example_num)
+        pdf.multi_cell(
+            w=pdf.epw - w0,
+            text=joined_lines,
+            markdown=True,
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+        )
+        pdf.ln()
+
+    assert_pdf_equal(pdf, HERE / "multi_cell_markdown_emphasis_cm.pdf", tmp_path)
+
+
+def link_examples() -> Iterator[tuple[str, str, str, tuple[int, ...]]]:
+    lf = ("\n", "\n", "", tuple())
+
+    yield (
+        "[fpdf2 on GitHub](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 on GitHub](https://github.com/py-pdf/fpdf2)",
+        "Default link",
+        (483,),
+    )
+    yield lf
+    yield (
+        "[](https://github.com/py-pdf/fpdf2)",
+        "[](https://github.com/py-pdf/fpdf2)",
+        "Empty link text",
+        (484,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 on GitHub]()",
+        "[fpdf2 on GitHub]()",
+        "Empty link destination",
+        (485,),
+    )
+    yield lf
+    yield (
+        "[]()",
+        "[]()",
+        "Empty link text and destination",
+        (487,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 on GitHub](https:// github.com/py-pdf/fpdf2)",
+        "[fpdf2 on GitHub](https:// github.com/py-pdf/fpdf2)",
+        "No space in link destination",
+        (488,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 on GitHub](https://\ngithub.com/py-pdf/fpdf2)",
+        "[fpdf2 on GitHub](https://\ngithub.com/py-pdf/fpdf2)",
+        "No line ending in link destination",
+        (490,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 on GitHub] (https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 on GitHub] (https://github.com/py-pdf/fpdf2)",
+        "No space between link text and link destination",
+        (511,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 [on [GitHub]]](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 [on [GitHub]]](https://github.com/py-pdf/fpdf2)",
+        "Balanced square brackets in link text (NOT SUPPORTED)",
+        (512,),
+    )
+    yield (
+        "[fpdf2 on] GitHub](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 on] GitHub](https://github.com/py-pdf/fpdf2)",
+        "Unbalanced square brackets in link text",
+        (513,),
+    )
+    yield (
+        "[fpdf2 on [GitHub](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 on [GitHub](https://github.com/py-pdf/fpdf2)",
+        "Unbalanced square brackets in link text",
+        (514,),
+    )
+    yield (
+        "[fpdf2 on \\[GitHub](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 on \\[GitHub](https://github.com/py-pdf/fpdf2)",
+        "Unbalanced escaped square bracket in link text",
+        (515,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 __on **GitHub**__](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 __on **GitHub**__](https://github.com/py-pdf/fpdf2)",
+        "Inline content (style in link text)",
+        (516,),
+    )
+    yield lf
+    yield (
+        "[fpdf2 on [GitHub](https://github.com)](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 on [GitHub](https://github.com)](https://github.com/py-pdf/fpdf2)",
+        "No nested links",
+        (518,),
+    )
+    yield (
+        "[fpdf2 **[on [GitHub](https://github.com)](https://github.com/py-pdf)**](https://github.com/py-pdf/fpdf2)",
+        "[fpdf2 **[on [GitHub](https://github.com)](https://github.com/py-pdf)**](https://github.com/py-pdf/fpdf2)",
+        "No nested links",
+        (519,),
+    )
+    yield lf
+    yield (
+        "**[fpdf2** on GitHub](https://github.com/py-pdf/fpdf2)",
+        "\\**[fpdf2\\** on GitHub](https://github.com/py-pdf/fpdf2)",
+        "Precedence of link text grouping over emphasis grouping",
+        (521,),
+    )
+    yield (
+        "[fpdf2 on **GitHub](https://github.com/py-pdf/fpdf2/**)",
+        "[fpdf2 on \\**GitHub](https://github.com/py-pdf/fpdf2/**)",
+        "Precedence of link text grouping over emphasis grouping",
+        (522,),
+    )
+    yield lf
+    yield (
+        "**fpdf2 [on** GitHub]",
+        "**fpdf2 [on** GitHub]",
+        "No Precedence of no link text square brackets",
+        (523,),
+    )
+    yield lf
+
+
+def test_multi_cell_markdown_link_cm(tmp_path) -> None:
+    # NOTE:
+    # Reference is CommonMark 0.31.2 - https://spec.commonmark.org/0.31.2/#links
+    # fpdf2 DOES NOT fulfill the specification, but the specs are used here as
+    # a reference for the examples to find bugs in the markdown parser
+    w0 = 20.0
+
+    pdf = fpdf.FPDF()
+    pdf.set_font("Helvetica")
+    pdf.add_page()
+
+    for text, parsed_text, msg, example_num in link_examples():
+        # LF
+        if text == "\n":
+            pdf.ln()
+            continue
+        # New page (3 lines per example case)
+        if pdf.y + 3 * pdf.font_size > pdf.page_break_trigger:
+            pdf.add_page()
+        # Title
+        pdf.set_font(style="B")
+        pdf.cell(
+            w=pdf.epw,
+            text=commonmark_header(msg, *example_num),
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+        )
+        pdf.set_font(style="")
+        # Normal
+        pdf.cell(text="Normal: ")
+        pdf.set_x(pdf.l_margin + w0)
+        pdf.multi_cell(
+            w=pdf.epw - w0,
+            text=text,
+            markdown=True,
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+        )
+        # Dry-run
+        pdf.cell(text="Dry-Run: ")
+        pdf.set_x(pdf.l_margin + w0)
+        lines = pdf.multi_cell(
+            w=pdf.epw - w0,
+            text=text,
+            dry_run=True,
+            markdown=True,
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+            output=fpdf.enums.MethodReturnValue.LINES,
+        )
+        joined_lines = "\n".join(lines)
+        assert joined_lines == parsed_text, commonmark_msg(msg, *example_num)
+        pdf.multi_cell(
+            w=pdf.epw - w0,
+            text=joined_lines,
+            markdown=True,
+            new_x=fpdf.XPos.LMARGIN,
+            new_y=fpdf.YPos.NEXT,
+        )
+        pdf.ln()
+
+    assert_pdf_equal(pdf, HERE / "multi_cell_markdown_link_cm.pdf", tmp_path)

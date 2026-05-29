@@ -12,6 +12,8 @@ and <https://py-pdf.github.io/fpdf2/CombineWithMarkdown.html>
 from abc import ABC
 from collections.abc import Iterator, Sequence
 from dataclasses import asdict, dataclass
+from functools import reduce
+from operator import or_
 import re
 from typing import Final, Literal, TypeAlias, TYPE_CHECKING
 
@@ -20,7 +22,7 @@ from .enums import TextEmphasis
 from .util import Number
 
 if TYPE_CHECKING:
-    from .line_break import TextLine
+    from .line_break import Fragment, TextLine
 
 
 MarkdownFragment: TypeAlias = tuple[str, TextEmphasis, str | None, Color | None]
@@ -37,6 +39,34 @@ class MarkdownToken:
 
     def __bool__(self) -> bool:
         return any(bool(a) for a in asdict(self).values())
+
+
+def frag_emphasis(fragment: "Fragment") -> TextEmphasis:
+    """
+    Returns the fragment's text emphasis.
+    """
+    font_style = fragment.font_style
+    if fragment.strikethrough:
+        font_style += "S"
+    if fragment.underline:
+        font_style += "U"
+    return TextEmphasis.coerce(font_style)
+
+
+def frag_emphasis_len(
+    fragments: Sequence["Fragment"],
+    start: int,
+    emph: TextEmphasis,
+) -> int:
+    """
+    Find the last fragment index that has the given emphasis (without a gap),
+    starting at index `start`.
+    """
+    for i in range(start, len(fragments)):
+        if frag_emphasis(fragments[i]) & emph:
+            continue
+        return i
+    return start
 
 
 class MarkdownMixin(ABC):
@@ -93,23 +123,34 @@ class MarkdownMixin(ABC):
     }
     _MD_MARKERS: Final[set[str]] = set(_MD_MARKER_TO_EMPH)
 
-    # Pattern to escape markdown markers, the escape character itself and link-related characters
+    # Patterns to escape markdown
     _MD_ESCAPE_PATTERN: re.Pattern[str] = re.compile(rf"({'|'.join(
+            re.escape(m)
+            for m in (*_MD_MARKER_TO_EMPH, MARKDOWN_ESCAPE_CHARACTER)
+            if m
+        ):s})")
+    _MD_ESCAPE_LINK_TEXT_PATTERN: re.Pattern[str] = re.compile(rf"({'|'.join(
             re.escape(m)
             for m in (*_MD_MARKER_TO_EMPH, MARKDOWN_ESCAPE_CHARACTER, "[", "]")
             if m
         ):s})")
 
-    # Pattern to search the link destination AFTER encountering an opening square bracket "["
+    # Pattern to find link text and destination
     _MD_LINK_PATTERN: re.Pattern[str] = re.compile(
-        rf"(?<!{2*MARKDOWN_ESCAPE_CHARACTER:s})([^]]*)\]\(([^()]*)\)"
+        # opening square bracket
+        rf"\["
+        # link text (char not in "[]\n" or char in escaped square brackets)
+        rf"((?:[^\[\]\n]|{2*MARKDOWN_ESCAPE_CHARACTER:s}[\[\]])*)"
+        # closing unescaped square bracket
+        rf"(?<!{2*MARKDOWN_ESCAPE_CHARACTER:s})\]"
+        # link destination (char not in "()" or any whitespace)
+        rf"\(([^()\s]*)\)"
     )
 
     @classmethod
-    def _escape_markdown_chars(cls, text: str) -> str:
-        return cls._MD_ESCAPE_PATTERN.sub(
-            rf"{cls.MARKDOWN_ESCAPE_CHARACTER:s}\\1", text
-        )
+    def _escape_markdown_chars(cls, text: str, *, in_link: bool = False) -> str:
+        pat = cls._MD_ESCAPE_LINK_TEXT_PATTERN if in_link else cls._MD_ESCAPE_PATTERN
+        return pat.sub(rf"{cls.MARKDOWN_ESCAPE_CHARACTER:s}\\1", text)
 
     def _join_markdown_text_lines(
         self,
@@ -128,40 +169,57 @@ class MarkdownMixin(ABC):
 
         output_lines: list[str] = []
 
-        def open_markers(last_emph: TextEmphasis, next_emph: TextEmphasis) -> None:
-            text_parts.extend(
-                self._EMPH_TO_MD_MARKER[te] for te in (next_emph & ~last_emph)
-            )
-
-        def close_markers(last_emph: TextEmphasis, next_emph: TextEmphasis) -> None:
-            text_parts.extend(
-                self._EMPH_TO_MD_MARKER[te]
-                for te in reversed(tuple(last_emph & ~next_emph))
-            )
+        def flush_markers(
+            fragments: Sequence["Fragment"],
+            start: int,
+            next_emph: TextEmphasis,
+        ) -> None:
+            cur_emph = reduce(or_, emph_stack)
+            add_emph = next_emph & ~cur_emph
+            remove_emph = cur_emph & ~next_emph
+            if remove_emph:
+                while remove_emph & emph_stack[-1]:
+                    emph = emph_stack[-1]
+                    text_parts.extend(
+                        self._EMPH_TO_MD_MARKER[te] for te in (remove_emph & emph)
+                    )
+                    emph_stack[-1] = emph & ~remove_emph
+                    if emph_stack[-1] == TextEmphasis.NONE:
+                        emph_stack.pop()
+                    remove_emph &= ~emph
+                if remove_emph:
+                    raise ValueError(
+                        f"invalid change: removing {remove_emph!r:s} from "
+                        f"stack {emph_stack!r:s}"
+                    )
+            if add_emph:
+                # We need to look ahead to push longer-lived markers first
+                add_emph_ls = list(add_emph)
+                add_emph_ls.sort(
+                    key=lambda te: frag_emphasis_len(fragments, start, te),
+                )
+                text_parts.extend(self._EMPH_TO_MD_MARKER[te] for te in add_emph_ls)
+                emph_stack.append(add_emph)
 
         for text_line in text_lines:
             text_parts: list[str] = []
-            last_emph: TextEmphasis = TextEmphasis.NONE
+            emph_stack: list[TextEmphasis] = [TextEmphasis.NONE]
             last_link_dest: int | str | None = None
             last_link_emph: TextEmphasis = TextEmphasis.NONE
+            i: int = 0
             for i, frag in enumerate(text_line.fragments):
-                next_emph = TextEmphasis.coerce(
-                    frag.font_style
-                    + ("U" if frag.underline else "")
-                    + ("S" if frag.strikethrough else "")
-                )
+                next_emph = frag_emphasis(frag)
                 next_link_dest = frag.link
                 # If a fragment has a link and the global flag
                 # `MARKDOWN_LINK_UNDERLINE` is true, the underline marker must
                 # not be added because it is unclear whether it has been set
                 # explicitly by a marker or just by the global flag
-                if next_link_dest and self.MARKDOWN_LINK_UNDERLINE:
+                if next_link_dest is not None and self.MARKDOWN_LINK_UNDERLINE:
                     next_emph &= ~TextEmphasis.U
                 # Close last link
                 if last_link_dest is not None and last_link_dest != next_link_dest:
-                    close_markers(last_emph, last_link_emph)
+                    flush_markers(text_line.fragments, i, last_link_emph)
                     text_parts.append(f"]({last_link_dest!s:s})")
-                    last_emph = last_link_emph
                     last_link_dest = None
                     last_link_emph = TextEmphasis.NONE
                 # Open next link
@@ -171,42 +229,30 @@ class MarkdownMixin(ABC):
                     for next_frag in text_line.fragments[i + 1 :]:
                         if next_frag.link != next_link_dest:
                             break
-                        next_link_emph &= TextEmphasis.coerce(
-                            next_frag.font_style
-                            + (
-                                "U"
-                                if next_frag.underline
-                                and not self.MARKDOWN_LINK_UNDERLINE
-                                else ""
-                            )
-                            + ("S" if next_frag.strikethrough else "")
-                        )
-                    close_markers(last_emph, next_link_emph)
-                    open_markers(last_emph, next_link_emph)
+                        next_link_emph &= frag_emphasis(next_frag)
+                    flush_markers(text_line.fragments, i, next_link_emph)
                     text_parts.append("[")
-                    open_markers(next_link_emph, next_emph)
+                    flush_markers(text_line.fragments, i, next_emph)
                     text_parts.append(
-                        self._escape_markdown_chars("".join(frag.characters))
+                        self._escape_markdown_chars(
+                            "".join(frag.characters), in_link=True
+                        )
                     )
-                    last_emph = next_emph
                     last_link_dest = next_link_dest
                     last_link_emph = next_link_emph
                 # Close and open markers
                 else:
-                    close_markers(last_emph, next_emph)
-                    open_markers(last_emph, next_emph)
+                    flush_markers(text_line.fragments, i, next_emph)
                     text_parts.append(
                         self._escape_markdown_chars("".join(frag.characters))
                     )
-                    last_emph = next_emph
                     continue
             # Close last link
             if last_link_dest is not None:
-                close_markers(last_emph, last_link_emph)
+                flush_markers(text_line.fragments, i, last_link_emph)
                 text_parts.append(f"]({last_link_dest!s:s})")
-                last_emph = last_link_emph
             # Close last marker
-            close_markers(last_emph, TextEmphasis.NONE)
+            flush_markers(text_line.fragments, i, TextEmphasis.NONE)
             output_lines.append("".join(text_parts))
         return output_lines
 
@@ -214,7 +260,7 @@ class MarkdownMixin(ABC):
         self,
         text: str,
         *,
-        _in_link: bool = False,
+        in_link: bool = False,
     ) -> Iterator[MarkdownFragment]:
         current_chars: list[str] = []
         current_emphasis: TextEmphasis = TextEmphasis.NONE
@@ -240,9 +286,9 @@ class MarkdownMixin(ABC):
             if current_emphasis != TextEmphasis.NONE:
                 return
             for t in tokens:
-                if not t.text and not t.link:
+                if not t.text and t.link is None:
                     continue
-                if t.link:
+                if t.link is not None:
                     yield t.text, t.emphasis | t.link_emphasis, t.link, link_color
                 else:
                     yield t.text, t.emphasis, None, None
@@ -275,26 +321,37 @@ class MarkdownMixin(ABC):
                 current_chars.append(self.MARKDOWN_ESCAPE_CHARACTER)
                 escape_run = False
             # Handle a link (bare minimum `[]()` - minimum length 4)
-            if not _in_link and text[i] == "[" and i + 3 < n:
-                is_link = self._MD_LINK_PATTERN.search(text, pos=i + 1)
+            if not in_link and text[i] == "[" and i + 3 < n:
+                is_link = self._MD_LINK_PATTERN.match(text, pos=i)
                 if is_link:
                     flush_chars()
                     link_text, link_dest = is_link.groups()
-                    if link_dest.startswith("<") and link_dest.endswith(">"):
-                        link_dest = link_dest[1:-1]
-                    for link_chars, link_emphasis, _, _ in self._parse_markdown_chars(
-                        link_text, _in_link=True
-                    ):
+                    if link_text:
+                        for (
+                            link_chars,
+                            link_emphasis,
+                            _,
+                            _,
+                        ) in self._parse_markdown_chars(link_text, in_link=True):
+                            tokens.append(
+                                MarkdownToken(
+                                    text=link_chars,
+                                    emphasis=current_emphasis,
+                                    link=link_dest,
+                                    link_emphasis=(
+                                        (link_emphasis | TextEmphasis.U)
+                                        if self.MARKDOWN_LINK_UNDERLINE
+                                        else link_emphasis
+                                    ),
+                                )
+                            )
+                    else:
                         tokens.append(
                             MarkdownToken(
-                                text=link_chars,
+                                text="",
                                 emphasis=current_emphasis,
                                 link=link_dest,
-                                link_emphasis=(
-                                    (link_emphasis | TextEmphasis.U)
-                                    if self.MARKDOWN_LINK_UNDERLINE
-                                    else link_emphasis
-                                ),
+                                link_emphasis=TextEmphasis.NONE,
                             )
                         )
                     i = is_link.end()
@@ -303,8 +360,14 @@ class MarkdownMixin(ABC):
             # Handle marker
             if is_marker:
                 emph = self._MD_MARKER_TO_EMPH[text[i : i + 2]]
+                # Case: Marker with equal third and fourth character, e.g.
+                #       "****" == "\**\**"
+                if i + 3 < n and text[i : i + 2] == text[i + 2 : i + 4]:
+                    current_chars.append(text[i : i + 4])
+                    i += 4
+                    continue
                 # Case: Marker with equal third character in case of an
-                # opening marker, e.g. "***" == "*" + bold marker
+                #       opening marker, e.g. "***" == "*" + bold marker
                 if (
                     not (current_emphasis & emph)
                     and i + 2 < n
