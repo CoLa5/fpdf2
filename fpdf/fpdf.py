@@ -4634,7 +4634,10 @@ class FPDF(GraphicsStateMixin, TextRegionMixin, MarkdownMixin):
                     and chars[i] != "\n"
                     and ord(chars[i]) not in font_glyphs
                 ):
-                    fallback_font = self.get_fallback_font(chars[i], self.font_style)
+                    style = ("B" if emph & TextEmphasis.B else "") + (
+                        "I" if emph & TextEmphasis.I else ""
+                    )
+                    fallback_font = self.get_fallback_font(chars[i], style=style)
                 else:
                     fallback_font = None
                 if fallback_font != current_fallback_font:
