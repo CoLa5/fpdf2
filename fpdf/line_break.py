@@ -79,6 +79,19 @@ class Fragment:
         self.k = k
         self.link = link
 
+    def __eq__(self, other: Any) -> bool:
+        if not isinstance(other, Fragment):
+            return False
+        return (
+            self.characters == other.characters
+            and self.graphics_state == other.graphics_state
+            and self.k == other.k
+            and self.link == other.link
+        )
+
+    def __hash__(self) -> int:
+        return hash((self.characters, self.graphics_state, self.k, self.link))
+
     def __repr__(self) -> str:
         return (
             f"Fragment(characters={self.characters},"
@@ -221,18 +234,6 @@ class Fragment:
 
     def trim(self, index: int) -> None:
         self.characters = self.characters[:index]
-
-    def __eq__(self, other: Any) -> bool:
-        if not isinstance(other, Fragment):
-            return False
-        return (
-            self.characters == other.characters
-            and self.graphics_state == other.graphics_state
-            and self.k == other.k
-        )
-
-    def __hash__(self) -> int:
-        return hash((self.characters, self.graphics_state, self.k))
 
     def get_width(
         self,

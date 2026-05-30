@@ -95,16 +95,10 @@ class MarkdownMixin(ABC):
     MARKDOWN_UNDERLINE_MARKER: Final[Literal["--"]] = "--"
 
     # Escape
-    MARKDOWN_ESCAPABLES: Final[set[str]] = set(
-        chr(x)
-        for x in (
-            *range(33, 48),  # !, ", #, $, %, &, ', (, ), *, +, ,, -, ., / (U+0021–2F)
-            *range(58, 65),  # :, ;, <, =, >, ?, @ (U+003A–0040)
-            *range(91, 97),  # [, \, ], ^, _, ` (U+005B–0060)
-            *range(123, 127),  # {, |, }, ~ (U+007B–007E)
-        )
-    )
     MARKDOWN_ESCAPE_CHARACTER: Final[Literal["\\"]] = "\\"
+    MARKDOWN_ESCAPABLES: Final[set[str]] = set(
+        (MARKDOWN_ESCAPE_CHARACTER, "[", "]")
+    )  # besides markers
 
     # Links
     MARKDOWN_LINK_COLOR: Number | Color | str | Sequence[Number] | None = None
@@ -131,7 +125,7 @@ class MarkdownMixin(ABC):
         ):s})")
     _MD_ESCAPE_LINK_TEXT_PATTERN: re.Pattern[str] = re.compile(rf"({'|'.join(
             re.escape(m)
-            for m in (*_MD_MARKER_TO_EMPH, MARKDOWN_ESCAPE_CHARACTER, "[", "]")
+            for m in (*_MD_MARKER_TO_EMPH, MARKDOWN_ESCAPE_CHARACTER, *MARKDOWN_ESCAPABLES)
             if m
         ):s})")
 
@@ -161,7 +155,7 @@ class MarkdownMixin(ABC):
         # the input, but do NOT change the appearance when finally being
         # printed:
         # - Order of markers is not kept: `"**__x__**" == "__**x**__"`
-        # - Implicitly escaped markers and square brackets will be escaped
+        # - Not closed markers are implicitly escaped and will be escaped
         #   explicitly: `"**x** **" == "**x** \\**"`
         # - Underline markers in or around links will not be kept if
         #   `MARKDOWN_LINK_UNDERLINE` is true:
@@ -309,8 +303,7 @@ class MarkdownMixin(ABC):
                 escape_run = False
                 i += 2
                 continue
-            # Handle escapable character
-            # (must be AFTER escaped marker because of overlap of symbols like "\\*" vs. "\\**")
+            # Handle escaped character
             if escape_run and text[i] in self.MARKDOWN_ESCAPABLES:
                 current_chars.append(text[i])
                 escape_run = False
@@ -360,21 +353,14 @@ class MarkdownMixin(ABC):
             # Handle marker
             if is_marker:
                 emph = self._MD_MARKER_TO_EMPH[text[i : i + 2]]
-                # Case: Marker with equal third and fourth character, e.g.
-                #       "****" == "\**\**"
-                if i + 3 < n and text[i : i + 2] == text[i + 2 : i + 4]:
-                    current_chars.append(text[i : i + 4])
-                    i += 4
-                    continue
-                # Case: Marker with equal third character in case of an
-                #       opening marker, e.g. "***" == "*" + bold marker
-                if (
-                    not (current_emphasis & emph)
-                    and i + 2 < n
-                    and text[i] == text[i + 2]
-                ):
-                    current_chars.append(text[i])
-                    i += 1
+                # Case: Equal character(s) after marker escape the marker
+                if i + 2 < n and text[i] == text[i + 2]:
+                    half_marker = text[i]
+                    j = i + 3
+                    while j < n and text[j] == half_marker:
+                        j += 1
+                    current_chars.extend(text[i:j])
+                    i = j
                     continue
                 flush_chars()
                 current_emphasis ^= emph
@@ -384,6 +370,9 @@ class MarkdownMixin(ABC):
             # Handle all other characters
             current_chars.append(text[i])
             i += 1
+        # Handle remaining escape run
+        if escape_run:
+            current_chars.append(self.MARKDOWN_ESCAPE_CHARACTER)
         # Handle remaininig characters
         flush_chars()
         # Handle unclosed markers
