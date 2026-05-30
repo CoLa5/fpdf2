@@ -13,13 +13,11 @@ from typing import (
     TYPE_CHECKING,
     Any,
     Callable,
-    Dict,
-    List,
+    Final,
+    Literal,
     NamedTuple,
     Optional,
     Sequence,
-    Tuple,
-    Union,
 )
 from uuid import uuid4
 
@@ -33,10 +31,10 @@ from .util import FloatTolerance, escape_parens
 
 StateStackType = GraphicsState
 
-SOFT_HYPHEN = "\u00ad"
-HYPHEN = "\u002d"
-SPACE = " "
-BREAKING_SPACE_SYMBOLS = [
+SOFT_HYPHEN: Final[Literal["\u00ad"]] = "\u00ad"
+HYPHEN: Final[Literal["\u002d"]] = "\u002d"
+SPACE: Final[Literal[" "]] = " "
+BREAKING_SPACE_SYMBOLS: Final[tuple[str, ...]] = (
     " ",
     "\u200b",  # | ZERO WIDTH SPACE
     "\u2000",  # | EN QUAD
@@ -52,11 +50,11 @@ BREAKING_SPACE_SYMBOLS = [
     "\u205f",  # | MEDIUM MATHEMATICAL SPACE
     "\u3000",  # | IDEOGRAPHIC SPACE
     "\u0009",  # | TAB
-]
-BREAKING_SPACE_SYMBOLS_STR = "".join(BREAKING_SPACE_SYMBOLS)
-NBSP = "\u00a0"
-NEWLINE = "\n"
-FORM_FEED = "\u000c"
+)
+BREAKING_SPACE_SYMBOLS_STR: Final[str] = "".join(BREAKING_SPACE_SYMBOLS)
+NBSP: Final[Literal["\u00a0"]] = "\u00a0"
+NEWLINE: Final[Literal["\n"]] = "\n"
+FORM_FEED: Final[Literal["\f"]] = "\f"
 
 
 class Fragment:
@@ -66,15 +64,14 @@ class Fragment:
 
     def __init__(
         self,
-        characters: Union[list[str], str],
+        characters: list[str] | str,
         graphics_state: StateStackType,
         k: float,
         link: Optional[int | str] = None,
     ) -> None:
-        if isinstance(characters, str):
-            self.characters = list(characters)
-        else:
-            self.characters = characters
+        self.characters: list[str] = (
+            list(characters) if isinstance(characters, str) else characters
+        )
         self.graphics_state = graphics_state
         self.k = k
         self.link = link
@@ -96,7 +93,7 @@ class Fragment:
         return (
             f"Fragment(characters={self.characters},"
             f" graphics_state={self.graphics_state},"
-            f" k={self.k}, link={self.link})"
+            f" k={self.k}, link={self.link!r})"
         )
 
     @property
@@ -203,7 +200,7 @@ class Fragment:
         return self.get_width()
 
     @property
-    def text_shaping_parameters(self) -> Optional[Dict[str, Any]]:
+    def text_shaping_parameters(self) -> Optional[dict[str, Any]]:
         return self.graphics_state.text_shaping
 
     @property
@@ -469,7 +466,7 @@ class TextLine(NamedTuple):
     trailing_form_feed: bool = False
     indent: float = 0
 
-    def get_ordered_fragments(self) -> List[Fragment]:
+    def get_ordered_fragments(self) -> list[Fragment]:
         if not self.fragments:
             return []
         directional_runs: list[list[Fragment]] = []
@@ -517,7 +514,10 @@ class HyphenHint(NamedTuple):
 
 class CurrentLine:
     def __init__(
-        self, max_width: float, print_sh: bool = False, indent: float = 0
+        self,
+        max_width: float,
+        print_sh: bool = False,
+        indent: float = 0,
     ) -> None:
         """
         Per-line text fragment management for use by MultiLineBreak.
@@ -525,10 +525,10 @@ class CurrentLine:
                 print_sh (bool): If true, a soft-hyphen will be rendered
                     normally, instead of triggering a line break. Default: False
         """
-        self.max_width = max_width
-        self.print_sh = print_sh
-        self.indent = indent
-        self.fragments: List[Fragment] = []
+        self.max_width: float = max_width
+        self.print_sh: bool = print_sh
+        self.indent: float = indent
+        self.fragments: list[Fragment] = []
         self.height: float = 0
         self.number_of_spaces: int = 0
 
@@ -545,6 +545,14 @@ class CurrentLine:
         # to break in multiple places, depending on condition.
         self.space_break_hint: Optional[SpaceHint] = None
         self.hyphen_break_hint: Optional[HyphenHint] = None
+
+    def __bool__(self) -> bool:
+        """Current line is `True` if it has at least one fragment with either
+        at least a character or a non-`None` link. Else, it will be `False`.
+        """
+        return bool(self.fragments) and (
+            bool(self.fragments[0].characters) or self.fragments[0].link is not None
+        )
 
     @property
     def width(self) -> float:
@@ -668,7 +676,7 @@ class CurrentLine:
     def automatic_break_possible(self) -> bool:
         return self.hyphen_break_hint is not None or self.space_break_hint is not None
 
-    def automatic_break(self, align: Align) -> Tuple[int, int, TextLine]:
+    def automatic_break(self, align: Align) -> tuple[int, int, TextLine]:
         assert self.automatic_break_possible()
         if self.hyphen_break_hint is not None and (
             self.space_break_hint is None
@@ -701,7 +709,7 @@ class MultiLineBreak:
     def __init__(
         self,
         fragments: Sequence[Fragment],
-        max_width: Union[float, Callable[[float], float]],
+        max_width: Callable[[float], float] | float,
         margins: Sequence[float],
         align: Align = Align.L,
         print_sh: bool = False,
@@ -732,12 +740,10 @@ class MultiLineBreak:
                 at the beginning will be skipped. Default value: False.
             first_line_indent (float, optional): left spacing before first line of text in paragraph.
         """
-        self.get_width: Callable[[float], float]
         self.fragments = fragments
-        if callable(max_width):
-            self.get_width = max_width
-        else:
-            self.get_width = lambda height: max_width
+        self.get_width: Callable[[float], float] = (
+            max_width if callable(max_width) else lambda height: max_width
+        )
         self.margins = margins
         self.align = align
         self.print_sh = print_sh
@@ -819,6 +825,7 @@ class MultiLineBreak:
                         self.fragment_index,
                         self.character_index,
                         current_font_height * self.line_height,
+                        url=current_fragment.link,
                     )
                 self.character_index = 0
                 self.fragment_index += 1
@@ -878,12 +885,11 @@ class MultiLineBreak:
                 self.fragment_index,
                 self.character_index,
                 current_font_height * self.line_height,
-                current_fragment.link,
+                url=current_fragment.link,
             )
-
             self.character_index += 1
 
-        if current_line.fragments:
+        if current_line:
             self._is_first_line = False
             return current_line.manual_break(
                 Align.L if self.align == Align.J else self.align,
